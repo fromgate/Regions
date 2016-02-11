@@ -1,0 +1,7 @@
+name: Regions
+main: ru.nukkit.regions.RegionsPlugin
+version: "0.0.1"
+author: fromgate, nukkit.ru
+api: ["1.0.0"]
+softdepend: [DbLib]
+description: Regions, regions, regions!
