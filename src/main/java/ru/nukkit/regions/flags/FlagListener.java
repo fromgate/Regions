@@ -28,6 +28,7 @@ public class FlagListener implements Listener {
             Flag f = region.getFlag(flagType);
             Relation rel = region.getRelation(player.getName());
             BoolFlag bf = (BoolFlag) f;
+            Message.BC(f.getType().name()+" : "+rel.name()+" | flag: "+f.getRelation().name()+" : "+f.getParam()+" | "+bf.isAllowed (rel));
             if (!bf.isAllowed (rel)) return true;
         }
         return false;
@@ -49,9 +50,10 @@ public class FlagListener implements Listener {
         }
     }
 
-    @EventHandler (ignoreCancelled =  true, priority = EventPriority.NORMAL)
+    //@EventHandler (ignoreCancelled =  true, priority = EventPriority.NORMAL)
+    @EventHandler
     public void onInteract (PlayerInteractEvent event){
-        if (event.getAction()!=PlayerInteractEvent.RIGHT_CLICK_BLOCK) return;
+        //if (event.getAction()!=PlayerInteractEvent.RIGHT_CLICK_BLOCK) return;
         Player player = event.getPlayer();
         switch (event.getBlock().getId()){
             case Block.CHEST:
@@ -87,9 +89,6 @@ public class FlagListener implements Listener {
                 break;
         }
     }
-
-
-
 
     @EventHandler (ignoreCancelled =  true, priority = EventPriority.NORMAL)
     public void onPVP (EntityDamageEvent event){

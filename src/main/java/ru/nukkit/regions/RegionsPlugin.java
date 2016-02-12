@@ -23,7 +23,7 @@ public class RegionsPlugin extends PluginBase{
         this.cfg.save();
 
 
-        Message.init(this);
+        Message.init(this,true);
 
         Commander.init(this);
 

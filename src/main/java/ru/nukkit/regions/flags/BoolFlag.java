@@ -52,7 +52,8 @@ public class BoolFlag extends Flag {
        rel: - отношениие игрока к региону (т.е. OWNER, MEMBER или NOT_MEMBER)
      */
     public boolean isAllowed(Relation rel) {
-        if (rel.isRelated(this.getRelation())) return value;
+        //if (rel.isRelated(this.getRelation())) return value;
+        if (this.getRelation().isRelated(rel)) return value;
         else return !value;
     }
 }
