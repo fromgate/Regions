@@ -48,8 +48,6 @@ public enum Message {
     RG_CHK_NOTFOUND("There's no regions around you!"),
     RG_CHK_FOUND("RegionsPlugin around you: %1%"),
     RG_FLAG_DESC("/rg flag <region> <flag> [rel:<relation>] <value> - configure flag for region"),
-    FMSG_BREAK ("You cannot break blocks here!",'5'),
-    FMSG_BUILD ("You cannot place blocks here!",'5'),
     UNKNOWN_FLAG("Unknown flag type: %1%",'c','4'),
     RG_FLAG_FAIL("Failed to set flag %1% check syntax and try again",'c','4'),
     RG_FLAG_OK("Flag %1% successfully set"),
@@ -93,7 +91,12 @@ public enum Message {
     RG_CLAIM_FAIL ("Failed to claim region %1%",'c','4'),
     RG_CLAIM_MAX_COUNT_REACHED ("You cannot claim region. Only %1% regions per player!",'c','4'),
     RG_CLAIM_AREA_VOLUME_REACHED("Selected area is too large to claim! You can claim %1% blocks only!",'c','4'),
-    RG_CLAIM_AREA_INTERSECTED("Cannot claim selected area. It's already used by another region!",'c','4');
+    RG_CLAIM_AREA_INTERSECTED("Cannot claim selected area. It's already used by another region!",'c','4'),
+
+
+    FMSG_INTERACT ("You cannot interact with this object!",'5'),
+    FMSG_BREAK ("You cannot break blocks here!",'5'),
+    FMSG_BUILD ("You cannot place blocks here!",'5');
 
     private static boolean debugMode = false;
     private static String language = "english";

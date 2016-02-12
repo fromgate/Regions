@@ -24,13 +24,22 @@ public class FlagListener implements Listener {
     private boolean cancelEvent(Player player, Location loc, FlagType flagType){
         Map<String,Region> regions = Regions.getManager().getRegions(loc);
         if (regions == null||regions.isEmpty()) return false;
-        for (Region region : regions.values()) {
+        for (Map.Entry<String,Region> entry : regions.entrySet()){
+            Region region = entry.getValue();
+            Flag f = region.getFlag(flagType);
+            Relation rel = region.getRelation(player.getName());
+            BoolFlag bf = (BoolFlag) f;
+            boolean allowed = bf.isAllowed (rel);
+            Message.BC(entry.getKey(),f.getType().name(),":",rel.name(),"| flag:",f.getRelation().name(),":",f.getParam(),"|",bf.isAllowed (rel));
+            if (!allowed) return true;
+        }
+        /*for (Region region : regions.values()) {
             Flag f = region.getFlag(flagType);
             Relation rel = region.getRelation(player.getName());
             BoolFlag bf = (BoolFlag) f;
             Message.BC(f.getType().name()+" : "+rel.name()+" | flag: "+f.getRelation().name()+" : "+f.getParam()+" | "+bf.isAllowed (rel));
             if (!bf.isAllowed (rel)) return true;
-        }
+        }*/
         return false;
     }
 
@@ -50,8 +59,7 @@ public class FlagListener implements Listener {
         }
     }
 
-    //@EventHandler (ignoreCancelled =  true, priority = EventPriority.NORMAL)
-    @EventHandler
+    @EventHandler (ignoreCancelled =  true, priority = EventPriority.NORMAL)
     public void onInteract (PlayerInteractEvent event){
         //if (event.getAction()!=PlayerInteractEvent.RIGHT_CLICK_BLOCK) return;
         Player player = event.getPlayer();
@@ -88,6 +96,7 @@ public class FlagListener implements Listener {
                 if (cancelEvent(player,event.getBlock().getLocation(),FlagType.DOOR)) event.setCancelled();
                 break;
         }
+        if (event.isCancelled()) Message.FMSG_INTERACT.print(player);
     }
 
     @EventHandler (ignoreCancelled =  true, priority = EventPriority.NORMAL)
