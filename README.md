@@ -221,3 +221,4 @@ Here's list of supported flags:
 * TRAPDOOR
 * GATE
 * CLAIM
+* ENTRY
