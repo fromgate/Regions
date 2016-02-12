@@ -37,7 +37,7 @@ public class CmdRgFlag extends Cmd{
             if (f==null||!Regions.getManager().addFlag (args[2],f)) Message.RG_FLAG_FAIL.print(sender,args[2]);
             return Message.RG_FLAG_OK.print(sender,args[2]);
         } else if (args[3].matches("(?i)^(rel|relation|r):.*")) {
-            rel =  Relation.getByName(args[3].replaceAll("(?i)^(rel|relation|r):",""));
+            rel =  Relation.getByName(args[3].replaceAll("(?i)^(rel|relation|r|group|grp|g):",""));
             value = StringUtil.join (args,4);
         } else value = StringUtil.join (args,3);
         Flag flag = FlagType.createFlag (args[2],rel,value);

@@ -14,9 +14,9 @@ public class RegionsConfig extends SimpleConfig {
     @Path (value = "claim.claim-only-existing-regions")
     public boolean claimOnlyExisting = false;
 
-    @Path (value = "claim.allow-to-claim-another-regions")
+    @Path (value = "claim.allow-to-instersect-with-other-regions")
     public boolean intersectionsAllowed = false;
-    
+
     public RegionsConfig(PluginBase plugin) {
         super(plugin);
     }
