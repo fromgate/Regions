@@ -7,18 +7,18 @@ import java.lang.reflect.Constructor;
 public enum FlagType {
     BREAK (Relation.MEMBER,true),
     BUILD (Relation.MEMBER,true),
-    CHEST (Relation.MEMBER,true),   // TODO
-    PVP (Relation.ALL,true),        // TODO
-    PVE (Relation.ALL,true),        // TODO Oops! There's no mobs in bukkit yet :)
+    CHEST (Relation.MEMBER,true),
+    PVP (Relation.ALL,true),
+    PVE (Relation.ALL,true),        // TODO Oops! There's no mobs in nukkit yet :)
     PASS (Relation.ALL,true),       // TODO
-    BUTTON (Relation.MEMBER,true),     // TODO O
+    BUTTON (Relation.MEMBER,true),  // TODO Opps! There's no buttons in nukkit yet :)
     LEVER (Relation.MEMBER,true),
     PLATE (Relation.MEMBER,true),
-    DOOR (Relation.ALL,true),       // TODO
-    TRAPDOOR (Relation.ALL,true),   // TODO
-    GATE (Relation.ALL,true),       // TODO
+    DOOR (Relation.ALL,true),
+    TRAPDOOR (Relation.ALL,true),
+    GATE (Relation.ALL,true),
     LIGHTER (Relation.MEMBER,true), // TODO
-    CLAIM (Relation.ALL,false);     // TODO
+    CLAIM (Relation.ALL,false);
 
     FlagType(Relation relation, boolean allow) {
         this.defaultFlag = new BoolFlag(this,relation,allow);

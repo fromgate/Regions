@@ -32,31 +32,7 @@ public abstract class Flag {
 
     public abstract String toString();
 
-    /*
-     Базовый тип. У флага есть параметры: название, кому он назначен, и собственно параметр.
-     Т.е. есть полная аналогия с флагами в RA
 
-     /rg define <aaa>
-     /rg set flag <flagName> [for:ALL/OWNER/MEMBER] <значение в соотстветсвии с типом> - задает
-     /rg add flag <flagName> [for:ALL/OWNER/MEMBER] <значение в соотстветсвии с типом> - дополняет
-
-     /rg add flag TP for:all world,x,y,z
-     /rg add flag DAMAGE for:all 10
-
-      */
-/*
-    @Override
-    public String toString(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("relate:").append(this.relation.name());
-        String value = this.getParam();
-        sb.append("value:");
-        if (value.contains(" ")) sb.append("{").append(value).append("}");
-        else sb.append(value);
-
-
-    }
-*/
 
 
 }
