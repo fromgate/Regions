@@ -3,16 +3,13 @@ package ru.nukkit.regions.saver;
 import cn.nukkit.utils.Config;
 import ru.nukkit.regions.RegionsPlugin;
 import ru.nukkit.regions.areas.Area;
-import ru.nukkit.regions.manager.Region;
 import ru.nukkit.regions.flags.Flag;
 import ru.nukkit.regions.flags.FlagType;
-import ru.nukkit.regions.util.Relation;
+import ru.nukkit.regions.manager.Region;
 import ru.nukkit.regions.util.StringUtil;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -59,15 +56,30 @@ public class YamlSaver implements RegionSaver {
         if (!f.exists()) return regions;
         Config cfg = new Config(f,Config.YAML);
 
-        Map<String, List<String>> flags = new HashMap<String, List<String>>();
+        //Map<String, List<String>> flags = new HashMap<String, List<String>>();
         for (String key : cfg.getAll().keySet()){
-            if (!key.contains(".")) flags.put(key, new ArrayList<String>());
+            if (key.contains(".")) continue;
+            Region region = new Region(new Area(cfg.getString(key+".area")));
+            region.setOwner(cfg.getString(key+".owners"));
+            region.setMember(cfg.getString(key+".members"));
+            for (FlagType ft : FlagType.values()){
+                String value = cfg.getString (key+".flags."+ft.name()+".value");
+                if (value == null) continue;
+                String relStr = cfg.getString(key+".flags."+ft.name()+".relate");
+                Flag flag = ft.createNewFlag(relStr,value);
+                region.addFlag(flag);
+            }
+            regions.put(key,region);
+
+          /*  if (!key.contains(".")) flags.put(key, new ArrayList<String>());
             else {
                 String[] ln = key.split(".");
                 if (key.matches("\\S+\\.flags\\.\\S+$"))
                     flags.get(ln[0]).add(key);
-            }
+            } */
         }
+
+        /*
 
         for (String key : flags.keySet()){
             Region region = new Region(new Area(cfg.getString(key+".area")));
@@ -78,10 +90,11 @@ public class YamlSaver implements RegionSaver {
                 String value = cfg.getString(s+".value");
                 Relation rel = Relation.getByName(cfg.getString(s+".relate"));
                 Flag flag = FlagType.createFlag(id,rel,value);
+                RegionsPlugin.getPlugin().getLogger().info(TextFormat.LIGHT_PURPLE+id+" : "+rel.name()+" : "+value+" : "+(flag==null));
                 if (flag != null) region.addFlag(flag);
             }
             regions.put(key,region);
-        }
+        } */
         return regions;
     }
 

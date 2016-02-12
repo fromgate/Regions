@@ -41,7 +41,7 @@ public class CmdRgFlag extends Cmd{
             value = StringUtil.join (args,4);
         } else value = StringUtil.join (args,3);
         Flag flag = FlagType.createFlag (args[2],rel,value);
-        if (flag==null||!Regions.getManager().addFlag (args[2],flag)) Message.RG_FLAG_FAIL.print(sender,args[2]);
-        return Message.RG_FLAG_OK.print(sender,args[2]);
+        if (flag==null||!Regions.getManager().addFlag (args[1],flag)) return Message.RG_FLAG_FAIL.print(sender,args[2].toUpperCase());
+        else return Message.RG_FLAG_OK.print(sender,args[2].toUpperCase());
     }
 }

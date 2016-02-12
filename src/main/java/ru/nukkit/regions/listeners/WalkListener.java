@@ -32,8 +32,8 @@ public class WalkListener implements Listener {
             public void run() {
                 for (Player player : Server.getInstance().getOnlinePlayers().values()){
                     Location from = locations.containsKey(player.getName()) ? locations.get(player.getName()) : null;
-                    if (cancelPlayerMove(player,player.getLocation())&&from!=null)
-                        player.teleport(from);
+                    if (cancelPlayerMove(player,player.getLocation())&&from!=null) player.teleport(from);
+                    else locations.put(player.getName(),player.getLocation());
                 }
             }
         },RegionsPlugin.getCfg().playerMoveRechek);
