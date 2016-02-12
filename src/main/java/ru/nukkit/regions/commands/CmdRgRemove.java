@@ -9,7 +9,7 @@ import ru.nukkit.regions.util.Message;
 public class CmdRgRemove extends Cmd {
     @Override
     public boolean execute(CommandSender sender, Player player, String[] args) {
-        if (Regions.getManager().isRegion(args[1])) return Message.UNKNOWN_REGION.print(sender);
+        if (!Regions.getManager().isRegion(args[1])) return Message.UNKNOWN_REGION.print(sender,args[1]);
         if (!Regions.getManager().isMember(player,args[1])) return Message.ONLY_OWNER.print(sender);
         return (Regions.getManager().removeRegion(args[1]) ? Message.RG_REMOVE_OK : Message.RG_REMOVE_FAIL).print(sender,args[1]);
     }
