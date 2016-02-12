@@ -2,7 +2,9 @@ package ru.nukkit.regions;
 
 import cn.nukkit.plugin.PluginBase;
 import ru.nukkit.regions.commands.Commander;
-import ru.nukkit.regions.flags.FlagListener;
+import ru.nukkit.regions.listeners.FlagListener;
+import ru.nukkit.regions.listeners.RegionListener;
+import ru.nukkit.regions.listeners.WalkListener;
 import ru.nukkit.regions.selector.ShowParticle;
 import ru.nukkit.regions.util.Message;
 import ru.nukkit.regions.util.RegionsConfig;
@@ -33,6 +35,7 @@ public class RegionsPlugin extends PluginBase{
 
         this.getServer().getPluginManager().registerEvents(new RegionListener(),this);
         this.getServer().getPluginManager().registerEvents(new FlagListener(),this);
+        this.getServer().getPluginManager().registerEvents(new WalkListener(),this);
 
     }
 

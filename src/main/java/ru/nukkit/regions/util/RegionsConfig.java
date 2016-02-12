@@ -5,6 +5,12 @@ import cn.nukkit.utils.SimpleConfig;
 
 public class RegionsConfig extends SimpleConfig {
 
+    @Path (value = "player-move.use-player-move-event")
+    public boolean usePlayerMoveEvent=true;
+
+    @Path (value = "player-move.recheck-interval-ticks")
+    public int playerMoveRechek=10;
+
     @Path (value = "claim.max-regions-per-player")
     public int maxRegionPerPlayer=5;
 

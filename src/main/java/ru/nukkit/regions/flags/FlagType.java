@@ -10,12 +10,12 @@ public enum FlagType {
     CHEST (Relation.MEMBER,true),
     PVP (Relation.ALL,true),
     PVE (Relation.ALL,true),        // TODO Oops! There's no mobs in nukkit yet :)
-    PASS (Relation.ALL,true),       // TODO
+    ENTRY (Relation.ALL,true),       // TODO
     BUTTON (Relation.MEMBER,true),  // TODO Opps! There's no buttons in nukkit yet :)
     LEVER (Relation.MEMBER,true),
     PLATE (Relation.MEMBER,true),
-    DOOR (Relation.ALL,true),
-    TRAPDOOR (Relation.ALL,true),
+    DOOR (Relation.MEMBER,true),
+    TRAPDOOR (Relation.MEMBER,true),
     GATE (Relation.ALL,true),
     LIGHTER (Relation.MEMBER,true), // TODO
     CLAIM (Relation.ALL,false);

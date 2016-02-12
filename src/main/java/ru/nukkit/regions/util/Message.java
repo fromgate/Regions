@@ -96,7 +96,8 @@ public enum Message {
 
     FMSG_INTERACT ("You cannot interact with this object!",'5'),
     FMSG_BREAK ("You cannot break blocks here!",'5'),
-    FMSG_BUILD ("You cannot place blocks here!",'5');
+    FMSG_BUILD ("You cannot place blocks here!",'5'),
+    FMSG_ENTRY("You cannot pass through this region!",'5');
 
     private static boolean debugMode = false;
     private static String language = "english";

@@ -4,11 +4,16 @@ import cn.nukkit.Player;
 import cn.nukkit.block.Block;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.Location;
+import ru.nukkit.regions.Regions;
 import ru.nukkit.regions.RegionsPlugin;
 import ru.nukkit.regions.areas.Area;
+import ru.nukkit.regions.flags.BoolFlag;
 import ru.nukkit.regions.flags.Flag;
+import ru.nukkit.regions.flags.FlagType;
 import ru.nukkit.regions.saver.RegionSaver;
 import ru.nukkit.regions.saver.YamlSaver;
+import ru.nukkit.regions.util.Message;
+import ru.nukkit.regions.util.Relation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -247,5 +252,29 @@ public class RegionManager {
 
     public boolean isRegion(String id) {
         return this.regions.containsKey(id);
+    }
+
+
+    public boolean cancelEvent(Player player, Location loc, FlagType flagType){
+        Map<String,Region> regions = Regions.getManager().getRegions(loc);
+        if (regions == null||regions.isEmpty()) return false;
+        for (Map.Entry<String,Region> entry : regions.entrySet()){
+            Region region = entry.getValue();
+            Flag f = region.getFlag(flagType);
+            Relation rel = region.getRelation(player.getName());
+            BoolFlag bf = (BoolFlag) f;
+            boolean allowed = bf.isAllowed (rel);
+            Message.BC(entry.getKey(),f.getType().name(),":",rel.name(),"| flag:",
+                    f.getRelation().name(),":",f.getParam(),"|",bf.isAllowed (rel));
+            if (!allowed) return true;
+        }
+        /*for (Region region : regions.values()) {
+            Flag f = region.getFlag(flagType);
+            Relation rel = region.getRelation(player.getName());
+            BoolFlag bf = (BoolFlag) f;
+            Message.BC(f.getType().name()+" : "+rel.name()+" | flag: "+f.getRelation().name()+" : "+f.getParam()+" | "+bf.isAllowed (rel));
+            if (!bf.isAllowed (rel)) return true;
+        }*/
+        return false;
     }
 }
