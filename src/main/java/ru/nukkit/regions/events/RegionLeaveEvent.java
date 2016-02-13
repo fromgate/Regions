@@ -1,11 +1,17 @@
 package ru.nukkit.regions.events;
 
 import cn.nukkit.Player;
-import cn.nukkit.event.player.PlayerEvent;
+import cn.nukkit.event.HandlerList;
 import ru.nukkit.regions.manager.Region;
 
 public class RegionLeaveEvent extends RegionEvent{
-    public RegionLeaveEvent(Player player, String regionId, Region region, PlayerEvent parentEvent) {
-        super(player, regionId, region,parentEvent);
+    private static final HandlerList handlers = new HandlerList();
+
+    public static HandlerList getHandlers() {
+        return handlers;
+    }
+
+    public RegionLeaveEvent(Player player, String regionId, Region region) {
+        super(player, regionId, region);
     }
 }

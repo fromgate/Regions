@@ -8,6 +8,11 @@ public class StringFlag extends Flag {
 
     private String value;
 
+    public StringFlag(FlagType flagType, Relation relation) {
+        super(flagType, relation);
+        this.value="";
+    }
+
     public StringFlag(FlagType flagType, Relation relation, String param) {
         super(flagType, relation);
         this.parseParam(param);

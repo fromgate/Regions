@@ -57,7 +57,7 @@ public class WalkListener implements Listener {
         Map<String,Region> fromCheck = new TreeMap<String, Region>(String.CASE_INSENSITIVE_ORDER);
         for (Map.Entry<String,Region> tor : toReg.entrySet()){
             if (fromReg.containsKey(tor.getKey())) continue;
-            RegionEnterEvent e = new RegionEnterEvent(player,tor.getKey(),tor.getValue(),null);
+            RegionEnterEvent e = new RegionEnterEvent(player,tor.getKey(),tor.getValue());
             Server.getInstance().getPluginManager().callEvent(e);
             if (e.isCancelled()) return true;
             toCheck.put(tor.getKey(),tor.getValue());
@@ -65,7 +65,7 @@ public class WalkListener implements Listener {
 
         for (Map.Entry<String,Region> fr : fromReg.entrySet()){
             if (toReg.containsKey(fr.getKey())) continue;
-            RegionLeaveEvent e = new RegionLeaveEvent(player,fr.getKey(),fr.getValue(),null);
+            RegionLeaveEvent e = new RegionLeaveEvent(player,fr.getKey(),fr.getValue());
             Server.getInstance().getPluginManager().callEvent(e);
             if (e.isCancelled()) return true;
             fromCheck.put(fr.getKey(),fr.getValue());
