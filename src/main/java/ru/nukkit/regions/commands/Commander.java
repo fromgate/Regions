@@ -40,6 +40,7 @@ public class Commander {
 
         addNewCommand(new CmdRgRemove());
 
+        addNewCommand(new CmdRgReload());
         addNewCommand(new CmdRgHelp());
 	}
 

@@ -97,7 +97,11 @@ public enum Message {
     FMSG_INTERACT ("You cannot interact with this object!",'5'),
     FMSG_BREAK ("You cannot break blocks here!",'5'),
     FMSG_BUILD ("You cannot place blocks here!",'5'),
-    FMSG_ENTRY("You cannot pass through this region!",'5');
+    FMSG_ENTRY("You cannot pass through this region!",'5'),
+    FMSG_LEAVE("You cannot leave this region!",'5'),
+
+    RG_RELOAD_DESC("/region reload - reload plugin configuration and regions"),
+    RG_RELOAD_OK("Cofiguration reloaded. Loaded %1% regions");
 
     private static boolean debugMode = false;
     private static String language = "english";
