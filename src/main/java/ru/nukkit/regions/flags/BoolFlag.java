@@ -32,14 +32,6 @@ public class BoolFlag extends Flag {
         return value;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder(this.getName());
-        sb.append(" relate: ").append(relation.name());
-        sb.append("value: ").append(this.getParam());
-        return sb.toString();
-    }
-
     public void set (String param){
         this.value = parseParam(param);
     }

@@ -7,6 +7,7 @@ import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.block.BlockBreakEvent;
 import cn.nukkit.event.block.BlockPlaceEvent;
+import cn.nukkit.event.block.DoorToggleEvent;
 import cn.nukkit.event.entity.EntityDamageByChildEntityEvent;
 import cn.nukkit.event.entity.EntityDamageByEntityEvent;
 import cn.nukkit.event.entity.EntityDamageEvent;
@@ -34,21 +35,37 @@ public class FlagListener implements Listener {
     }
 
     @EventHandler (ignoreCancelled =  true, priority = EventPriority.NORMAL)
-    public void onInteractDoor (PlayerInteractEvent event) {
-        switch (event.getBlock().getId()){
+    public void onDoor (DoorToggleEvent event){
+        Player player = event.getPlayer();
+        switch (event.getBlock().getId()) {
             case Block.DOOR_BLOCK:
             case Block.ACACIA_DOOR_BLOCK:
             case Block.DARK_OAK_DOOR_BLOCK:
             case Block.BIRCH_DOOR_BLOCK:
             case Block.JUNGLE_DOOR_BLOCK:
             case Block.SPRUCE_DOOR_BLOCK:
-                event.setCancelled();
+                if (Regions.getManager().cancelEvent(player, event.getBlock().getLocation(), FlagType.DOOR))
+                    event.setCancelled();
+                break;
+            case Block.TRAPDOOR:
+                if (Regions.getManager().cancelEvent(player, event.getBlock().getLocation(), FlagType.DOOR))
+                    event.setCancelled();
+                break;
+            case Block.FENCE_GATE:
+            case Block.FENCE_GATE_ACACIA:
+            case Block.FENCE_GATE_BIRCH:
+            case Block.FENCE_GATE_DARK_OAK:
+            case Block.FENCE_GATE_JUNGLE:
+            case Block.FENCE_GATE_SPRUCE:
+                if (Regions.getManager().cancelEvent(player, event.getBlock().getLocation(), FlagType.DOOR))
+                    event.setCancelled();
+                break;
         }
+        if (event.isCancelled()) Message.FMSG_INTERACT.print(player);
     }
 
     @EventHandler (ignoreCancelled =  true, priority = EventPriority.NORMAL)
     public void onInteract (PlayerInteractEvent event){
-        //if (event.getAction()!=PlayerInteractEvent.RIGHT_CLICK_BLOCK) return;
         Player player = event.getPlayer();
         switch (event.getBlock().getId()){
             case Block.CHEST:
@@ -62,25 +79,6 @@ public class FlagListener implements Listener {
             case Block.STONE_PRESSURE_PLATE:
             case Block.WOODEN_PRESSURE_PLATE:
                 if (Regions.getManager().cancelEvent(player,event.getBlock().getLocation(),FlagType.LEVER)) event.setCancelled();
-                break;
-            case Block.DOOR_BLOCK:
-            case Block.ACACIA_DOOR_BLOCK:
-            case Block.DARK_OAK_DOOR_BLOCK:
-            case Block.BIRCH_DOOR_BLOCK:
-            case Block.JUNGLE_DOOR_BLOCK:
-            case Block.SPRUCE_DOOR_BLOCK:
-                if (Regions.getManager().cancelEvent(player,event.getBlock().getLocation(),FlagType.DOOR)) event.setCancelled();
-                break;
-            case Block.TRAPDOOR:
-                if (Regions.getManager().cancelEvent(player,event.getBlock().getLocation(),FlagType.DOOR)) event.setCancelled();
-                break;
-            case Block.FENCE_GATE:
-            case Block.FENCE_GATE_ACACIA:
-            case Block.FENCE_GATE_BIRCH:
-            case Block.FENCE_GATE_DARK_OAK:
-            case Block.FENCE_GATE_JUNGLE:
-            case Block.FENCE_GATE_SPRUCE:
-                if (Regions.getManager().cancelEvent(player,event.getBlock().getLocation(),FlagType.DOOR)) event.setCancelled();
                 break;
         }
         if (event.isCancelled()) Message.FMSG_INTERACT.print(player);

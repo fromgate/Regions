@@ -5,6 +5,7 @@ import cn.nukkit.level.Location;
 import ru.nukkit.regions.areas.Area;
 import ru.nukkit.regions.flags.Flag;
 import ru.nukkit.regions.flags.FlagType;
+import ru.nukkit.regions.util.Message;
 import ru.nukkit.regions.util.Relation;
 
 import java.util.*;
@@ -76,7 +77,10 @@ public class Region {
 
     public Flag getFlag (FlagType flagType){
         for (Flag f : flags)
-            if (f.getType()==flagType) return f;
+            if (f.getType()==flagType) {
+                Message.debugMessage("Flag",f.getName(),"rel:",f.getRelation().name(),"value:",f.getParam());
+                return f;
+            }
         return flagType.getDefaultFlag();
     }
 

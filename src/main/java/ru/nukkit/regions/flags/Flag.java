@@ -30,7 +30,12 @@ public abstract class Flag {
         return type;
     }
 
-    public abstract String toString();
+    public String toString() {
+        StringBuilder sb = new StringBuilder(this.getName());
+        sb.append(" relate: ").append(relation.name());
+        sb.append("value: ").append(this.getParam());
+        return sb.toString();
+    }
 
 
 

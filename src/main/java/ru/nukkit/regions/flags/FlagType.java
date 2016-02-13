@@ -10,7 +10,10 @@ public enum FlagType {
     CHEST (Relation.MEMBER,true),
     PVP (Relation.ALL,true),
     PVE (Relation.ALL,true),        // TODO Oops! There's no mobs in nukkit yet :)
-    ENTRY (Relation.ALL,true),       // TODO
+    ENTRY (Relation.ALL,true),
+    ENTRYMSG(Relation.ALL,""),
+    LEAVE (Relation.ALL,true),
+    LEAVEMSG(Relation.ALL,""),
     BUTTON (Relation.MEMBER,true),  // TODO Opps! There's no buttons in nukkit yet :)
     LEVER (Relation.MEMBER,true),
     PLATE (Relation.MEMBER,true),
@@ -25,10 +28,19 @@ public enum FlagType {
         this.flagClass = BoolFlag.class;
     }
 
+    FlagType(Relation relation, String str) {
+        this.defaultFlag = new StringFlag(this,relation,str);
+        this.flagClass = StringFlag.class;
+    }
+
 
     // private FlagType parent; // Заморочиться, что ли...
     private Class<? extends Flag> flagClass;
     private final Flag defaultFlag;
+
+
+
+
 
     public Flag getDefaultFlag(){
         return this.defaultFlag;
