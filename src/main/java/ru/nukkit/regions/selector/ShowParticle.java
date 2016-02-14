@@ -9,6 +9,7 @@ import cn.nukkit.level.particle.Particle;
 import cn.nukkit.level.particle.RedstoneParticle;
 import ru.nukkit.regions.Regions;
 import ru.nukkit.regions.RegionsPlugin;
+import ru.nukkit.regions.areas.Area;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -49,19 +50,13 @@ public class ShowParticle {
         if (!player.isOnline()) return;
         List<Location> sel = Regions.getSelector().getPoints(player);
         if (sel==null||sel.isEmpty()) return;
-
         List<Location> cubeLoc = new ArrayList<Location>();
-        if (sel.size()>1) {
-            Location min = new Location(Math.min(sel.get(0).getFloorX(),sel.get(1).getFloorX()),
-                    Math.min(sel.get(0).getFloorY(),sel.get(1).getFloorY()),
-                    Math.min(sel.get(0).getFloorZ(),sel.get(1).getFloorZ()),0,0,player.getLevel());
-            Location max = new Location(Math.max(sel.get(0).getFloorX(),sel.get(1).getFloorX()),
-                    Math.max(sel.get(0).getFloorY(),sel.get(1).getFloorY()),
-                    Math.max(sel.get(0).getFloorZ(),sel.get(1).getFloorZ()),0,0,player.getLevel());
-            cubeLoc = getCubePoints (min,max,RegionsPlugin.getCfg().selectionDrawWall,RegionsPlugin.getCfg().selectionSolidWall);
-            if (cubeLoc.size()>RegionsPlugin.getCfg().selectionLimitAmount) return;
-        }
-        if (cubeLoc.isEmpty()) cubeLoc.add(sel.get(0));
+        if (sel.size()==2) {
+            Area area = new Area(sel.get(0), sel.get(2));
+            cubeLoc = getCubePoints (area.getMin(),area.getMax(),RegionsPlugin.getCfg().selectionDrawWall,RegionsPlugin.getCfg().selectionSolidWall);
+            // TODO add show of intersected regions
+        } else cubeLoc.add(sel.get(0));
+
         for (Location l : cubeLoc){
             Particle p = new RedstoneParticle(centerLoc(l));
             player.getLevel().addParticle(p,player);
@@ -71,7 +66,6 @@ public class ShowParticle {
     private static Location centerLoc (Location loc){
         return new Location(loc.getFloorX()+0.5,loc.getFloorY()+0.5,loc.getFloorZ()+0.5,0,0,loc.getLevel());
     }
-
 
     private static List<Location> getCubePoints(Location loc1, Location loc2, boolean drawWall, boolean solid){
         List<Location> locs = new ArrayList<Location>();
