@@ -221,7 +221,7 @@ public class RegionManager {
 
     public boolean canClaimMore (String playerName){
         int count = countClaimRegions(playerName);
-        return count< RegionsPlugin.getPlugin().getCfg().maxRegionPerPlayer;
+        return count>=RegionsPlugin.getPlugin().getCfg().maxRegionPerPlayer;
     }
 
     public boolean canClaimVolume (Area area){
@@ -242,9 +242,9 @@ public class RegionManager {
 
     public Map<String,Region> getIntersections (Area area){
         Map<String,Region> intersections = new TreeMap<String, Region>(String.CASE_INSENSITIVE_ORDER);
-        for (String id: this.regions.keySet()){
-            Region r = this.regions.get(id);
-            if (r.intersect(area)) intersections.put(id,r);
+        for (Map.Entry<String,Region> entry : regions.entrySet()){
+            if (entry.getValue().intersect(area))
+                intersections.put(entry.getKey(),entry.getValue());
         }
         return intersections;
     }

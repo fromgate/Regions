@@ -20,6 +20,8 @@ public class Commander {
         addNewCommand(new CmdSelect());
         addNewCommand(new CmdSelectPos());
 
+        addNewCommand(new CmdClaim());
+
         addNewCommand(new CmdRgDefine());
         addNewCommand(new CmdRgRedefine());
 

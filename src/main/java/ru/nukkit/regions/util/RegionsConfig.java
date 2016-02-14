@@ -5,12 +5,30 @@ import cn.nukkit.utils.SimpleConfig;
 
 public class RegionsConfig extends SimpleConfig {
 
+    // Selections
+    @Path (value = "selection.particles.enable")
+    public boolean selectionShow;
+
+    @Path (value = "selection.particles.draw-wall")
+    public boolean selectionDrawWall = true;
+
+    @Path (value = "selection.particles.solid")
+    public boolean selectionSolidWall = false;
+
+    @Path (value = "selection.particles.replay-interval-ticks")
+    public int selectionTick = 10;
+
+    @Path (value = "selection.particles.limit-amount")
+    public int selectionLimitAmount = 100;
+
+    // Player Move detections
     @Path (value = "player-move.use-player-move-event")
     public boolean usePlayerMoveEvent=true;
 
     @Path (value = "player-move.recheck-interval-ticks")
     public int playerMoveRechek=10;
 
+    // Claim command configuration
     @Path (value = "claim.max-regions-per-player")
     public int maxRegionPerPlayer=5;
 
@@ -20,8 +38,12 @@ public class RegionsConfig extends SimpleConfig {
     @Path (value = "claim.claim-only-existing-regions")
     public boolean claimOnlyExisting = false;
 
+    @Path (value = "claim.claim-only-when-player-inside-region")
+    public boolean claimOnlyInside = false;
+
     @Path (value = "claim.allow-to-instersect-with-other-regions")
     public boolean intersectionsAllowed = false;
+
 
     public RegionsConfig(PluginBase plugin) {
         super(plugin);

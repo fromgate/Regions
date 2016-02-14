@@ -84,14 +84,16 @@ public enum Message {
     RG_CLAIM_INSIDE_ONLY("You can claim regions only inside specified areas!",'c'),
     RG_CLAIM_SINGLE_ONLY ("Cannot claim multiple regions",'c'),
     RG_CLAIM_ALREADY ("This regions is already claimed"),
-    RG_CLAIM_PREDEFINED_OK("You successfully claimed region %1%"),
-    RG_CLAIM_PREDEFINED_FAIL("Failed to claim region %1%",'c','4'),
-    RG_CLAIM_PREDEFINED_RENAME("You cannot rename predifned region. Try just /region claim"),
+    RG_CLAIM_EXIST_OK("You successfully claimed region %1%"),
+    RG_CLAIM_EXIST_FAIL("Failed to claim region %1%",'c','4'),
+    RG_CLAIM_EXIST_UNALLOWED("You cannot claim region %1%",'c','4'),
+    RG_CLAIM_EXIST_INSIDE("You must be inside region you want to claim. Move into that region and type /claim"),
     RG_CLAIM_OK ("Region claimed %1%"),
     RG_CLAIM_FAIL ("Failed to claim region %1%",'c','4'),
     RG_CLAIM_MAX_COUNT_REACHED ("You cannot claim region. Only %1% regions per player!",'c','4'),
     RG_CLAIM_AREA_VOLUME_REACHED("Selected area is too large to claim! You can claim %1% blocks only!",'c','4'),
     RG_CLAIM_AREA_INTERSECTED("Cannot claim selected area. It's already used by another region!",'c','4'),
+    RG_CLAIM_NEED_ID ("You must provide region id to claim. Use /claim <id>",'c'),
 
 
     FMSG_INTERACT ("You cannot interact with this object!",'5'),
@@ -101,7 +103,12 @@ public enum Message {
     FMSG_LEAVE("You cannot leave this region!",'5'),
 
     RG_RELOAD_DESC("/region reload - reload plugin configuration and regions"),
-    RG_RELOAD_OK("Cofiguration reloaded. Loaded %1% regions");
+    RG_RELOAD_OK("Cofiguration reloaded. Loaded %1% regions"),
+
+    SEL_SHOW_DESC("/select show - toggle displaying selected area using particles"),
+    SEL_SHOW_DISABLED("Selections particles disabled in config. Command canceled.",'c'),
+    SEL_SHOW_PLR_ENABLED("Selections show mode enabled"),
+    SEL_SHOW_PLR_DISABLED("Selections show mode disabled");;
 
     private static boolean debugMode = false;
     private static String language = "english";
@@ -324,7 +331,8 @@ public enum Message {
     }
     public static void init(PluginBase plg, boolean createCfg){
         plugin = plg;
-        language = plg.getConfig().getString("general.language","english");
+        language = plg.getConfig().getString("general.language","default");
+        if (language.equalsIgnoreCase("default")) language = Server.getInstance().getLanguage().getLang();
         debugMode = plg.getConfig().getBoolean("general.debug-mode",false);
         if (createCfg) {
             plg.getDataFolder().mkdirs();

@@ -90,6 +90,19 @@ public class Area {
         return this.z2;
     }
 
+    public int getSizeX(){
+        return this.x2-this.x1;
+    }
+
+    public int getSizeY(){
+        return this.y2-this.y1;
+    }
+
+    public int getSizeZ(){
+        return this.z2-this.z1;
+    }
+
+
     public Location getLoc2(){
         Level level = Server.getInstance().getLevelByName(world);
         if (level == null) return  null;
@@ -131,11 +144,42 @@ public class Area {
         return locY>=y1&&locY<=y2;
     }
 
+    /*
+    public static boolean checkCollision(ObjectBox a, ObjectBox b){
+{
+   //check the X axis
+   if(Math.abs(a.getX() - b.getX()) < a.getSizeX() + b.getSizeX())
+   {
+      //check the Y axis
+      if(Math.abs(a.getY() - b.getY()) < a.getSizeY() + b.getSizeY())
+      {
+          //check the Z axis
+          if(Math.abs(a.getZ() - b.getZ()) < a.getSizeZ() + b.getSizeZ())
+          {
+             return true;
+          }
+      }
+   }
+
+   return false;
+}
+     */
     public boolean intersect (Area area){
-        if (this.getMin().getFloorX()<area.getMin().getFloorX()||this.getMax().getFloorX()>area.getMax().getFloorX()) return true;
-        if (this.getMin().getFloorZ()<area.getMin().getFloorZ()||this.getMax().getFloorZ()>area.getMax().getFloorZ()) return true;
-        if (this.getMin().getFloorY()<area.getMin().getFloorY()||this.getMax().getFloorY()>area.getMax().getFloorY()) return true;
-        return true;
+        if (Math.abs(this.getX1()-area.getX1())< this.getSizeX()+area.getSizeX())
+            if (Math.abs(this.getY1()-area.getY1())< this.getSizeY()+area.getSizeY())
+                if (Math.abs(this.getZ1()-area.getZ1())< this.getSizeZ()+area.getSizeZ())
+                    return true;
+        return false;
+
+      /*  if (this.getMax().getFloorY()<area.getMax().getFloorY()) return false;
+        if (this.getMin().getFloorY()>area.getMin().getFloorY()) return false;
+        if (this.getMax().getFloorX()<area.getMax().getFloorX()) return false;
+        if (this.getMin().getFloorX()>area.getMin().getFloorX()) return false;
+        if (this.getMax().getFloorZ()<area.getMax().getFloorZ()) return false;
+        if (this.getMin().getFloorZ()>area.getMin().getFloorZ()) return false; */
+        /*if (this.getMin().getFloorX()<area.getMin().getFloorX()||this.getMax().getFloorX()>area.getMax().getFloorX()) return false;
+        if (this.getMin().getFloorZ()<area.getMin().getFloorZ()||this.getMax().getFloorZ()>area.getMax().getFloorZ()) return false;
+        if (this.getMin().getFloorY()<area.getMin().getFloorY()||this.getMax().getFloorY()>area.getMax().getFloorY()) return false;*/
     }
 
     public int getVolume(){
