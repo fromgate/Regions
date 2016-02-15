@@ -73,6 +73,7 @@ public class Commander {
             Message.CMD_REGISTERED.debug(cmd.toString());
         }
         commands.add(cmd);
+        Message.debugMessage(cmd.getPermission());
         return true;
     }
 

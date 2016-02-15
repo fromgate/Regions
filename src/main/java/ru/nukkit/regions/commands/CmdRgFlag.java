@@ -11,7 +11,7 @@ import ru.nukkit.regions.util.Relation;
 import ru.nukkit.regions.util.StringUtil;
 
 
-@CmdDefine(command = "region", alias = "rg", subCommands = {"flag|f", "\\S+", "\\S+","\\S+"}, permission = "region.flag", description = Message.RG_FLAG_DESC)
+@CmdDefine(command = "region", alias = "rg", subCommands = {"flag|f", "\\S+", "\\S+","\\S+"}, permission = "regions.flag", description = Message.RG_FLAG_DESC)
 public class CmdRgFlag extends Cmd{
     @Override
     public boolean execute(CommandSender sender, Player player, String[] args) {

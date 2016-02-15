@@ -133,8 +133,6 @@ public enum Message {
         plugin.getServer().broadcastMessage(TextFormat.colorize(sb.toString().trim()));
     }
 
-
-
     /**
      * Send current message to log files
      * @param s

@@ -5,7 +5,7 @@ import cn.nukkit.command.CommandSender;
 import ru.nukkit.regions.Regions;
 import ru.nukkit.regions.util.Message;
 
-@CmdDefine(command = "select", alias = "sel",subCommands = {} , permission = "region.select", description = Message.SEL_DESC)
+@CmdDefine(command = "select", alias = "sel",subCommands = {} , permission = "regions.select", description = Message.SEL_DESC)
 public class CmdSelect extends Cmd {
     @Override
     public boolean execute(CommandSender sender, Player player, String[] args) {

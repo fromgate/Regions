@@ -110,4 +110,7 @@ public abstract class Cmd {
 		return TextFormat.clean(/*"/"+this.getCommand()+(this.subCommands.length>0? " "+ Commander.unsplit(this.subCommands) : "")+" - "+*/this.getDescription());
 	}
 
+	public String getPermission() {
+		return permission;
+	}
 }

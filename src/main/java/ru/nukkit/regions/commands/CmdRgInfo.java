@@ -11,7 +11,7 @@ import ru.nukkit.regions.util.StringUtil;
 
 import java.util.Map;
 
-@CmdDefine(command = "region", alias = "rg", subCommands ={"info|i"} , permission = "regions.check", description = Message.RG_CHK_DESC)
+@CmdDefine(command = "region", alias = "rg", subCommands ={"info|i"} , permission = "regions.info", description = Message.RG_CHK_DESC)
 public class CmdRgInfo extends Cmd{
     @Override
     public boolean execute(CommandSender sender, Player player, String[] args) {

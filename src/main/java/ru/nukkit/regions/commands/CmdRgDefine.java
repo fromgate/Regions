@@ -10,7 +10,7 @@ import ru.nukkit.regions.util.StringUtil;
 import java.util.List;
 
 
-@CmdDefine(command = "region", alias = "rg", subCommands = {"define|create|d","\\S+"} , permission = "regions.edit", description = Message.RG_DEFINE_DESC)
+@CmdDefine(command = "region", alias = "rg", subCommands = {"define|create|d","\\S+"} , permission = "regions.define", description = Message.RG_DEFINE_DESC)
 public class CmdRgDefine extends Cmd {
     @Override
     public boolean execute(CommandSender sender, Player player, String[] args) {

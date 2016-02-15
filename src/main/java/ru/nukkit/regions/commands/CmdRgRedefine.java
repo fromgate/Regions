@@ -9,7 +9,7 @@ import ru.nukkit.regions.util.Message;
 import java.util.List;
 
 
-@CmdDefine(command = "region", alias = "rg", subCommands = {"redefine|update|move","\\S+"} , permission = "regions.edit", description = Message.RG_REDEFINE_DESC)
+@CmdDefine(command = "region", alias = "rg", subCommands = {"redefine|update|move","\\S+"} , permission = "regions.redefine", description = Message.RG_REDEFINE_DESC)
 public class CmdRgRedefine extends Cmd {
     @Override
     public boolean execute(CommandSender sender, Player player, String[] args) {

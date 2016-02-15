@@ -6,7 +6,7 @@ import ru.nukkit.regions.RegionsPlugin;
 import ru.nukkit.regions.selector.ShowParticle;
 import ru.nukkit.regions.util.Message;
 
-@CmdDefine(command = "select", alias = "sel",subCommands = {"(?i)show"} , permission = "region.select.particles", description = Message.SEL_SHOW_DESC)
+@CmdDefine(command = "select", alias = "sel",subCommands = {"(?i)show"} , permission = "regions.select.particles", description = Message.SEL_SHOW_DESC)
 public class CmdSelectShow extends Cmd {
     @Override
     public boolean execute(CommandSender sender, Player player, String[] args) {
