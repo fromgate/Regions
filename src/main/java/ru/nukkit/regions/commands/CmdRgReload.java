@@ -6,7 +6,7 @@ import ru.nukkit.regions.Regions;
 import ru.nukkit.regions.RegionsPlugin;
 import ru.nukkit.regions.util.Message;
 
-@CmdDefine(command = "region", alias = "rg", subCommands = "reload", permission = "regions.reload", description = Message.RG_RELOAD_DESC)
+@CmdDefine(command = "region", alias = "rg", subCommands = "reload", permission = "regions.reload", description = Message.RG_RELOAD_DESC, allowConsole = true)
 public class CmdRgReload extends Cmd {
     @Override
     public boolean execute(CommandSender sender, Player player, String[] args) {

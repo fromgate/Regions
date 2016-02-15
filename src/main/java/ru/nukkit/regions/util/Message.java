@@ -73,7 +73,7 @@ public enum Message {
     RG_ADDMBMR_DESC("/region addmember <id> <member>[, <member2>..] - add member(s) to defined region"),
     RG_ADDMBMR_FAIL("Failed to add members to region %1%: %2%",'c','4'),
     RG_ADDMBMR_OK("Successfully added members to region %1%: %2%"),
-    RG_CLAIM_DESC("/region claim <region> - create region and add yourself to owners"),
+    CLAIM_DESC("/claim [region] - create region and add yourself to owners"),
     RG_REMMEM_DESC("/region removemember <id> <player> - remove member from region"),
     RG_REMMEM_OK("Player %1% was removed from members of region %2%"),
     RG_REMMEM_FAIL("Failed to remove %1% from members of region %2%"),
@@ -108,7 +108,8 @@ public enum Message {
     SEL_SHOW_DESC("/select show - toggle displaying selected area using particles"),
     SEL_SHOW_DISABLED("Selections particles disabled in config. Command canceled.",'c'),
     SEL_SHOW_PLR_ENABLED("Selections show mode enabled"),
-    SEL_SHOW_PLR_DISABLED("Selections show mode disabled");;
+    SEL_SHOW_PLR_DISABLED("Selections show mode disabled"),
+    RG_DESC("/region <command> <parameters> - main command of Regions. Type /region help for more info");;
 
     private static boolean debugMode = false;
     private static String language = "english";

@@ -21,7 +21,7 @@ public class CmdRgFlag extends Cmd{
         // /rg flag <id> break clear
         Region region  = Regions.getManager().getRegion(args[1]);
         if (region==null) return Message.UNKNOWN_REGION.print(sender,args[1]);
-        if (!Regions.getManager().isMember(player,args[1])) return Message.ONLY_OWNER.print(sender);
+        if (!Regions.getManager().isOwner(player,args[1])) return Message.ONLY_OWNER.print(sender);
         //if (FlagType.isValidType(args[2]))
 
         FlagType flagType = FlagType.getFlagByName(args[2]);

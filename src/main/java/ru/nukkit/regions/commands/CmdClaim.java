@@ -17,7 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-@CmdDefine(command = "claim", alias = "rgclaim", subCommands ={} , permission = "regions.claim", description = Message.RG_CLAIM_DESC)
+@CmdDefine(command = "claim", alias = "rgclaim", subCommands ={} , permission = "regions.claim", description = Message.CLAIM_DESC)
 public class CmdClaim extends Cmd {
     @Override
     public boolean execute(CommandSender sender, Player player, String[] args) {

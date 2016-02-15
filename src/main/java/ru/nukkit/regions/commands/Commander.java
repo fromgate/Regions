@@ -17,13 +17,13 @@ public class Commander {
 
     public static void init (PluginBase plg){
 		plugin = plg;
-        addNewCommand(new CmdSelect());
+        addNewCommand(new CmdSelect(),Message.SEL_DESC);
         addNewCommand(new CmdSelectPos());
         addNewCommand(new CmdSelectShow());
 
-        addNewCommand(new CmdClaim());
+        addNewCommand(new CmdClaim(),Message.CLAIM_DESC);
 
-        addNewCommand(new CmdRgDefine());
+        addNewCommand(new CmdRgDefine(),Message.RG_DESC);
         addNewCommand(new CmdRgRedefine());
 
         addNewCommand(new CmdRgInfo());

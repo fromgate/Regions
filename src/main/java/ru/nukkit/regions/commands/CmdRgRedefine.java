@@ -14,7 +14,7 @@ public class CmdRgRedefine extends Cmd {
     @Override
     public boolean execute(CommandSender sender, Player player, String[] args) {
         if (!Regions.getManager().isRegion(args[1])) return Message.UNKNOWN_REGION.print(sender,args[1]);
-        if (!Regions.getManager().isMember(player,args[1])) return Message.ONLY_OWNER.print(sender);
+        if (!Regions.getManager().isOwner(player,args[1])) return Message.ONLY_OWNER.print(sender);
         List<Location> locs = Regions.getSelector().getPoints(player);
         if (locs == null||locs.size()!=2) return Message.DEF_SELECT.print(player);
         String id = args[1];
