@@ -1,11 +1,11 @@
 package ru.nukkit.regions.util;
 
-import cn.nukkit.plugin.PluginBase;
+import cn.nukkit.plugin.Plugin;
 import cn.nukkit.utils.SimpleConfig;
 
 public class RegionsConfig extends SimpleConfig {
 
-    // Selections
+    // Selection particles
     @Path (value = "selection.particles.enable")
     public boolean selectionShow;
 
@@ -20,6 +20,12 @@ public class RegionsConfig extends SimpleConfig {
 
     @Path (value = "selection.particles.limit-amount")
     public int selectionLimitAmount = 100;
+
+    @Path (value = "selection.particles.limit-distance")
+    public int particleDistance = 64;
+
+    @Path (value = "selection.particles.show-intersections")
+    public boolean selectionShowIntersections=true;
 
     // Player Move detections
     @Path (value = "player-move.use-player-move-event")
@@ -45,7 +51,8 @@ public class RegionsConfig extends SimpleConfig {
     public boolean intersectionsAllowed = false;
 
 
-    public RegionsConfig(PluginBase plugin) {
+
+    public RegionsConfig(Plugin plugin) {
         super(plugin);
     }
 }

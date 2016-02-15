@@ -19,6 +19,7 @@ public class Commander {
 		plugin = plg;
         addNewCommand(new CmdSelect());
         addNewCommand(new CmdSelectPos());
+        addNewCommand(new CmdSelectShow());
 
         addNewCommand(new CmdClaim());
 

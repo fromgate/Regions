@@ -268,23 +268,7 @@ public class RegionManager {
         for (Map.Entry<String,Region> entry : regions.entrySet()){
             Region region = entry.getValue();
             if (cancelEvent(player,region,flagType)) return true;
-
-            /*
-            Flag f = region.getFlag(flagType);
-            Relation rel = region.getRelation(player.getName());
-            BoolFlag bf = (BoolFlag) f;
-            boolean allowed = bf.isAllowed (rel);
-            Message.BC(entry.getKey(),f.getType().name(),":",rel.name(),"| flag:",
-                    f.getRelation().name(),":",f.getParam(),"|",allowed);
-            if (!allowed) return true;            */
         }
-        /*for (Region region : regions.values()) {
-            Flag f = region.getFlag(flagType);
-            Relation rel = region.getRelation(player.getName());
-            BoolFlag bf = (BoolFlag) f;
-            Message.BC(f.getType().name()+" : "+rel.name()+" | flag: "+f.getRelation().name()+" : "+f.getParam()+" | "+bf.isAllowed (rel));
-            if (!bf.isAllowed (rel)) return true;
-        }*/
         return false;
     }
 }

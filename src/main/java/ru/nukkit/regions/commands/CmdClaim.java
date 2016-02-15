@@ -58,7 +58,6 @@ public class CmdClaim extends Cmd {
             Area area = new Area (locs.get(0),locs.get(1));
             if (Regions.getManager().canClaimVolume(area))
                 return Message.RG_CLAIM_AREA_VOLUME_REACHED.print(sender,getCfg().maxClaimVolume);
-            Message.BC("intersectionsAllowed",Regions.getManager().getIntersections(area).size(),Regions.getManager().getIntersections(area).size()>0);
             if (!getCfg().intersectionsAllowed
                     && Regions.getManager().getIntersections(area).size()>0) return Message.RG_CLAIM_AREA_INTERSECTED.print(sender);
             if (Regions.getManager().defineRegion(id,player.getName(),locs)) {
