@@ -1,0 +1,64 @@
+#########################################################
+# Regions - fully functional regions engine for Nukkit
+# ====================================================
+# Official page: http://nukkit.ru/
+# GitHub: https://github.com/fromgate/Regions
+#########################################################
+general:
+# Suported languages:
+# default - system language defined in nukkit.yml
+# eng - English
+# rus - Russian
+# You can translate plugin manually. If you can help me with translation
+# please send me translated file or made a pull request at github:
+# https://github.com/fromgate/Regions
+  language: default
+# Enable/disable debug mode. Don't touch this option :)
+  debug-mode: false
+
+# Selection mode configuration
+selection:
+# Enable particle effects. If you changing this option - you must restart server to take effect
+  particles:
+#   Enable particles (true) or disable (false)
+    enable: true
+#   Draw wall or only top and bottom line
+    draw-wall: true
+#   Solid wall or not
+    solid: false
+#   How often to replay particle effects (ticks)
+    replay-interval-ticks: 10
+#   Amount of particles to display. If amount is exceeded particle effect will be disabled
+    limit-amount: 100
+#   Maximum distance from player to particle to display it. Lower value = higher performance
+    limit-distance: 64
+#   Show intersected regions too
+    show-intersections: true
+# Player movement detection options
+# for flags: ENTER, ENTERMSG, LEAVE, LEAVEMSG
+player-move:
+# Use Nukkit's event system to determine player movement
+# This is most accurate method. But it could reduce performance on high loaded servers
+# Set to false if you find your TPS is too low
+  use-player-move-event: true
+# How often will check player postions (ticks) if "use-player-move-event" is set to "false"
+  recheck-interval-ticks: 10
+#
+# /claim command configuration
+claim:
+# How much regions can own player
+  max-regions-per-player: 5
+# Maximum volume of regions player could claim
+  max-claim-volume: 10000
+# Allows (true) players to claim only existing regions.
+# Regions suggested to claim must have CLAIM flag with allows values
+# Players will not be able to claim regions manually (using selections)
+  claim-only-existing-regions: false
+# Claim region only when player inside the regions 
+# This option is for /claim and /claim <id> command for existing regions
+# Player must travel to region or he will not be able to claim this region
+  claim-only-when-player-inside-region: false
+# Allow claiming regions to intersect with other regions
+# Please use this options carefully: players will be able to claim
+# part of other player's regions if this option is set to true
+  allow-to-instersect-with-other-regions: false

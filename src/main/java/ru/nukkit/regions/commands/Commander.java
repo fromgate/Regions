@@ -73,7 +73,6 @@ public class Commander {
             Message.CMD_REGISTERED.debug(cmd.toString());
         }
         commands.add(cmd);
-        Message.debugMessage(cmd.getPermission());
         return true;
     }
 
@@ -112,9 +111,9 @@ public class Commander {
     public static boolean execute(CommandSender sender, String cmdLabel, String[] args) {
         for (Cmd cmd : commands){
             if (!cmd.isCommand(cmdLabel)) continue;
-            if (cmd.executeCommand(sender, args)) return true;
-            else Message.debugMessage("Command not executed:",sender.getName(),cmdLabel, cmd.getCommand(), new ArrayList<String>(Arrays.asList(args)).toString());
+            if (cmd.executeCommand(sender, args)) return Message.debugMessage("Executed command:",sender.getName(),cmdLabel, cmd.toString(), new ArrayList<String>(Arrays.asList(args)).toString());
         }
+        Message.debugMessage("Command not executed:",sender.getName(),cmdLabel, new ArrayList<String>(Arrays.asList(args)).toString());
         return false;
     }
 
