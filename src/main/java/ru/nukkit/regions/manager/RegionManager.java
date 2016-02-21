@@ -255,11 +255,14 @@ public class RegionManager {
 
 
     public boolean cancelEvent(Player player, Region region, FlagType flagType){
+        return !isAllowed(player,region,flagType);
+    }
+
+    public boolean isAllowed (Player player, Region region, FlagType flagType){
         Flag f = region.getFlag(flagType);
         Relation rel = region.getRelation(player.getName());
         BoolFlag bf = (BoolFlag) f;
-        boolean allowed = bf.isAllowed (rel);
-        return !allowed;
+        return bf.isAllowed (rel);
     }
 
     public boolean cancelEvent(Player player, Location loc, FlagType flagType){

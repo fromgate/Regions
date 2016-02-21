@@ -1,4 +1,4 @@
-package ru.nukkit.regions.selector;
+package ru.nukkit.regions.util;
 
 
 import cn.nukkit.Player;
@@ -111,4 +111,5 @@ public class ShowParticle {
         if (player.distance(pt)>RegionsPlugin.getCfg().particleDistance) return;
         player.getLevel().addParticle(pt,player);
     }
+
 }

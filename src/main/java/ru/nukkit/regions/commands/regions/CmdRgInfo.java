@@ -1,9 +1,11 @@
-package ru.nukkit.regions.commands;
+package ru.nukkit.regions.commands.regions;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.utils.TextFormat;
 import ru.nukkit.regions.Regions;
+import ru.nukkit.regions.commands.Cmd;
+import ru.nukkit.regions.commands.CmdDefine;
 import ru.nukkit.regions.manager.Region;
 import ru.nukkit.regions.flags.Flag;
 import ru.nukkit.regions.util.Message;
@@ -12,7 +14,7 @@ import ru.nukkit.regions.util.StringUtil;
 import java.util.Map;
 
 @CmdDefine(command = "region", alias = "rg", subCommands ={"info|i"} , permission = "regions.info", description = Message.RG_CHK_DESC)
-public class CmdRgInfo extends Cmd{
+public class CmdRgInfo extends Cmd {
     @Override
     public boolean execute(CommandSender sender, Player player, String[] args) {
         if (args.length>1) return false;

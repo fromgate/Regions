@@ -32,6 +32,7 @@ public enum Message {
     SEL_DISABLE("Selection mode disabled!"),
     SEL_OK("Point #%2% selected: %1%"),
     SEL_FAIL("Failed to select point"),
+    SEL_AREASELECTED("Complete area selected. Selection volume: %1% blocks"),
     RG_DEFINE_DESC("Define new region"),
     DEF_SELECT("Failed to define region. Area was not selected"),
     RG_DEF_ID_USED("Region %1% already defined"),
@@ -109,7 +110,31 @@ public enum Message {
     SEL_SHOW_DISABLED("Selections particles disabled in config. Command canceled.",'c'),
     SEL_SHOW_PLR_ENABLED("Selections show mode enabled"),
     SEL_SHOW_PLR_DISABLED("Selections show mode disabled"),
-    RG_DESC("/region <command> <parameters> - main command of Regions. Type /region help for more info");;
+    RG_DESC("/region <command> <parameters> - main command of Regions. Type /region help for more info"),
+
+
+    UP_DESC("/up <height> - place glass block above the player and teleport on it"),
+    UP_HEIGHT_FAIL("Try jump higher",'c'),
+    UP_EMPTY_FAIL("Area above you is not empty",'c'),
+
+    SET_DESC("/set <id>[:data] - fill select area with specified blocks"),
+    BUILD_FINISHED("Successfully proccessed %1% blocks (Time: %2% ms / %3% ticks)"),
+    BUILD_FINISHED_LOG("[%1%] Processed %2% blocks (Time: %3% ms / %4% ticks)"),
+    BUILD_SELECT("You must select area before execute this command",'c'),
+    BUILD_WRONG_ID("Failed to parse block: %1%",'c','4'),
+    REPLACE_DESC("/set <id>[:data] - fill select area with specified blocks"),
+    UNDO_NOT_FOUND("There's nothing to undo for %1%"),
+    UNDO_DESC("/undo - undo your last edit"),
+    UNDO_FAIL("Failed to perform undo operation"),
+    RG_SEL("/region select [id] - select area bounded to region in your location (or defined by Id)"),
+    RG_SEL_NOTFOUND("There's no regions around you!",'c'),
+    RG_SEL_FOUNDMORE("Failed to get region selection. Found more than one region around you: %1%"),
+    CBD_COPY_DESK("/copy - copy selection to clipboard"),
+    CBD_COPY_FAIL("Failed to copy blocks to clipboard"),
+    CBD_COPY_OK("Copied %1% blocks to clipboard"),
+    CBD_PASTE_DESK("/paste - paste blocks from clipboard"),
+    CBD_PASTE_NOCLIP("Clipboard is empty!",'c'),
+    CBD_PASTING("Pasting clipboard into world...");
 
     private static boolean debugMode = false;
     private static String language = "english";

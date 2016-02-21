@@ -7,7 +7,7 @@ import cn.nukkit.level.Location;
 import java.util.regex.Pattern;
 
 public class Area {
-    private static final Pattern AREA_TEXT_PATTERN = Pattern.compile("(?i)^cuboid:\\{level:\\s?\\S+\\s+x1:\\s?\\d+\\s+y1:\\s?\\d+\\s+z1:\\s?\\d+\\s+x2:\\s?\\d+\\s+y2:\\s?\\d+\\s+z2:\\s?\\d+\\}$");
+    private static final Pattern AREA_TEXT_PATTERN = Pattern.compile("(?i)^cuboid:\\{level:\\s?\\S+\\s+x1:\\s?-?\\d+\\s+y1:\\s?\\d+\\s+z1:\\s?-?\\d+\\s+x2:\\s?-?\\d+\\s+y2:\\s?\\d+\\s+z2:\\s?-?\\d+\\}$");
 
     private String world;
     private int x1;

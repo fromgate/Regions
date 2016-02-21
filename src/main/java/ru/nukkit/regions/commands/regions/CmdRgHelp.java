@@ -1,7 +1,10 @@
-package ru.nukkit.regions.commands;
+package ru.nukkit.regions.commands.regions;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
+import ru.nukkit.regions.commands.Cmd;
+import ru.nukkit.regions.commands.CmdDefine;
+import ru.nukkit.regions.commands.Commander;
 import ru.nukkit.regions.util.Message;
 
 @CmdDefine(command = "region", alias = "rg", subCommands = "help|hlp|\\?", permission = "regions.help", description = Message.RG_HELP_DESC, allowConsole = true)

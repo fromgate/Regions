@@ -1,9 +1,11 @@
-package ru.nukkit.regions.commands;
+package ru.nukkit.regions.commands.select;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import ru.nukkit.regions.RegionsPlugin;
-import ru.nukkit.regions.selector.ShowParticle;
+import ru.nukkit.regions.commands.Cmd;
+import ru.nukkit.regions.commands.CmdDefine;
+import ru.nukkit.regions.util.ShowParticle;
 import ru.nukkit.regions.util.Message;
 
 @CmdDefine(command = "select", alias = "sel",subCommands = {"(?i)show"} , permission = "regions.select.particles", description = Message.SEL_SHOW_DESC)

@@ -58,8 +58,8 @@ public class Selector {
     public List<Location> getPoints (Player player){
         List<Location> locs = new ArrayList<Location>();
         String playerName = player.getName();
-        if (p1.containsKey(playerName)) locs.add(p1.get(playerName));
-        if (p2.containsKey(playerName)) locs.add(p2.get(playerName));
+        if (p1.containsKey(playerName)&&p1.get(playerName)!=null) locs.add(p1.get(playerName));
+        if (p2.containsKey(playerName)&&p2.get(playerName)!=null) locs.add(p2.get(playerName));
         return locs;
     }
 
@@ -82,8 +82,12 @@ public class Selector {
         return mode;
     }
 
-    public void selectPoints(Player player, Location p1, Location p2) {
-
-
+    public int getSelectionVolume(Player player){
+        List<Location> locs = getPoints(player);
+        if (locs.size()!=2) return -1;
+        int dx = locs.get(1).getFloorX()-locs.get(0).getFloorX();
+        int dy = locs.get(1).getFloorY()-locs.get(0).getFloorY();
+        int dz = locs.get(1).getFloorZ()-locs.get(0).getFloorZ();
+        return dx*dy*dz;
     }
 }

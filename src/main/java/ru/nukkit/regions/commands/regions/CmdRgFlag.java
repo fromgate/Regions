@@ -1,18 +1,20 @@
-package ru.nukkit.regions.commands;
+package ru.nukkit.regions.commands.regions;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import ru.nukkit.regions.Regions;
-import ru.nukkit.regions.manager.Region;
+import ru.nukkit.regions.commands.Cmd;
+import ru.nukkit.regions.commands.CmdDefine;
 import ru.nukkit.regions.flags.Flag;
 import ru.nukkit.regions.flags.FlagType;
+import ru.nukkit.regions.manager.Region;
 import ru.nukkit.regions.util.Message;
 import ru.nukkit.regions.util.Relation;
 import ru.nukkit.regions.util.StringUtil;
 
 
 @CmdDefine(command = "region", alias = "rg", subCommands = {"flag|f", "\\S+", "\\S+","\\S+"}, permission = "regions.flag", description = Message.RG_FLAG_DESC)
-public class CmdRgFlag extends Cmd{
+public class CmdRgFlag extends Cmd {
     @Override
     public boolean execute(CommandSender sender, Player player, String[] args) {
         //       0    1    2     3       4
@@ -41,6 +43,7 @@ public class CmdRgFlag extends Cmd{
             value = StringUtil.join (args,4);
         } else value = StringUtil.join (args,3);
         Flag flag = FlagType.createFlag (args[2],rel,value);
+        Message.BC("flag value", value);
         if (flag==null||!Regions.getManager().addFlag (args[1],flag)) return Message.RG_FLAG_FAIL.print(sender,args[2].toUpperCase());
         else return Message.RG_FLAG_OK.print(sender,args[2].toUpperCase());
     }

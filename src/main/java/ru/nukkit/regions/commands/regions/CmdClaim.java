@@ -1,4 +1,4 @@
-package ru.nukkit.regions.commands;
+package ru.nukkit.regions.commands.regions;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
@@ -6,6 +6,8 @@ import cn.nukkit.level.Location;
 import ru.nukkit.regions.Regions;
 import ru.nukkit.regions.RegionsPlugin;
 import ru.nukkit.regions.areas.Area;
+import ru.nukkit.regions.commands.Cmd;
+import ru.nukkit.regions.commands.CmdDefine;
 import ru.nukkit.regions.flags.BoolFlag;
 import ru.nukkit.regions.flags.Flag;
 import ru.nukkit.regions.flags.FlagType;

@@ -12,10 +12,13 @@ import ru.nukkit.regions.Regions;
 import ru.nukkit.regions.RegionsPlugin;
 import ru.nukkit.regions.events.RegionEnterEvent;
 import ru.nukkit.regions.events.RegionLeaveEvent;
+import ru.nukkit.regions.flags.EffectFlag;
 import ru.nukkit.regions.flags.FlagType;
 import ru.nukkit.regions.flags.StringFlag;
 import ru.nukkit.regions.manager.Region;
 import ru.nukkit.regions.util.Message;
+import ru.nukkit.regions.util.PotionEffects;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -77,16 +80,21 @@ public class WalkListener implements Listener {
         }
 
         for (Region region : fromCheck.values())
-            if (Regions.getManager().cancelEvent(player,region,FlagType.LEAVE)) return Message.FMSG_LEAVE.print(player);
+            if (Regions.getManager().cancelEvent(player,region,FlagType.LEAVE))
+                return Message.FMSG_LEAVE.print(player);
 
         for (Map.Entry<String,Region> entry : toCheck.entrySet()){
             StringFlag sf = (StringFlag) entry.getValue().getFlag(FlagType.ENTRYMSG);
             sf.print(player,entry.getKey());
+            EffectFlag ef = (EffectFlag) entry.getValue().getFlag(FlagType.EFFECT);
+            PotionEffects.setEffects(player,ef.getValue());
         }
 
         for (Map.Entry<String,Region> entry : fromCheck.entrySet()){
             StringFlag sf = (StringFlag) entry.getValue().getFlag(FlagType.LEAVEMSG);
             sf.print(player,entry.getKey());
+            EffectFlag ef = (EffectFlag) entry.getValue().getFlag(FlagType.EFFECT);
+            PotionEffects.removeEffects(player,ef.getValue());
         }
         this.currentRegions.put(player.getName(),toReg);
         return false;
@@ -108,5 +116,6 @@ public class WalkListener implements Listener {
         Player player = event.getPlayer();
         this.currentRegions.put(player.getName(),Regions.getManager().getRegions(player.getLocation()));
         if (!RegionsPlugin.getCfg().usePlayerMoveEvent) prevLoc.put(player.getName(), player.getLocation());
+        cancelPlayerMove(event.getPlayer(),event.getPlayer().getLocation());
     }
 }

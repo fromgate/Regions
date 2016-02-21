@@ -4,6 +4,12 @@ import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.TextFormat;
+import ru.nukkit.regions.commands.builder.*;
+import ru.nukkit.regions.commands.owner.*;
+import ru.nukkit.regions.commands.regions.*;
+import ru.nukkit.regions.commands.select.CmdSelect;
+import ru.nukkit.regions.commands.select.CmdSelectPos;
+import ru.nukkit.regions.commands.select.CmdSelectShow;
 import ru.nukkit.regions.util.Message;
 import ru.nukkit.regions.util.Paginator;
 
@@ -20,6 +26,7 @@ public class Commander {
         addNewCommand(new CmdSelect(),Message.SEL_DESC);
         addNewCommand(new CmdSelectPos());
         addNewCommand(new CmdSelectShow());
+        addNewCommand(new CmdRgSelect());
 
         addNewCommand(new CmdClaim(),Message.CLAIM_DESC);
 
@@ -45,6 +52,14 @@ public class Commander {
 
         addNewCommand(new CmdRgReload());
         addNewCommand(new CmdRgHelp());
+
+        addNewCommand(new CmdUp());
+        addNewCommand(new CmdSet());
+        addNewCommand(new CmdReplace());
+        addNewCommand(new CmdUndo());
+        addNewCommand(new CmdCopy());
+        addNewCommand(new CmdPaste());
+
 	}
 
 

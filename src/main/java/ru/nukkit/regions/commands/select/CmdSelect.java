@@ -1,8 +1,10 @@
-package ru.nukkit.regions.commands;
+package ru.nukkit.regions.commands.select;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import ru.nukkit.regions.Regions;
+import ru.nukkit.regions.commands.Cmd;
+import ru.nukkit.regions.commands.CmdDefine;
 import ru.nukkit.regions.util.Message;
 
 @CmdDefine(command = "select", alias = "sel",subCommands = {} , permission = "regions.select", description = Message.SEL_DESC)

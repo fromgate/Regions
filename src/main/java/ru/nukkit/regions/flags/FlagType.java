@@ -1,7 +1,11 @@
 package ru.nukkit.regions.flags;
 
+import cn.nukkit.utils.Config;
+import ru.nukkit.regions.RegionsPlugin;
 import ru.nukkit.regions.util.Relation;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 
 public enum FlagType {
@@ -21,26 +25,30 @@ public enum FlagType {
     TRAPDOOR (Relation.MEMBER,true),
     GATE (Relation.ALL,true),
     LIGHTER (Relation.MEMBER,true), // TODO
-    CLAIM (Relation.ALL,false);
+    CLAIM (Relation.ALL,false),
+    EFFECT (Relation.ALL,"",EffectFlag.class),
+    VISUAL (Relation.OWNER,true); //Названиеэффекта:Уровень, разделитель - пробел или ", "
 
     FlagType(Relation relation, boolean allow) {
-        this.defaultFlag = new BoolFlag(this,relation,allow);
         this.flagClass = BoolFlag.class;
+        this.defaultFlag = getDefault (new BoolFlag(this,relation,allow));
     }
 
     FlagType(Relation relation, String str) {
-        this.defaultFlag = new StringFlag(this,relation,str);
         this.flagClass = StringFlag.class;
+        this.defaultFlag = getDefault (new StringFlag(this,relation,str));
     }
 
+    FlagType(Relation relation, String valueStr, Class<? extends Flag> clazz) {
+        this.flagClass =clazz;
+        Flag f = createFlag(relation,valueStr);
+        this.defaultFlag = getDefault(f);
+    }
 
-    // private FlagType parent; // Заморочиться, что ли...
     private Class<? extends Flag> flagClass;
     private final Flag defaultFlag;
 
-
-
-
+    private static Config cfg= null;
 
     public Flag getDefaultFlag(){
         return this.defaultFlag;
@@ -73,7 +81,8 @@ public enum FlagType {
         try {
             Constructor constructor = this.flagClass.getConstructor(FlagType.class,Relation.class);
             Flag f = (Flag) constructor.newInstance(this,relation);
-            if (f.parseParam(valueStr)) return f;
+            f.parseParam(valueStr);
+            return f;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -92,4 +101,34 @@ public enum FlagType {
         return null;
     }
 
+    private static Flag getDefault (Flag defaultFlag){
+        if (cfg==null) {
+            File f = new File(RegionsPlugin.getPlugin().getDataFolder(),"default-flags.yml");
+            if (!f.exists()) try {
+                f.createNewFile();
+            } catch (IOException e) {
+            }
+            cfg = new Config(f,Config.YAML);
+        }
+        if (!cfg.exists(defaultFlag.getName())) return defaultFlag;
+        return defaultFlag.getType().createNewFlag(
+                cfg.getString(defaultFlag.getName()+".relate",defaultFlag.getRelation().name()),
+                        cfg.getString(defaultFlag.getName()+".value",defaultFlag.getParam()));
+    }
+
+    public static void createDefaults(){
+        if (cfg==null) {
+            File f = new File(RegionsPlugin.getPlugin().getDataFolder(),"default-flags.yml");
+            if (!f.exists()) try {
+                f.createNewFile();
+            } catch (IOException e) {
+            }
+            cfg = new Config(f,Config.YAML);
+        }
+        for (FlagType ft: values()){
+            cfg.set(ft.name()+".value",ft.getDefaultFlag().getParam());
+            cfg.set(ft.name()+".relate",ft.getDefaultFlag().getRelation().name());
+        }
+        cfg.save();
+    }
 }

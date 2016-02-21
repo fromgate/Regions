@@ -51,6 +51,21 @@ public class RegionsConfig extends SimpleConfig {
     public boolean intersectionsAllowed = false;
 
 
+    /*
+     * Builder configuration
+     *
+     *
+     **/
+
+    @Path (value = "builder.log.volume-to-inform")
+    public int builderLogAmount = 5000;
+
+    @Path (value = "builder.queue.max-time-per-tick-ms")
+    public long builderTicks=30;
+
+    @Path (value = "enable-undo-operations")
+    public boolean builderUseUndo=true;
+
 
     public RegionsConfig(Plugin plugin) {
         super(plugin);

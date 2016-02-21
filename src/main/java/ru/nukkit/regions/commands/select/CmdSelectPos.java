@@ -1,13 +1,15 @@
-package ru.nukkit.regions.commands;
+package ru.nukkit.regions.commands.select;
 
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import ru.nukkit.regions.Regions;
+import ru.nukkit.regions.commands.Cmd;
+import ru.nukkit.regions.commands.CmdDefine;
 import ru.nukkit.regions.util.Message;
 
 
-@CmdDefine(command = "select", alias = "sel",subCommands = {"(?i)pos1|p1|pos2|p2"} , permission = "region.select", description = Message.SEL_POS_DESC)
-public class CmdSelectPos extends Cmd{
+@CmdDefine(command = "select", alias = "sel",subCommands = {"(?i)pos1|p1|pos2|p2"} , permission = "regions.select", description = Message.SEL_POS_DESC)
+public class CmdSelectPos extends Cmd {
 
     @Override
     public boolean execute(CommandSender sender, Player player, String[] args) {
