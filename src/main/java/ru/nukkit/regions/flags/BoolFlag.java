@@ -1,5 +1,6 @@
 package ru.nukkit.regions.flags;
 
+import ru.nukkit.regions.util.Message;
 import ru.nukkit.regions.util.Relation;
 
 public class BoolFlag extends Flag {
@@ -11,7 +12,7 @@ public class BoolFlag extends Flag {
     }
 
     public BoolFlag(FlagType flagType, Relation relation, boolean value) {
-        this (flagType,relation);
+        this(flagType, relation);
         this.value = value;
     }
 
@@ -32,11 +33,11 @@ public class BoolFlag extends Flag {
         return value;
     }
 
-    public void set (String param){
+    public void set(String param) {
         this.value = parseParam(param);
     }
 
-    public void set (boolean value){
+    public void set(boolean value) {
         this.value = value;
     }
 
@@ -44,7 +45,8 @@ public class BoolFlag extends Flag {
        rel: - отношениие игрока к региону (т.е. OWNER, MEMBER или NOT_MEMBER)
      */
     public boolean isAllowed(Relation rel) {
-        if (this.getRelation().isRelated(rel)) return value;
-        else return !value;
+        boolean result = this.getRelation().isRelated(rel) ? value : !value;
+        Message.FLAG_DEBUG_RESULT.debug(this.getName(), result);
+        return result;
     }
 }

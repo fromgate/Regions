@@ -10,6 +10,6 @@ public class CommandExecutor extends Command {
 
     @Override
     public boolean execute(CommandSender commandSender, String s, String[] strings) {
-        return Commander.execute(commandSender,s,strings);
+        return Commander.execute(commandSender, s, strings);
     }
 }

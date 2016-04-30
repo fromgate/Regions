@@ -15,30 +15,30 @@ import java.util.Set;
 
 public class VisualRegions {
 
-    private static Map<Area,Set<Player>> visualEffect;
+    private static Map<Area, Set<Player>> visualEffect;
     private static boolean enable;
 
-    public static void updateVisuals(){
+    public static void updateVisuals() {
         if (!enable) return;
         visualEffect = new HashMap<Area, Set<Player>>();
-        for (Region region : Regions.getManager().getRegions().values()){
+        for (Region region : Regions.getManager().getRegions().values()) {
             Set<Player> players = new HashSet<Player>();
-            for (Player player : Server.getInstance().getOnlinePlayers().values()){
-                if (!Regions.getManager().isAllowed(player,region, FlagType.VISUAL)) continue;
+            for (Player player : Server.getInstance().getOnlinePlayers().values()) {
+                if (Regions.getManager().cancelEvent(player, region, FlagType.VISUAL)) continue;
                 players.add(player);
             }
-            if (!players.isEmpty()) visualEffect.put(region.getArea(),players);
+            if (!players.isEmpty()) visualEffect.put(region.getArea(), players);
         }
     }
 
-    public static void init(){
+    public static void init() {
         enable = true; //TODO
         visualEffect = new HashMap<Area, Set<Player>>();
         Server.getInstance().getScheduler().scheduleDelayedRepeatingTask(new Runnable() {
             public void run() {
                 updateVisuals();
             }
-        },30, RegionsPlugin.getCfg().selectionTick);
+        }, 30, RegionsPlugin.getCfg().selectionTick);
 
 
     }

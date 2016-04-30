@@ -1,62 +1,77 @@
 package ru.nukkit.regions.saver;
 
 import cn.nukkit.utils.Config;
+import cn.nukkit.utils.ConfigSection;
 import ru.nukkit.regions.RegionsPlugin;
 import ru.nukkit.regions.areas.Area;
 import ru.nukkit.regions.flags.Flag;
 import ru.nukkit.regions.flags.FlagType;
 import ru.nukkit.regions.manager.Region;
+import ru.nukkit.regions.util.Message;
 import ru.nukkit.regions.util.StringUtil;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class YamlSaver implements RegionSaver {
     public boolean save(Map<String, Region> regions) {
-        File f = new File(RegionsPlugin.getPlugin().getDataFolder()+File.separator+"regions.yml");
+        File f = new File(RegionsPlugin.getPlugin().getDataFolder() + File.separator + "regions.yml");
         if (f.exists()) f.delete();
-        Config cfg = new Config(f,Config.YAML);
-        for (String id : regions.keySet()){
-            Region region = regions.get(id);
-            cfg.set(id+".area",region.getDimension());
-            cfg.set(id+".owners", StringUtil.listToString(region.getOwners()));
-            cfg.set(id+".members", StringUtil.listToString(region.getMembers()));
-            for (Flag flag : region.getFlags()){
-                String flagKey = id+".flags."+flag.getName()+".";
-                if (flag.getRelation()!=null)
-                    cfg.set(flagKey+"relate",flag.getRelation().name());
-                cfg.set(flagKey+"value",flag.getParam());
+        Config cfg = new Config(f, Config.YAML);
+        regions.entrySet().forEach(e -> {
+            ConfigSection s = new ConfigSection();
+            Region region = e.getValue();
+            s.set("area", region.getDimension());
+            s.set("owners", StringUtil.listToString(region.getOwners()));
+            s.set("members", StringUtil.listToString(region.getMembers()));
+            for (Flag flag : region.getFlags()) {
+                String flagKey = "flags." + flag.getName() + ".";
+                if (flag.getRelation() != null) s.set(flagKey + "relate", flag.getRelation().name());
+                s.set(flagKey + "value", flag.getParam());
             }
-        }
+            cfg.set(e.getKey(),s);
+        });
+
+        /*
+        for (String id : regions.keySet()) {
+            Region region = regions.get(id);
+            cfg.set(id + ".area", region.getDimension());
+            cfg.set(id + ".owners", StringUtil.listToString(region.getOwners()));
+            cfg.set(id + ".members", StringUtil.listToString(region.getMembers()));
+            for (Flag flag : region.getFlags()) {
+                String flagKey = id + ".flags." + flag.getName() + ".";
+                if (flag.getRelation() != null)
+                    cfg.set(flagKey + "relate", flag.getRelation().name());
+                cfg.set(flagKey + "value", flag.getParam());
+            }
+        } */
         return cfg.save();
     }
 
     public Map<String, Region> load() {
         Map<String, Region> regions = new HashMap<String, Region>();
-        File f = new File(RegionsPlugin.getPlugin().getDataFolder()+File.separator+"regions.yml");
+        File f = new File(RegionsPlugin.getPlugin().getDataFolder() + File.separator + "regions.yml");
         if (!f.exists()) return regions;
-        Config cfg = new Config(f,Config.YAML);
-        for (String key : cfg.getAll().keySet()){
-            if (key.contains(".")) continue;
-            Region region = new Region(new Area(cfg.getString(key+".area")));
-            region.setOwner(cfg.getString(key+".owners"));
-            region.setMember(cfg.getString(key+".members"));
-            for (FlagType ft : FlagType.values()){
-                if (!cfg.exists(key+".flags."+ft.name())) continue;
-                if (!cfg.exists(key+".flags."+ft.name()+".value")) continue;
-                String value = cfg.getString (key+".flags."+ft.name()+".value");
-                String relStr = cfg.getString(key+".flags."+ft.name()+".relate");
-                Flag flag = ft.createNewFlag(relStr,value);
+        Config cfg = new Config(f, Config.YAML);
+
+        cfg.getSections(null).entrySet().forEach(e -> {
+            ConfigSection s = (ConfigSection) e.getValue();
+            Region region = new Region(new Area(s.getString("area")));
+            region.setOwner(s.getString("owners"));
+            region.setMember(s.getString("members"));
+            for (FlagType ft : FlagType.values()) {
+                if (!s.exists("flags." + ft.name())) continue;
+                if (!s.exists("flags." + ft.name() + ".value")) continue;
+                String value = s.getString("flags." + ft.name() + ".value");
+                String relStr = s.getString("flags." + ft.name() + ".relate");
+                Flag flag = ft.createNewFlag(relStr, value);
                 region.addFlag(flag);
             }
-            regions.put(key,region);
-        }
+            regions.put(e.getKey(), region);
+        });
+        Message.debugMessage("Loaded", regions.size(), "regions");
+
         return regions;
     }
-
-
-
-
 }

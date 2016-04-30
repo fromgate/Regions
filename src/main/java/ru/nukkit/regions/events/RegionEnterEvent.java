@@ -10,6 +10,7 @@ public class RegionEnterEvent extends RegionEvent {
     public static HandlerList getHandlers() {
         return handlers;
     }
+
     public RegionEnterEvent(Player player, String regionId, Region region) {
         super(player, regionId, region);
     }

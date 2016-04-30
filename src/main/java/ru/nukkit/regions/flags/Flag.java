@@ -6,27 +6,28 @@ public abstract class Flag {
     Relation relation;
     FlagType type;
 
-    public Flag (FlagType flagType, Relation relation){
+    public Flag(FlagType flagType, Relation relation) {
         this.type = flagType;
-        this.relation = relation==null ? this.type.getDefaultFlag().relation : relation;
+        this.relation = relation == null ? this.type.getDefaultFlag().relation : relation;
     }
 
-    public abstract boolean parseParam (String parameter); // Это парсер параметров из командной строки (и возможно при загрузке)
-                                                           // /rg add flag <Название> [RELATION]
+    public abstract boolean parseParam(String parameter); // Это парсер параметров из командной строки (и возможно при загрузке)
+
+    // /rg add flag <Название> [RELATION]
     public abstract String getParam();
 
-    public String getName(){
+    public String getName() {
         return this.type.name();
     }
 
     public abstract Object getValue(); // возврат какого-то ;) значения флага. По идее типизированного
 
 
-    public Relation getRelation(){
+    public Relation getRelation() {
         return this.relation;
     }
 
-    public FlagType getType(){
+    public FlagType getType() {
         return type;
     }
 
@@ -36,8 +37,6 @@ public abstract class Flag {
         sb.append("value: ").append(this.getParam());
         return sb.toString();
     }
-
-
 
 
 }

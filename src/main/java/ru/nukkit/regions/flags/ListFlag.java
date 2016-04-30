@@ -17,7 +17,7 @@ public class ListFlag extends Flag {
 
     @Override
     public boolean parseParam(String parameter) {
-        if (parameter==null||parameter.isEmpty()) return false;
+        if (parameter == null || parameter.isEmpty()) return false;
         String[] ln = parameter.split(",\\s*");
         for (String s : ln) names.add(s);
         return true;
@@ -26,8 +26,8 @@ public class ListFlag extends Flag {
     @Override
     public String getParam() {
         StringBuilder sb = new StringBuilder();
-        for (String s : names){
-            if (sb.length()>0) sb.append(", ");
+        for (String s : names) {
+            if (sb.length() > 0) sb.append(", ");
             sb.append(s);
         }
         return sb.toString();
@@ -38,20 +38,20 @@ public class ListFlag extends Flag {
         return names;
     }
 
-    public boolean isOwner (String playerName){
+    public boolean isOwner(String playerName) {
         return this.names.contains(playerName);
     }
 
-    public void add(String playerName){
-        if (this.names==null) this.names = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
+    public void add(String playerName) {
+        if (this.names == null) this.names = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
         this.names.add(playerName);
     }
 
-    public void remove(String playerName){
+    public void remove(String playerName) {
         if (this.names.contains(playerName)) this.names.remove(playerName);
     }
 
-    public void clear (String playerName){
+    public void clear(String playerName) {
         this.names.clear();
     }
 
@@ -70,7 +70,7 @@ public class ListFlag extends Flag {
         else {
             int count = sb.length();
             for (String s : this.names) {
-                if (sb.length()>count) sb.append(", ");
+                if (sb.length() > count) sb.append(", ");
                 sb.append(s);
             }
             sb.append("]");

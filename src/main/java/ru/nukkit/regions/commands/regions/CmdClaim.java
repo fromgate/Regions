@@ -3,6 +3,7 @@ package ru.nukkit.regions.commands.regions;
 import cn.nukkit.Player;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.level.Location;
+import cn.nukkit.permission.Permission;
 import ru.nukkit.regions.Regions;
 import ru.nukkit.regions.RegionsPlugin;
 import ru.nukkit.regions.areas.Area;
@@ -19,18 +20,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-@CmdDefine(command = "claim", alias = "rgclaim", subCommands ={} , permission = "regions.claim", description = Message.CLAIM_DESC)
+@CmdDefine(command = "claim", defaultPerm = Permission.DEFAULT_TRUE, alias = "rgclaim", subCommands = {}, permission = "regions.claim", description = Message.CLAIM_DESC)
 public class CmdClaim extends Cmd {
     @Override
     public boolean execute(CommandSender sender, Player player, String[] args) {
         if (Regions.getManager().canClaimMore(player.getName()))
-            return Message.RG_CLAIM_MAX_COUNT_REACHED.print(sender,getCfg().maxRegionPerPlayer);
-        String id = args.length>0 ? args[0] : null;
+            return Message.RG_CLAIM_MAX_COUNT_REACHED.print(sender, getCfg().maxRegionPerPlayer);
+        String id = args.length > 0 ? args[0] : null;
 
-        if (getCfg().claimOnlyExisting){
+        if (getCfg().claimOnlyExisting) {
             Region region = null;
-            if (id!=null){
-                if (!Regions.getManager().isRegion(id)) return Message.UNKNOWN_REGION.print(player,id);
+            if (id != null) {
+                if (!Regions.getManager().isRegion(id)) return Message.UNKNOWN_REGION.print(player, id);
                 region = Regions.getManager().getRegion(id);
             } else {
                 Map<String, Region> regions = Regions.getManager().getRegions(player);
@@ -46,31 +47,33 @@ public class CmdClaim extends Cmd {
                 id = regions.keySet().toArray(new String[1])[0];
                 region = regions.get(id);
             }
-            if (getCfg().claimOnlyInside&&!region.isInRegion(player.getLocation())) return Message.RG_CLAIM_EXIST_INSIDE.print(player,id);
+            if (getCfg().claimOnlyInside && !region.isInRegion(player.getLocation()))
+                return Message.RG_CLAIM_EXIST_INSIDE.print(player, id);
 
             if (!region.clear(FlagType.CLAIM)) return Message.RG_CLAIM_EXIST_FAIL.print(sender);
 
-            return (Regions.getManager().setOwner(id,player.getName())?Message.RG_CLAIM_EXIST_OK :Message.RG_CLAIM_EXIST_FAIL).print(player,id);
+            return (Regions.getManager().setOwner(id, player.getName()) ? Message.RG_CLAIM_EXIST_OK : Message.RG_CLAIM_EXIST_FAIL).print(player, id);
         } else {
-            if (id==null||id.isEmpty()) return Message.RG_CLAIM_NEED_ID.print(player);
+            if (id == null || id.isEmpty()) return Message.RG_CLAIM_NEED_ID.print(player);
             List<Location> locs = Regions.getSelector().getPoints(player);
-            if (locs == null||locs.size()!=2) return Message.DEF_SELECT.print(player);
-            if (Regions.getManager().regionIdUsed(id)) Message.RG_DEF_ID_USED.print(player,id);
+            if (locs == null || locs.size() != 2) return Message.DEF_SELECT.print(player);
+            if (Regions.getManager().regionIdUsed(id)) Message.RG_DEF_ID_USED.print(player, id);
 
-            Area area = new Area (locs.get(0),locs.get(1));
+            Area area = new Area(locs.get(0), locs.get(1));
             if (Regions.getManager().canClaimVolume(area))
-                return Message.RG_CLAIM_AREA_VOLUME_REACHED.print(sender,getCfg().maxClaimVolume);
+                return Message.RG_CLAIM_AREA_VOLUME_REACHED.print(sender, getCfg().maxClaimVolume);
             if (!getCfg().intersectionsAllowed
-                    && Regions.getManager().getIntersections(area).size()>0) return Message.RG_CLAIM_AREA_INTERSECTED.print(sender);
-            if (Regions.getManager().defineRegion(id,player.getName(),locs)) {
-                Regions.getSelector().setSelMode(player,false);
+                    && Regions.getManager().getIntersections(area).size() > 0)
+                return Message.RG_CLAIM_AREA_INTERSECTED.print(sender);
+            if (Regions.getManager().defineRegion(id, player.getName(), locs)) {
+                Regions.getSelector().setSelMode(player, false);
                 Regions.getSelector().clearSelection(player);
-                return Message.RG_CLAIM_OK.print(sender,id);
-            } else return Message.RG_CLAIM_FAIL.print(sender,id);
+                return Message.RG_CLAIM_OK.print(sender, id);
+            } else return Message.RG_CLAIM_FAIL.print(sender, id);
         }
     }
 
-    private RegionsConfig getCfg(){
+    private RegionsConfig getCfg() {
         return RegionsPlugin.getCfg();
     }
 

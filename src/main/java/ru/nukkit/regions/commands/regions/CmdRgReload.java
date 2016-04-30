@@ -8,12 +8,12 @@ import ru.nukkit.regions.commands.Cmd;
 import ru.nukkit.regions.commands.CmdDefine;
 import ru.nukkit.regions.util.Message;
 
-@CmdDefine(command = "region", alias = "rg", subCommands = "reload", permission = "regions.reload", description = Message.RG_RELOAD_DESC, allowConsole = true)
+@CmdDefine(command = "region", alias = "rg", subCommands = "reload", allowConsole = true, permission = "regions.reload", description = Message.RG_RELOAD_DESC)
 public class CmdRgReload extends Cmd {
     @Override
     public boolean execute(CommandSender sender, Player player, String[] args) {
         RegionsPlugin.getCfg().load();
         Regions.getManager().load();
-        return Message.RG_RELOAD_OK.print(sender,Regions.getManager().getRegions().size());
+        return Message.RG_RELOAD_OK.print(sender, Regions.getManager().getRegions().size());
     }
 }

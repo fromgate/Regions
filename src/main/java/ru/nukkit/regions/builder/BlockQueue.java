@@ -18,8 +18,8 @@ public class BlockQueue {
     private int count;
     private Location minLoc; //add this to block coordinates if not null
 
-    BlockQueue(String name){
-        this.queue =new ArrayList<Block>();//LinkedList<Block>();
+    BlockQueue(String name) {
+        this.queue = new ArrayList<Block>();//LinkedList<Block>();
         this.starter = name;
         this.startTime = System.currentTimeMillis();
         this.ticks = 0;
@@ -27,17 +27,17 @@ public class BlockQueue {
         this.minLoc = null;
     }
 
-    public BlockQueue (String name, Block block){
+    public BlockQueue(String name, Block block) {
         this(name);
         add(block);
     }
 
-    public BlockQueue (String name, Collection<Block> blocks){
+    public BlockQueue(String name, Collection<Block> blocks) {
         this(name);
         add(blocks);
     }
 
-    public BlockQueue (String name, Collection<Block> blocks, Location minLoc){
+    public BlockQueue(String name, Collection<Block> blocks, Location minLoc) {
         this(name);
         this.minLoc = minLoc;
         add(blocks);
@@ -56,46 +56,47 @@ public class BlockQueue {
         return true;
     }
 
-    public boolean processQueue(long time){
+    public boolean processQueue(long time) {
         if (queue.isEmpty()) return true;
         ticks++;
-        for (;count<queue.size()&&(System.currentTimeMillis() - time) < RegionsPlugin.getCfg().builderTicks;){
+        for (; count < queue.size() && (System.currentTimeMillis() - time) < RegionsPlugin.getCfg().builderTicks; ) {
             Block b = queue.get(count);
-            if (this.minLoc!=null) b = Block.get(b.getId(),b.getDamage(),b.getLocation().add(this.minLoc));
-            if (b.isValid()) b.getLevel().setBlock(b,b,false,false);
+            if (this.minLoc != null) b = Block.get(b.getId(), b.getDamage(), b.getLocation().add(this.minLoc));
+            if (b.isValid()) b.getLevel().setBlock(b, b, false, false);
             count++;
         }
         return true;
     }
 
     public boolean isFinished() {
-        return count>=queue.size();
+        return count >= queue.size();
     }
 
-    public void finishInform(){
+    public void finishInform() {
         Player player = Server.getInstance().getPlayerExact(this.starter);
-        if (player!=null) Message.BUILD_FINISHED.print(player,queue.size(),System.currentTimeMillis()-this.startTime,ticks);
-        if (player==null||queue.size()> RegionsPlugin.getCfg().builderLogAmount)
-            Message.BUILD_FINISHED_LOG.log(this.starter,queue.size(), System.currentTimeMillis()-this.startTime,ticks);
+        if (player != null)
+            Message.BUILD_FINISHED.print(player, queue.size(), System.currentTimeMillis() - this.startTime, ticks);
+        if (player == null || queue.size() > RegionsPlugin.getCfg().builderLogAmount)
+            Message.BUILD_FINISHED_LOG.log(this.starter, queue.size(), System.currentTimeMillis() - this.startTime, ticks);
     }
 
-    public void scheduleUpdateBlocks(){
+    public void scheduleUpdateBlocks() {
         if (queue.isEmpty()) return;
         Level l = queue.get(0).getLevel();
         for (Block b : queue)
-                l.scheduleUpdate(b,1);
+            l.scheduleUpdate(b, 1);
     }
 
-    private void sortQueue(){
-        Map<Integer,List<Block>> groupQueue = new TreeMap<Integer,List<Block>>();
-        for (Block b : queue){
-            int hash = (b.getFloorX()>>4)^(b.getFloorZ()>>4);
-            if (!groupQueue.containsKey(hash)) groupQueue.put(hash,new LinkedList<Block>());
-            List<Block> chunkBlock=groupQueue.get(hash);
+    private void sortQueue() {
+        Map<Integer, List<Block>> groupQueue = new TreeMap<Integer, List<Block>>();
+        for (Block b : queue) {
+            int hash = (b.getFloorX() >> 4) ^ (b.getFloorZ() >> 4);
+            if (!groupQueue.containsKey(hash)) groupQueue.put(hash, new LinkedList<Block>());
+            List<Block> chunkBlock = groupQueue.get(hash);
             chunkBlock.add(b);
         }
         queue = new LinkedList<Block>();
-        for (Map.Entry<Integer,List<Block>> entry : groupQueue.entrySet()){
+        for (Map.Entry<Integer, List<Block>> entry : groupQueue.entrySet()) {
             queue.addAll(entry.getValue());
         }
     }

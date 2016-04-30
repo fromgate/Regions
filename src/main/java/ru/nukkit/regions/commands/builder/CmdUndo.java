@@ -11,8 +11,9 @@ import ru.nukkit.regions.util.Message;
 public class CmdUndo extends Cmd {
     @Override
     public boolean execute(CommandSender sender, Player player, String[] args) {
-        if (!Regions.getBuilder().getUndoManager().playerUndoExist(player.getName())) return Message.UNDO_NOT_FOUND.print(sender,sender.getName());
-        if (!Regions.getBuilder().getUndoManager().performUndo(player.getName())) return Message.UNDO_FAIL.print(sender);
+        if (!Regions.getUndoManager().playerUndoExist(player.getName()))
+            return Message.UNDO_NOT_FOUND.print(sender, sender.getName());
+        if (!Regions.getUndoManager().performUndo(player.getName())) return Message.UNDO_FAIL.print(sender);
         return true;
     }
 }

@@ -10,7 +10,7 @@ public class StringFlag extends Flag {
 
     public StringFlag(FlagType flagType, Relation relation) {
         super(flagType, relation);
-        this.value="";
+        this.value = "";
     }
 
     public StringFlag(FlagType flagType, Relation relation, String param) {
@@ -20,7 +20,7 @@ public class StringFlag extends Flag {
 
     @Override
     public boolean parseParam(String parameter) {
-        this.value = parameter== null ? "" : new String(parameter);
+        this.value = parameter == null ? "" : new String(parameter);
         return true;
     }
 
@@ -34,13 +34,13 @@ public class StringFlag extends Flag {
         return this.value;
     }
 
-    public void print(Player player, String... str){
+    public void print(Player player, String... str) {
         if (player == null) return;
         if (this.value.isEmpty()) return;
-        String msg = this.value.replace("%player%",player.getName());
-        if (str.length>0)
-            for (int i = 0;i<str.length;i++)
-                msg = msg.replace("%"+Integer.toString(i+1)+"%",str[i]);
+        String msg = this.value.replace("%player%", player.getName());
+        if (str.length > 0)
+            for (int i = 0; i < str.length; i++)
+                msg = msg.replace("%" + Integer.toString(i + 1) + "%", str[i]);
         player.sendMessage(TextFormat.colorize(msg));
     }
 }

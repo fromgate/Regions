@@ -10,25 +10,28 @@ import java.util.List;
 
 public class PotionEffects {
 
-    public static void setEffects (Player player, List<Effect> effects){
-        for (Effect eff : effects){
+    public static void setEffects(Player player, List<Effect> effects) {
+        for (Effect eff : effects) {
             if (player.hasEffect(eff.getId())) player.removeEffect(eff.getId());
             player.addEffect(eff);
         }
     }
-    public static void removeEffects (Player player, List<Effect> effects){
+
+    public static void removeEffects(Player player, List<Effect> effects) {
         for (Effect eff : effects)
             if (player.hasEffect(eff.getId())) player.removeEffect(eff.getId());
     }
 
 
-    public static String effectToStr (Effect effect){
-        for (Field field : Effect.class.getDeclaredFields()){
+    public static String effectToStr(Effect effect) {
+        for (Field field : Effect.class.getDeclaredFields()) {
             if (!Modifier.isStatic(field.getModifiers())) continue;
             try {
-                if (field.getInt(null)!=effect.getId()) continue;
-            } catch (Exception e){continue;}
-            return field.getName()+(effect.getAmplifier()>0 ? ":"+effect.getAmplifier() : "");
+                if (field.getInt(null) != effect.getId()) continue;
+            } catch (Exception e) {
+                continue;
+            }
+            return field.getName() + (effect.getAmplifier() > 0 ? ":" + effect.getAmplifier() : "");
         }
         return null;
     }

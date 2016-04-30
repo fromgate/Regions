@@ -18,37 +18,38 @@ public class EffectFlag extends Flag {
     @Override
     public boolean parseParam(String parameter) {
         effects = new ArrayList<Effect>();
-        if (parameter==null||parameter.isEmpty()) return false;
-        String [] ln = parameter.split("\\s+|,\\s*|;\\s*");
-        for (String effStr : ln){
+        if (parameter == null || parameter.isEmpty()) return false;
+        String[] ln = parameter.split("\\s+|,\\s*|;\\s*");
+        for (String effStr : ln) {
             String eStr = effStr;
             int power = 0;
-            Effect effect=null;
-            if (effStr.contains(":")){
-                String[] eln=effStr.split(":");
+            Effect effect = null;
+            if (effStr.contains(":")) {
+                String[] eln = effStr.split(":");
                 eStr = eln[0];
                 if (eln[1].matches("\\d+")) power = Integer.parseInt(eln[1]);
             }
             try {
                 effect = eStr.matches("\\d+") ? Effect.getEffect(Integer.parseInt(eStr)) : Effect.getEffectByName(eStr);
-            } catch (Exception e){}
+            } catch (Exception e) {
+            }
             if (effect == null) continue;
             effect.setAmplifier(power);
             effect.setAmbient(false);
             effect.setDuration(Integer.MAX_VALUE);
-            effects.add (effect);
+            effects.add(effect);
         }
         return true;
     }
 
     @Override
     public String getParam() {
-        if (effects==null||effects.isEmpty()) return "";
+        if (effects == null || effects.isEmpty()) return "";
         StringBuilder sb = new StringBuilder();
-        for (Effect effect : effects){
+        for (Effect effect : effects) {
             String effStr = PotionEffects.effectToStr(effect);
             if (effStr == null) continue;
-            if (sb.length()>0) sb.append(", ");
+            if (sb.length() > 0) sb.append(", ");
             sb.append(effStr);
         }
         return sb.toString();

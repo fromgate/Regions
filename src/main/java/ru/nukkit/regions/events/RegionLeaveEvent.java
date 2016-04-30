@@ -4,7 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.event.HandlerList;
 import ru.nukkit.regions.manager.Region;
 
-public class RegionLeaveEvent extends RegionEvent{
+public class RegionLeaveEvent extends RegionEvent {
     private static final HandlerList handlers = new HandlerList();
 
     public static HandlerList getHandlers() {

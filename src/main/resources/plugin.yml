@@ -1,58 +1,10 @@
 name: Regions
 main: ru.nukkit.regions.RegionsPlugin
-version: "0.0.1"
+version: "0.0.3"
 author: fromgate, nukkit.ru
 api: ["1.0.0"]
 description: Regions, regions, regions!
 permissions:
-  regions.select:
-    descripition: Allows to select areas (/select)
-    default: true
-  regions.select.particles:
-    descripition: Allows to toggle display selection mode (/select show)
-    default: true
-  regions.claim:
-    descripition: Allows to claim region (/claim)
-    default: true
-  regions.define:
-    descripition: Allows to define new region (/region define)
-    default: op
-  regions.redefine:
-    descripition: Allows to redefine existing region (/region define)
-    default: op
-  regions.info:
-    descripition: Allows to display region info (/region info)
-    default: true
-  regions.flag:
-    descripition: Allows to configure flags regions (/region flag)
-    default: true
-  regions.setowner:
-    descripition: Allows to set owner of the region (/region setowner)
-    default: op
-  regions.addowner:
-    descripition: Allows to add owner to the region (/region addowner)
-    default: op
-  regions.setmember:
-    descripition: Allows to set member of the region (/region setmember)
-    default: true
-  regions.addmember:
-    descripition: Allows to add member to the region (/region addmember)
-    default: true
-  regions.removemember:
-    descripition: Allows to remove member from the region (/region removemember)
-    default: true
-  regions.removeowner:
-    descripition: Allows to remove owner from the region (/region removeowner)
-    default: op
-  regions.remove:
-    descripition: Allows to existing remove region (/region remove)
-    default: true
-  regions.reload:
-    descripition: Allows to reload configuration (/region reload)
-    default: op
-  regions.help:
-    descripition: Allows to display help (/region help)
-    default: true
   regions.unlimited:
     descripition: Allows to operate with regions owned by other players
     default: op

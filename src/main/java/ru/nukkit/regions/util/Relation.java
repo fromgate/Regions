@@ -1,17 +1,17 @@
 package ru.nukkit.regions.util;
 
 public enum Relation {
-    OWNER ("own",4),
-    MEMBER ("mem",3),
-    NOT_OWNER ("notowner",2),
-    NOT_MEMBER ("notmember",1),
-    ALL("everyone",0);
+    OWNER("own", 4),
+    MEMBER("mem", 3),
+    NOT_OWNER("notowner", 2),
+    NOT_MEMBER("notmember", 1),
+    ALL("everyone", 0);
 
 
     private String alias;
     private int priority;
 
-    Relation(String alias, int priority){
+    Relation(String alias, int priority) {
         this.alias = alias;
         this.priority = priority;
     }
@@ -24,20 +24,20 @@ public enum Relation {
     ALL - вообще все
      */
 
-    public static Relation getByName(String str){
+    public static Relation getByName(String str) {
         if (str != null)
             for (Relation r : values())
                 if (r.name().equalsIgnoreCase(str)) return r;
         return null;
     }
 
-    public boolean isRelated(Relation to){
-        if (to==null) return false;
-        switch (this){
+    public boolean isRelated(Relation to) {
+        if (to == null) return false;
+        switch (this) {
             case OWNER:
-                return (to==OWNER);
+                return (to == OWNER);
             case MEMBER:
-                return (to==OWNER||to==MEMBER);
+                return (to == OWNER || to == MEMBER);
             case NOT_OWNER:
                 return (to != OWNER);
             case NOT_MEMBER:
