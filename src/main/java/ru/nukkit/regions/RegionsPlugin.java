@@ -24,9 +24,9 @@ public class RegionsPlugin extends PluginBase {
         this.saveDefaultConfig();
         this.cfg = new RegionsConfig(this);
         this.cfg.load();
-        this.cfg.save();
-        FlagType.createDefaults();
         Message.init(this);
+        this.cfg.update();
+        FlagType.createDefaults();
         Commander.init(this);
         Regions.init();
         ShowParticle.init();
@@ -34,7 +34,6 @@ public class RegionsPlugin extends PluginBase {
         this.getServer().getPluginManager().registerEvents(new RegionListener(), this);
         this.getServer().getPluginManager().registerEvents(new FlagListener(), this);
         new WalkListener();
-        //this.getServer().getPluginManager().registerEvents(new WalkListener(), this);
         this.getLogger().info(TextFormat.colorize("&cRegions &ecreated for Nukkit.Ru"));
         this.getLogger().info(TextFormat.colorize("&eYou can get more info about Regions at:"));
         this.getLogger().info(TextFormat.colorize("&3http://nukkit.ru/resources/regions.53/"));

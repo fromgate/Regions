@@ -1,10 +1,14 @@
 package ru.nukkit.regions.util;
 
 import cn.nukkit.plugin.Plugin;
+import cn.nukkit.utils.Config;
 import cn.nukkit.utils.SimpleConfig;
 import ru.nukkit.regions.builder.Builder;
 import ru.nukkit.regions.builder.BuilderQueed;
 import ru.nukkit.regions.builder.SimpleBuilder;
+
+import java.io.File;
+import java.lang.reflect.Field;
 
 public class RegionsConfig extends SimpleConfig {
 
@@ -52,7 +56,6 @@ public class RegionsConfig extends SimpleConfig {
     @Path("player-move.provide-custom-events")
     public boolean enableCustomEvents = false;
 
-
     // Claim command configuration
     @Path("claim.max-regions-per-player")
     public int maxRegionPerPlayer = 5;
@@ -69,13 +72,7 @@ public class RegionsConfig extends SimpleConfig {
     @Path("claim.allow-to-instersect-with-other-regions")
     public boolean intersectionsAllowed = false;
 
-
-    /*
-     * Builder configuration
-     *
-     *
-     **/
-
+    // Builder configuration
     @Path("builder.type")
     private String builderType = "SIMPLE"; // SIMPLE / QUEUE
 
@@ -85,9 +82,8 @@ public class RegionsConfig extends SimpleConfig {
     @Path("builder.queue.max-time-per-tick-ms")
     public long builderTicks = 30;
 
-    @Path("enable-undo-operations")
+    @Path("builder.undo.enable")
     public boolean builderUseUndo = true;
-
 
     public RegionsConfig(Plugin plugin) {
         super(plugin);
@@ -97,4 +93,22 @@ public class RegionsConfig extends SimpleConfig {
         if (this.builderType.equalsIgnoreCase("QUEUE")) return new BuilderQueed();
         return new SimpleBuilder();
     }
+
+    public void update(){
+        File file;
+        try {
+            Field field = SimpleConfig.class.getDeclaredField("configFile");
+            field.setAccessible(true);
+            file = (File) field.get((SimpleConfig) this);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+        Config cfg = new Config(file,Config.YAML);
+        if (!cfg.exists("builder.undo.enable")){
+            save();
+            Message.CFG_UPDATED.log();
+        }
+    }
+
 }

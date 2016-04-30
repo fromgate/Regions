@@ -4,6 +4,7 @@
 # Official page: http://nukkit.ru/
 # GitHub: https://github.com/fromgate/Regions
 #########################################################
+
 general:
 # Suported languages:
 # default - system language defined in nukkit.yml
@@ -13,15 +14,19 @@ general:
 # please send me translated file or made a pull request at github:
 # https://github.com/fromgate/Regions
   language: default
+# Save translation to file. Use it if you going to customize messages
+# If you going to translate Regions, please join to translation project:
+# https://crowdin.com/project/regions/invite
+  language-save: false
 # Enable/disable debug mode. Don't touch this option :)
   debug-mode: false
 
 # Selection mode configuration
 selection:
-# Enable particle effects. If you changing this option - you must restart server to take effect
   particles:
+#   Enable particle effects. If you changing this option - you must restart server to take effect
 #   Enable particles (true) or disable (false)
-    enable: true
+    enable: false
 #   Draw wall or only top and bottom line
     draw-wall: true
 #   Solid wall or not
@@ -29,21 +34,30 @@ selection:
 #   How often to replay particle effects (ticks)
     replay-interval-ticks: 10
 #   Amount of particles to display. If amount is exceeded particle effect will be disabled
-    limit-amount: 100
+    limit-amount: 500
 #   Maximum distance from player to particle to display it. Lower value = higher performance
     limit-distance: 64
 #   Show intersected regions too
     show-intersections: true
+
 # Player movement detection options
-# for flags: ENTER, ENTERMSG, LEAVE, LEAVEMSG
+# This will affect to flags ENTER, ENTERMSG, LEAVE, LEAVEMSG
+# and could affect your server performance (if you have a lot of players and regions)
 player-move:
+# Enable (true) this option. If you disabled - flags ENTER, ENTERMSG, LEAVE, LEAVEMSG will be ignored
+# Use when you don't planning to use this flags
+  enable-detection: true
 # Use Nukkit's event system to determine player movement
 # This is most accurate method. But it could reduce performance on high loaded servers
 # Set to false if you find your TPS is too low
   use-player-move-event: true
 # How often will check player postions (ticks) if "use-player-move-event" is set to "false"
+# Higher value will increase performance, but decrease sharpness of coordinate detection.
   recheck-interval-ticks: 10
-#
+# Generate custom Regions events, that could be used by another plugins.
+# You must set this option to true if you use plugin, that needs this events
+  provide-custom-events: false
+
 # /claim command configuration
 claim:
 # How much regions can own player
@@ -54,7 +68,7 @@ claim:
 # Regions suggested to claim must have CLAIM flag with allows values
 # Players will not be able to claim regions manually (using selections)
   claim-only-existing-regions: false
-# Claim region only when player inside the regions 
+# Claim region only when player inside the regions
 # This option is for /claim and /claim <id> command for existing regions
 # Player must travel to region or he will not be able to claim this region
   claim-only-when-player-inside-region: false
@@ -62,3 +76,21 @@ claim:
 # Please use this options carefully: players will be able to claim
 # part of other player's regions if this option is set to true
   allow-to-instersect-with-other-regions: false
+
+# Builder configuration
+builder:
+# Builder provider type. Supported: SIMPLE and QUEUE.
+# SIMPLE is default provider will work fine on small edits. But on big changes it could cause lags and freezes
+# QUEUE is experimental providers that works limit amount of time per tick. Created to lower server CPU usage
+  type: SIMPLE
+  log:
+# When someone change in one moment more than specified amount of block you'll get message in server log
+    volume-to-inform: 5000
+# QUEUE builder configuration
+  queue:
+# Time (ms) per ticks that Regions could use to place blocks. 1 tick = 50 ms.
+    max-time-per-tick-ms: 30
+# Undo operation configuration
+  undo:
+# Enable (true) undo
+    enable: true

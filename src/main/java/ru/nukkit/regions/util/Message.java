@@ -146,7 +146,8 @@ public enum Message {
     FLAG_DEBUG_PERMISSION("Flag %1% is \"true\" according to permission"),
     FLAG_DEBUG_RESULT("Flag %1% is \"%2\""),
     SEL_EXPAND_DELTA("You must specify positive integer value to expand your selection"),
-    REGEN_OK("%1% chunks regenerated");
+    REGEN_OK("%1% chunks regenerated"),
+    CFG_UPDATED("Config file updated. New variables added but we lost all comments...");
 
     private static boolean debugMode = false;
     private static String language = "default";
