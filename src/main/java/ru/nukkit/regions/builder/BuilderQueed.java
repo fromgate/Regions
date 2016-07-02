@@ -8,6 +8,7 @@ import cn.nukkit.level.Position;
 import ru.nukkit.regions.Regions;
 import ru.nukkit.regions.RegionsPlugin;
 import ru.nukkit.regions.areas.Area;
+import ru.nukkit.regions.clipboard.Clipboard;
 import ru.nukkit.regions.util.Message;
 
 import java.util.Collection;
@@ -113,7 +114,7 @@ public class BuilderQueed implements Builder {
                     }
             }
         if (undo != null) getUndoManager().add(undo);
-        Message.debugMessage("setBlock:", "blocks:", blocks.size(), "undo:", undo == null ? "null" : undo.blocks.size());
+        Message.debugMessage("setBlock:", "blocks:", blocks.size(), "undo:", undo == null ? "null" : undo.getVolume());
         setBlock(playerName, blocks);
     }
 

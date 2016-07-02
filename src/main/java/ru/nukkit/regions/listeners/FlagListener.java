@@ -17,6 +17,8 @@ import ru.nukkit.regions.flags.FlagType;
 import ru.nukkit.regions.util.BlockUtil;
 import ru.nukkit.regions.util.Message;
 
+import static ru.nukkit.regions.flags.FlagType.PVP;
+
 public class FlagListener implements Listener {
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
@@ -71,14 +73,16 @@ public class FlagListener implements Listener {
     public void onPVP(EntityDamageEvent event) {
         Player player = (event.getEntity() instanceof Player) ? (Player) event.getEntity() : null;
         if (player == null) return;
+        Player damager = null;
         if (event instanceof EntityDamageByEntityEvent) {
             EntityDamageByEntityEvent ev = (EntityDamageByEntityEvent) event;
-            if (!(ev.getDamager() instanceof Player)) return;
-            if (Regions.getManager().cancelEvent(player, player.getLocation(), FlagType.PVP)) event.setCancelled();
-        } else if (event instanceof EntityDamageByChildEntityEvent) {
-            EntityDamageByChildEntityEvent ev = (EntityDamageByChildEntityEvent) event;
-            if (!(ev.getDamager() instanceof Player)) return;
-            if (Regions.getManager().cancelEvent(player, player.getLocation(), FlagType.PVP)) event.setCancelled();
+            if (ev instanceof EntityDamageByChildEntityEvent) {
+                EntityDamageByChildEntityEvent evc = (EntityDamageByChildEntityEvent) ev;
+                if (evc.getDamager() instanceof Player) damager = (Player) evc.getDamager();
+            } else if (ev.getDamager() instanceof Player) damager = (Player) ev.getDamager();
         }
+        if (damager == null) return;
+        if (Regions.getManager().cancelEvent(player, player.getLocation(), PVP)||
+                Regions.getManager().cancelEvent(damager, damager.getLocation(), PVP)) event.setCancelled();
     }
 }

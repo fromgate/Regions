@@ -32,21 +32,9 @@ public class YamlSaver implements RegionSaver {
             }
             cfg.set(e.getKey(),s);
         });
-
-        /*
-        for (String id : regions.keySet()) {
-            Region region = regions.get(id);
-            cfg.set(id + ".area", region.getDimension());
-            cfg.set(id + ".owners", StringUtil.listToString(region.getOwners()));
-            cfg.set(id + ".members", StringUtil.listToString(region.getMembers()));
-            for (Flag flag : region.getFlags()) {
-                String flagKey = id + ".flags." + flag.getName() + ".";
-                if (flag.getRelation() != null)
-                    cfg.set(flagKey + "relate", flag.getRelation().name());
-                cfg.set(flagKey + "value", flag.getParam());
-            }
-        } */
-        return cfg.save();
+        boolean saveResult = cfg.save();
+        Message.debugMessage("Regions saved:",regions.size(),"Save result (ok)",saveResult);
+        return saveResult;
     }
 
     public Map<String, Region> load() {

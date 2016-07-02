@@ -6,6 +6,7 @@ import cn.nukkit.level.Location;
 import cn.nukkit.level.Position;
 import ru.nukkit.regions.Regions;
 import ru.nukkit.regions.areas.Area;
+import ru.nukkit.regions.clipboard.Clipboard;
 import ru.nukkit.regions.util.Message;
 
 import java.util.Collection;
@@ -25,7 +26,11 @@ public class SimpleBuilder implements Builder {
 
     @Override
     public void setBlock(String playerName, Block block) {
-        block.getLevel().setBlock(block, block);
+        setBlock(playerName, block, true);
+
+    }
+    public void setBlock(String playerName, Block block, boolean direct) {
+        block.getLevel().setBlock(block, block, direct);
     }
 
     @Override
@@ -97,7 +102,7 @@ public class SimpleBuilder implements Builder {
                     }
             }
         if (undo != null) getUndoManager().add(undo);
-        Message.debugMessage("setBlock:", "blocks:", blocks.size(), "undo:", undo == null ? "null" : undo.blocks.size());
+        Message.debugMessage("setBlock:", "blocks:", blocks.size(), "undo:", undo == null ? "null" : undo.getVolume());
         setBlock(playerName, blocks);
     }
 
@@ -108,7 +113,9 @@ public class SimpleBuilder implements Builder {
 
     @Override
     public void setBlock(String playerName, Collection<Block> blocks) {
-        blocks.forEach(block -> setBlock(playerName, block));
+        boolean direct = blocks.size()<100;
+        Message.debugMessage("Set Blocks:",blocks.size(),"direct:", direct);
+        blocks.forEach(block -> setBlock(playerName, block, direct));
     }
 
     @Override

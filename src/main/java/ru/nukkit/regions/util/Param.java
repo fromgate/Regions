@@ -1,14 +1,14 @@
 package ru.nukkit.regions.util;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Param {
     private String paramStr = "";
-    private Map<String, String> params = new HashMap<String, String>();
+    private Map<String, String> params = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
     public Param(String param) {
         this(param, "param");
@@ -40,8 +40,28 @@ public class Param {
 
 
     public Param() {
-        this.params = new HashMap<String, String>();
+        this.params = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         this.paramStr = "";
+    }
+
+    /**
+     * Creates param object, based on arguments array.
+     * For example if input array represents string:
+     *    "key1 value1 key2 value2" it will converted into param map:
+     *    key1:value1
+     *    key2:value2
+     *
+     * @param args      Arguments array
+     * @param start     First array that will count as a first key (0 for first element)
+     * @return          Param object
+     */
+    public static Param fromArgs (String[] args, int start){
+        Param param = new Param();
+        if (args.length<start+2) return param;
+        for (int i = start; i+1<args.length ;i+=2){
+            param.set(args[i],args[i+1]);
+        }
+        return param;
     }
 
     /**
@@ -74,6 +94,8 @@ public class Param {
 			param.set(keys[i], ln[i]);
 		return param;
 	} */
+
+
     public String getParam(String key, String defParam) {
         if (!params.containsKey(key)) return defParam;
         return params.get(key);
@@ -104,7 +126,7 @@ public class Param {
     public boolean getParam(String key, boolean defValue) {
         if (!params.containsKey(key)) return defValue;
         String str = params.get(key);
-        return (str.equalsIgnoreCase("true") || str.equalsIgnoreCase("on") || str.equalsIgnoreCase("yes"));
+        return str.matches("(?i)true|yes|on|1");
     }
 
     public String toString() {
@@ -129,9 +151,8 @@ public class Param {
                 if (param.matches(key)) return true;
         return false;
     }
-
     public static Map<String, String> parseParams(String param, String defaultKey) {
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> params = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         Pattern pattern = Pattern.compile("\\S+:\\{[^\\{\\}]*\\}|\\S+");
         Matcher matcher = pattern.matcher(hideBkts(param));
         while (matcher.find()) {

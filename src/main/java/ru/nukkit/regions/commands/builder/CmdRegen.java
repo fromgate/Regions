@@ -9,7 +9,8 @@ import cn.nukkit.level.generator.task.GeneratorPool;
 import ru.nukkit.regions.Regions;
 import ru.nukkit.regions.areas.Area;
 import ru.nukkit.regions.builder.ChunkCoord;
-import ru.nukkit.regions.builder.Clipboard;
+import ru.nukkit.regions.clipboard.ClipBlock;
+import ru.nukkit.regions.clipboard.Clipboard;
 import ru.nukkit.regions.commands.Cmd;
 import ru.nukkit.regions.commands.CmdDefine;
 import ru.nukkit.regions.util.Message;
@@ -34,8 +35,8 @@ public class CmdRegen extends Cmd {
                 chunList.add(new ChunkCoord(x, z));
 
         List<Location> chLocs = getChunkedLocation(area);
-        Clipboard chunks = new Clipboard(chLocs.get(0), chLocs.get(1));
-        chunks.remove(new Clipboard(area));
+        Clipboard chunks = new ClipBlock(chLocs.get(0), chLocs.get(1));
+        chunks.remove(new ClipBlock(area));
         Level level = area.getLevel();
         Generator generator = GeneratorPool.get(player.getLevel().getId());
 

@@ -85,6 +85,16 @@ public class RegionsConfig extends SimpleConfig {
     @Path("builder.undo.enable")
     public boolean builderUseUndo = true;
 
+    @Path("builder.undo.levels")
+    public int undoLevels = 10;
+
+    @Path ("builder.brush.item")
+    public String brushItem = "FEATHER";
+
+    @Path ("builder.brush.item-name")
+    public String brushName = "&6Brush";
+
+
     public RegionsConfig(Plugin plugin) {
         super(plugin);
     }

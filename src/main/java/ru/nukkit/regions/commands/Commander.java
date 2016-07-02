@@ -61,7 +61,8 @@ public class Commander {
         addNewCommand(new CmdUndo());
         addNewCommand(new CmdCopy());
         addNewCommand(new CmdPaste());
-        //addNewCommand(new CmdRegen());
+        addNewCommand(new CmdBiome());
+        addNewCommand(new CmdBrush());
 
         registerPermissions();
     }

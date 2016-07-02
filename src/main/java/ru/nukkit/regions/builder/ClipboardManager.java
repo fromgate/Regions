@@ -5,6 +5,8 @@ import cn.nukkit.block.Block;
 import cn.nukkit.level.Location;
 import cn.nukkit.level.Position;
 import ru.nukkit.regions.areas.Area;
+import ru.nukkit.regions.clipboard.ClipBlock;
+import ru.nukkit.regions.clipboard.Clipboard;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -12,10 +14,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class ClipboardManager {
-    private Map<String, Clipboard> clipboards;
+    private Map<String, ClipBlock> clipboards;
 
     public ClipboardManager() {
-        this.clipboards = new TreeMap<String, Clipboard>(String.CASE_INSENSITIVE_ORDER);
+        this.clipboards = new TreeMap<String, ClipBlock>(String.CASE_INSENSITIVE_ORDER);
     }
 
     public void clear(Player player) {
@@ -41,7 +43,7 @@ public class ClipboardManager {
                             blocks.add(loc1.getLevel().getBlock(new Position(blockX, y, blockZ, area.getLevel())));
                     }
         if (blocks.isEmpty()) return false;
-        Clipboard clipboard = new Clipboard(player, blocks, area.getMin());
+        ClipBlock clipboard = new ClipBlock(player, blocks, area.getMin());
         clipboards.put(player.getName(), clipboard);
         return true;
     }
@@ -54,10 +56,10 @@ public class ClipboardManager {
     }
 
     public boolean hasClipboard(Player player) {
-        return clipboards.containsKey(player.getName()) && (clipboards.get(player.getName()).blocks.size() > 0);
+        return clipboards.containsKey(player.getName()) && (clipboards.get(player.getName()).getVolume() > 0);
     }
 
     public int getVolume(Player player) {
-        return clipboards.containsKey(player.getName()) ? clipboards.get(player.getName()).blocks.size() : 0;
+        return clipboards.containsKey(player.getName()) ? clipboards.get(player.getName()).getVolume() : 0;
     }
 }

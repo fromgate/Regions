@@ -1,42 +1,40 @@
-package ru.nukkit.regions.builder;
+package ru.nukkit.regions.clipboard;
 
 import cn.nukkit.Player;
-import cn.nukkit.Server;
 import cn.nukkit.block.Block;
 import cn.nukkit.level.Location;
 import ru.nukkit.regions.Regions;
-import ru.nukkit.regions.RegionsPlugin;
 import ru.nukkit.regions.areas.Area;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class Clipboard {
+public class ClipBlock extends Clipboard {
 
     String playerName;
     Location playerLocation;
     Location minLocation;
     List<Block> blocks;
 
-    public Clipboard() {
+    public ClipBlock() {
         this.playerName = "";
         this.playerLocation = null;
         this.minLocation = null;
         this.blocks = new LinkedList<Block>();
     }
 
-    public Clipboard(Player player) {
+    public ClipBlock(Player player) {
         this.playerName = player.getName();
         this.playerLocation = player.getLocation();
     }
 
-    public Clipboard(Player player, List<Block> blocks, Location minLocation) {
+    public ClipBlock(Player player, List<Block> blocks, Location minLocation) {
         this(blocks, minLocation);
         this.playerName = player.getName();
         this.playerLocation = player.getLocation();
     }
 
-    public Clipboard(List<Block> blocks, Location minLocation) {
+    public ClipBlock(List<Block> blocks, Location minLocation) {
         this();
         this.minLocation = minLocation;
         this.blocks = new LinkedList<Block>();
@@ -48,7 +46,7 @@ public class Clipboard {
         }
     }
 
-    public Clipboard(Area area) {
+    public ClipBlock(Area area) {
         this();
         this.minLocation = area.getMin();
         for (int chX = area.getChunkX1(); chX <= area.getChunkX2(); chX++)
@@ -64,7 +62,7 @@ public class Clipboard {
                 }
     }
 
-    public Clipboard(Location loc1, Location loc2) {
+    public ClipBlock(Location loc1, Location loc2) {
         this(new Area(loc1, loc2));
     }
 
@@ -81,17 +79,6 @@ public class Clipboard {
         Regions.getBuilder().setBlock(playerName, blocks);
     }
 
-    public static Clipboard createUndoClipBoard(String playerName) {
-        if (!RegionsPlugin.getCfg().builderUseUndo) return null;
-        if (playerName == null || playerName.isEmpty()) return null;
-        Player player = Server.getInstance().getPlayerExact(playerName);
-        if (player == null || !player.isOnline()) return null;
-        if (!player.hasPermission("regions.undo")) return null;
-        Clipboard clip = new Clipboard();
-        clip.playerName = player.getName();
-        return clip;
-    }
-
     public void paste(Location loc, boolean asPlayer) {
         Location start = asPlayer && this.playerLocation != null ? loc.add(this.minLocation.subtract(this.playerLocation)) : loc;
         List<Block> blocks = new LinkedList<Block>();
@@ -106,7 +93,13 @@ public class Clipboard {
     }
 
     public void remove(Clipboard removeClip) {
-        blocks.removeAll(removeClip.blocks);
+        if (removeClip instanceof ClipBlock){
+            blocks.removeAll(((ClipBlock)removeClip).blocks);
+        }
     }
 
+    @Override
+    public int getVolume() {
+        return blocks.size();
+    }
 }

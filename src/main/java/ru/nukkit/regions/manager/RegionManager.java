@@ -15,10 +15,7 @@ import ru.nukkit.regions.saver.YamlSaver;
 import ru.nukkit.regions.util.Message;
 import ru.nukkit.regions.util.Relation;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class RegionManager {

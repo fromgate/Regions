@@ -1,0 +1,5 @@
+.gitignore
+.idea/
+Regions.iml
+src/test/
+target/

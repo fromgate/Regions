@@ -1,6 +1,7 @@
 package ru.nukkit.regions.listeners;
 
 import cn.nukkit.Player;
+import cn.nukkit.block.Block;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
@@ -8,6 +9,7 @@ import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.level.Location;
 import ru.nukkit.regions.Regions;
+import ru.nukkit.regions.brush.BrushManager;
 import ru.nukkit.regions.util.Message;
 
 public class RegionListener implements Listener {
@@ -33,5 +35,14 @@ public class RegionListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Regions.getSelector().setSelMode(event.getPlayer(), false);
+    }
+
+    @EventHandler
+    public void onBrush (PlayerInteractEvent event){
+        if (event.getAction() != PlayerInteractEvent.RIGHT_CLICK_BLOCK&&
+                event.getAction() != PlayerInteractEvent.RIGHT_CLICK_AIR) return;
+        if (!BrushManager.isBrush (event.getPlayer().getInventory().getItemInHand())) return;
+        Block clickedBlock = event.getAction() == PlayerInteractEvent.RIGHT_CLICK_BLOCK ? event.getBlock() : null;
+        BrushManager.paint(event.getPlayer(), clickedBlock);
     }
 }

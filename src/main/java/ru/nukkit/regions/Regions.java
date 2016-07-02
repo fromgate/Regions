@@ -2,7 +2,7 @@ package ru.nukkit.regions;
 
 import ru.nukkit.regions.builder.Builder;
 import ru.nukkit.regions.builder.ClipboardManager;
-import ru.nukkit.regions.builder.Undo;
+import ru.nukkit.regions.builder.UndoManager;
 import ru.nukkit.regions.manager.RegionManager;
 import ru.nukkit.regions.selector.Selector;
 
@@ -12,12 +12,12 @@ public class Regions {
         regionManager = new RegionManager();
         selector = new Selector();
         builder = RegionsPlugin.getCfg().getConfiguredBuilder();
-        undoManager = new Undo();
+        undoManagerManager = new UndoManager();
         clipboardManager = new ClipboardManager();
     }
 
     private static Builder builder;
-    private static Undo undoManager;
+    private static UndoManager undoManagerManager;
     private static RegionManager regionManager;
     private static Selector selector;
     private static ClipboardManager clipboardManager;
@@ -34,8 +34,8 @@ public class Regions {
         return builder;
     }
 
-    public static Undo getUndoManager() {
-        return undoManager;
+    public static UndoManager getUndoManager() {
+        return undoManagerManager;
     }
 
     public static ClipboardManager getClipboard() {
