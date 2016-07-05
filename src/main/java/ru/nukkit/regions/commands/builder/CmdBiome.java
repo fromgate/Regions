@@ -6,6 +6,7 @@ import cn.nukkit.level.Location;
 import cn.nukkit.level.generator.biome.Biome;
 import cn.nukkit.utils.BlockColor;
 import ru.nukkit.regions.Regions;
+import ru.nukkit.regions.areas.Area;
 import ru.nukkit.regions.builder.WeatherMan;
 import ru.nukkit.regions.commands.Cmd;
 import ru.nukkit.regions.commands.CmdDefine;
@@ -25,12 +26,19 @@ public class CmdBiome extends Cmd {
             return Message.BUILD_BIOMESHOW.print(sender, biome.getName());
         }
 
+        Area area = Regions.getSelector().getSelectedArea(player);
+
         if (args[0].equalsIgnoreCase("list")) {
             String biomeList = WeatherMan.getBiomeList();
             Message m = (biomeList.isEmpty()) ? Message.BUILD_BIOMELISTFAIL :
                     Message.BUILD_BIOMELIST;
             return m.print(sender, biomeList);
+        } else if (args[0].equalsIgnoreCase("smooth")){
+            int radius = args.length >= 2 && args[1].matches("\\d+") ? Integer.parseInt(args[1]) : 3;
+            WeatherMan.smooth(player, area, radius);
+            return Message.BUILD_BIOME_SMOOTH.print(sender);
         }
+
         List<Location> locs = Regions.getSelector().getPoints(player);
         if (locs == null || locs.size() != 2) return Message.BUILD_SELECT.print(player);
 
@@ -63,7 +71,7 @@ public class CmdBiome extends Cmd {
             biomeColor = new BlockColor(rgb[0],rgb[1],rgb[2]);
         }
         if (biome == null && biomeColor==null) return Message.BUILD_BIOME_FAIL.print(sender);
-        WeatherMan.setBiome(Regions.getSelector().getSelectedArea(player), biome, biomeColor);
+        WeatherMan.setBiome(player, area, biome, biomeColor);
         return Message.BUILD_BIOMEOK.print(sender);
     }
 

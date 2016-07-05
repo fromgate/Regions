@@ -6,7 +6,6 @@ import cn.nukkit.level.Location;
 import cn.nukkit.level.generator.biome.Biome;
 import cn.nukkit.utils.BlockColor;
 import ru.nukkit.regions.builder.WeatherMan;
-import ru.nukkit.regions.clipboard.Clipboard;
 import ru.nukkit.regions.util.Param;
 
 import java.util.List;
@@ -46,12 +45,7 @@ public class BiomeBrush extends Brush {
         Location center = clickedBlock == null ? getTargetAir(player) : clickedBlock.getLocation();
         if (center == null) return false;
         List<Block> blocks = getDisk(center, this.radius);
-        Clipboard undo = Clipboard.createUndoClipBiome(player.getName());
-        if (undo!=null){
-            blocks.forEach(block -> undo.add(block));
-            getUndoManager().add(undo);
-        }
-        return WeatherMan.setBiome(blocks, biome, color);
+        return WeatherMan.setBiome(player, blocks, biome, color);
     }
 
     public String toString(){

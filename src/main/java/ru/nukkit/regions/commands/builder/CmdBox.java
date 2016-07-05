@@ -20,17 +20,7 @@ public class CmdBox extends Cmd {
         if (locs == null || locs.size() != 2) return Message.BUILD_SELECT.print(player);
         Block block = BlockUtil.getNewBlock(args[0]);
         if (block == null) return Message.BUILD_WRONG_ID.print(player, args[0]);
-
         Regions.getBuilder().setBlockBox(player, block, locs.get(0), locs.get(1));
-
-        /*
-                List<Location> locs = Regions.getSelector().getPoints(player);
-        if (locs == null||locs.size()!=2) return Message.BUILD_SELECT.print(player);
-        Block block= Regions.getBuilder().getNewBlock(args[0]);
-        if (block == null) return Message.BUILD_WRONG_ID.print(player,args[0]);
-        Regions.getBuilder().setBlock(player, block, locs.get(0),locs.get(1));
-         */
-
-        return false;
+        return true;
     }
 }

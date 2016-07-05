@@ -4,12 +4,13 @@
 Regions is a plugin for Nukkit, that provides useful private system for nukkit server. You can define regions and control access rights to this regions: build or break blocks, accessing to chest, using levers, doors, etc.
 
 ## Features
-* Regions managment system (create, redefine, configure region flags)
+* Regions management (create, redefine, configure region flags)
 * World editing system (fill areas, replace blocks, copy areas, edit biomes)
-* Brushes for easy world editing (set ball or discs, remove  blocks, set biome and biome color, smooth bioms, flood fill areas)
+* Brushes for easy world editing (set ball or discs, remove  blocks, set biome and biome color, smooth biomes, flood fill areas)
+* Multilayer undo-system
 
 ## Commands
-
+## Regions command
 ###Show help
 >**/region help \[page\]**
 >**/rg help \[page\]**
@@ -97,6 +98,22 @@ Show list of available regions
 Add flag to regions. Relations is a modificator that filters players who will be affected by flag (ALL, OWNER,
 MEMBER, NOT_MEMBER, NOT_OWNER)
 
+### Flags
+Here's list of supported flags:
+
+* BREAK
+* BUILD
+* CHEST
+* PVP
+* LEVER
+* PLATE
+* DOOR
+* TRAPDOOR
+* GATE
+* CLAIM
+* ENTRY
+
+
 ###Remove flag from region
 >**/region flag \<FLAG\> clear**
 >**/rg f \<FLAG\> remove**
@@ -163,17 +180,120 @@ Add one or more members to region.
 
 Remove defined member from region.
 
-## Flags
-Here's list of supported flags:
+##World editing commands
+###Fill area with provided block
+>**/set \<block\>\[:\<data\>\]**
+>**/blockset \<block\>\[:\<data\>\]**
 
-* BREAK
-* BUILD
-* CHEST
-* PVP
-* LEVER
-* PLATE
-* DOOR
-* TRAPDOOR
-* GATE
-* CLAIM
-* ENTRY
+Fill selected area with provided block. You can use block id or block name.
+
+###Replace one block type to another
+>**/replace \<block1\>\[:\<data1\>\] \<block2>\[:\<data2\>\]**
+>**/blockreplace \<block1\>\[:\<data1\>\] \<block2>\[:\<data2\>\]**
+
+Scan selected area and replace one type of blocks (block1) to another (block2)
+
+###Build box
+>**/box \<block\>\[:\<data\>\]**
+>**/buildbox \<block\>\[:\<data\>\]**
+
+Use selection to build box
+
+###Build walls
+>**/walls \<block\>\[:\<data\>\]**
+>**/buildwalls \<block\>\[:\<data\>\]**
+
+Use selection to build walls
+
+###Copy and paste selections
+>**/copy**
+
+Copy selected blocks into a clipboard
+
+>**/paste**
+
+Paste blocks from the clipboard in a world
+
+###Biome operations
+>**/biome**
+>**/wm**
+
+Show information about biome in player location
+
+>**/biome list**
+>**/wm list**
+
+Show all available biomes
+
+###Set biome or grass color
+>**/biome \<biome|color\>**
+>**/wm \<biome|color\>**
+>**/biome \<biome\> \<color\>**
+>**/wm \<biome\> \<color\>**
+
+Set biome or/and grass color for selected area. 
+
+Supported biome list could be found use using ``/biome list`` command.
+
+Supported colors: White, Orange, Magenta, Light Blue, Yellow, Lime,
+Pink, Gray, Light Gray, Cyan, Purple, Blue, Brown, Green, Red, Black.
+(Space in name of color must be replaced with character "_").
+
+And you can use decimal RGB-values to define color.
+
+Examples:
+```
+/biome swamp
+/biome swamp red
+/biome light_blue
+/biome plains 125,100,255
+```
+
+
+###Smooth biome colors
+>**/biome smooth \[radius\]**
+>**/wm smooth \[radius\]**
+
+Smooth color transition between different grass colors.
+ 
+##Brush
+###Show current brush info
+>**/brush**
+
+Display current brush name and brush settings
+
+###Give brush
+>**/brush give**
+
+Give player brush item. Item type, data and name configured at config.yml
+
+###Select brush mode
+>**/brush \<brushType\> radius \<radius\> \[<paramter> <value>\] ...**
+
+Supported brush types:
+
+* **BUILD** — place a sphere or circle of blocks.  
+Supported parameters:
+    * block <type>[:data] — block type that will used to create sphere
+    * radius <radius> — radius of sphere
+    * type <ball|disk> — place sphere or circle of blocks
+* **BREAK** — remove blocks from the world  
+Supported parameters:
+    * block <type>[:data] — block type that will removed
+    * radius <radius> — radius of sphere
+    * type <ball|disk> — remove sphere or circle of blocks
+* **FILL** — fill areas using flood fill algorithm. Fill distance 
+horizontally limited by radius, but vertically (down) will fall as far as possible  
+Supported parameters:
+    * block <type>[:data] — block type that will used to place
+    * radius <radius> — radius of sphere
+* **BIOME** — set biome or/and grass color  
+Supported parameters:
+    * biome <biomeName> — biome name (spce replaced with "_")
+    * color <colorName|r,g,b> — grass color
+    * radius <radius> — brush size
+* **SMOOTH** — make grass color transition softer
+    * radius <radius> — brush size
+    * size <size> — matrix size (by default equal to radius)
+    
+    

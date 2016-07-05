@@ -165,7 +165,8 @@ public enum Message {
     BRUSH_MODIFY_NOBRUSH("You must select your brush first!",'c','4'),
     BRUSH_NOBRUSH("You didn't define your brush yet!",'c','4'),
     BRUSH_MODIFY_OK("Brush configured: %1%"),
-    BRUSH_INFO ("Brush: %1%");
+    BRUSH_INFO ("Brush: %1%"),
+    BUILD_BIOME_SMOOTH ("Biome color transitions smoothened");
 
     private static boolean debugMode = false;
     private static String language = "default";
