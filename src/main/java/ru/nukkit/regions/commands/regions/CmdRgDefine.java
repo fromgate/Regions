@@ -21,7 +21,7 @@ public class CmdRgDefine extends Cmd {
         if (locs == null || locs.size() != 2) return Message.DEF_SELECT.print(player);
         String id = args[1];
 
-        if (Regions.getManager().regionIdUsed(id)) Message.RG_DEF_ID_USED.print(player, id);
+        if (Regions.getManager().regionIdUsed(id)) return Message.RG_DEF_ID_USED.print(player, id);
 
         if (Regions.getManager().defineRegion(id, (args.length > 2 ? StringUtil.join(args, 2) : null), locs)) {
             Regions.getSelector().setSelMode(player, false);

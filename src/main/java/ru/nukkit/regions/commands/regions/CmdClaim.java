@@ -57,7 +57,7 @@ public class CmdClaim extends Cmd {
             if (id == null || id.isEmpty()) return Message.RG_CLAIM_NEED_ID.print(player);
             List<Location> locs = Regions.getSelector().getPoints(player);
             if (locs == null || locs.size() != 2) return Message.DEF_SELECT.print(player);
-            if (Regions.getManager().regionIdUsed(id)) Message.RG_DEF_ID_USED.print(player, id);
+            if (Regions.getManager().regionIdUsed(id)) return Message.RG_DEF_ID_USED.print(player, id);
 
             Area area = new Area(locs.get(0), locs.get(1));
             if (Regions.getManager().canClaimVolume(area))
