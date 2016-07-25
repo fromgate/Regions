@@ -76,6 +76,4 @@ public class CmdClaim extends Cmd {
     private RegionsConfig getCfg() {
         return RegionsPlugin.getCfg();
     }
-
-
 }

@@ -83,7 +83,7 @@ public class RegionManager {
         if (id == null || id.isEmpty()) return false;
         if (!VALID_ID_PATTERN.matcher(id).matches()) return false;
         Region region = new Region(loc1, loc2);
-        if (owner != null && !owner.isEmpty()) region.addOwner(owner);
+        if (owner != null && !owner.isEmpty()) region.setOwner(owner);
         regions.put(id, region);
         save();
         return true;
