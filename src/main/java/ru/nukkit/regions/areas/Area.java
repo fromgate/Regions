@@ -40,7 +40,7 @@ public class Area {
     public Area(String areaStr) {
         if (!AREA_TEXT_PATTERN.matcher(areaStr).matches())
             throw new IllegalArgumentException("Wrong area definition format: " + areaStr);
-        String[] ln = areaStr.replaceAll("(?i)(^cuboid:\\{)|(\\}$)", "").toLowerCase().split("\\s+");
+        String[] ln = areaStr.replaceAll("(?i)(^cuboid:\\{)|(\\}$)", "").split("\\s+");
         for (String s : ln) {
             if (s.startsWith("level:")) this.world = s.replace("level:", "");
             else if (s.startsWith("x1:")) this.x1 = Integer.parseInt(s.replace("x1:", ""));
