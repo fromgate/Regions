@@ -1,0 +1,149 @@
+lng_load_fail: ファイルから言語を読み込めませんでした。原文のメッセージを使用します。
+lng_save_fail: 言語ファイルを保存できませんでした。
+lng_print_fail: 'メッセージ %1% を出力できませんでした。Senderオブジェクトはnullです。'
+lng_config: '[MESSAGES] メッセージ: %1% 言語: %2% 保存された翻訳ファイル: %1% デバッグモード: %3%'
+word_unknown: 不明
+wrong_permission: このコマンドを実行する権限がありません
+permission_fail: このコマンドを実行する権限がありません
+player_commad_only: このコマンドはゲーム内のみで使用できます
+cmd_registered: 'コマンド %1% が登録されました'
+cmd_failed: 'コマンドを実行できませんでした。%1%でヘルプを表示します'
+cmd_wand_desc: プレイヤーにワンドアイテムを付与します
+sel_desc: 選択モードを切り替えます
+rg_define_desc: '/region define <ID> - 新たに領域を作成します'
+rg_info_desc: '/region info <ID> - 領域についての情報を表示します'
+rg_list_desc: '/region list [ページ番号] - すべての領域を一覧表示します'
+rg_chk_desc: '/region info - 付近のすべての領域を一覧表示します'
+rg_flag_desc: '/rg flag <領域> <フラグ> [rel:<関係>] <値> - 領域にフラグを指定します'
+rg_setown_desc: '/region setowner <ID> <所有者>[, <所有者2>..] - 領域の所有者を指定します。再度指定した場合は、以前の所有者に上書きされます'
+rg_addown_desc: '/region addowner <ID> <所有者>[, <所有者2>..] - 指定した領域に所有者を追加します'
+rg_help_desc: '/region help <ページ番号> - プラグインについてのヘルプを表示します'
+rg_remove_desc: '/region remove <ID> - 指定した領域を削除します'
+rg_redefine_desc: '/region redefine <ID> - 領域の範囲を変更します'
+sel_pos_desc: '/select <pos1|pos2> - プレイヤーが現在いる場所をポイントとして選択します'
+rg_setmbmr_desc: '/region setmember <ID> <メンバー>[, <メンバー2>..] - 領域のメンバーを指定します。再度指定した場合は、以前のメンバーに上書きされます'
+rg_addmbmr_desc: '/region addmember <ID> <メンバー>[, <メンバー2>..] - 指定した領域にメンバーを追加します'
+claim_desc: '/claim [領域] - 新たに領域を作成すると同時に、自身を所有者に指定します'
+rg_remmem_desc: '/region removemember <ID> <プレイヤー> - 領域のメンバーから除外します'
+rg_remown_desc: '/region removowner <ID> <プレイヤー> - 領域の所有者から除外します'
+rg_reload_desc: '/region reload - プラグインの設定と領域を再読み込みします'
+rg_desc: '/region <コマンド> <パラメーター> - Regionsのメインコマンド。/region helpでさらに詳細な情報を表示できます'
+sel_show_desc: '/select show - 選択した範囲のパーティクルの表示を切り替えます'
+set_desc: '/set <ID>[:データ値] - 選択した範囲を指定したブロックで満たします'
+box_desc: '/box <ID>[:データ値] - 指定したブロックで箱状に設置します'
+walls_desc: '/walls <ID>[:データ値] - 指定したブロックで壁状に設置します'
+up_desc: '/up <高さ> - 指定した高さ分上の足場部分にガラスを設置し、その上にテレポートします'
+replace_desc: '/replace <ID>[:データ値] <ID>[:データ値] - 1番目に指定したブロックを、2番目に指定したブロックに置き換えます'
+undo_desc: '/undo - 最後に行った操作を取り消します'
+cmd_chnk_desc: '/chunk - チャンクを選択します'
+cmd_expand_desc: '/expand <方向> <サイズ> - 現在の選択範囲を拡張します'
+cmd_regen_desc: '/regen - 選択した範囲を再生成します'
+hlp_title: 'Regions %1%'
+sel_enable: 選択モードが有効になりました
+sel_disable: 選択モードが無効になりました
+sel_ok: '第%2%ポイントを %1% に選択しました'
+sel_ok_area: '範囲を %1% に選択しました'
+sel_needselect: 範囲が選択されていません
+sel_chunk_ok: 'チャンク [%1%, %2%] を選択しました'
+sel_fail: ポイントを選択できませんでした
+sel_chunk_fail: チャンクを選択できませんでした
+sel_areaselected: '範囲を選択しました。合計選択数: %1%ブロック'
+def_select: 領域を作成/指定できませんでした。範囲が選択されていません
+rg_def_id_used: '領域 %1% は既に存在します'
+rg_def_ok: '領域 %1% が作成されました'
+rg_def_fail: '領域 %1% を作成/指定できませんでした'
+unknown_region: '領域 %1% は存在しません'
+rg_info_regname: '==== 領域: %1% ===='
+rg_info_coord: 'ディメンション: %1%'
+rg_info_owners: '所有者: %1%'
+rg_info_members: 'メンバー: %1%'
+rg_list: '領域一覧: %1%'
+rg_chk_notfound: 付近に領域がありません
+rg_chk_found: '付近の領域: %1%'
+unknown_flag: 'フラグ %1% は存在しません'
+rg_flag_fail: 'フラグ %1% を指定できませんでした。構文を確認し、もう一度やり直してください'
+rg_flag_ok: 'フラグ %1% を指定しました'
+rg_setown_fail: '領域 %1% の所有者を %2% に指定できませんでした'
+rg_setown_ok: '領域 %1% の所有者を %2% に指定しました'
+rg_addown_fail: '領域 %1% の所有者に %2% を追加できませんでした'
+rg_addown_ok: '領域 %1% の所有者に %2% を追加しました'
+rg_remove_ok: '領域 %1% を削除しました'
+rg_remove_fail: '領域 %1% を削除できませんでした'
+rg_redef_fail: '領域 %1% を変更できませんでした'
+rg_redef_ok: '領域 %1% を変更しました'
+rg_flag_clear_ok: '領域 %2% からフラグ %1% を削除しました'
+rg_flag_clear_fail: '領域 %2% からフラグ %1% を削除できませんでした'
+rg_setmbmr_fail: '領域 %1% のメンバーに %2% を指定できませんでした'
+rg_setmbmr_ok: '領域 %1% のメンバーに %2% を指定しました'
+rg_addmbmr_fail: '領域 %1% のメンバーに %2% を追加できませんでした'
+rg_addmbmr_ok: '領域 %1% のメンバーに %2% を追加しました'
+rg_remmem_ok: '領域 %2% のメンバーからプレイヤー %1% が除外されました'
+rg_remmem_fail: '領域 %2% のメンバーからプレイヤー %1% を除外できませんでした'
+rg_remown_ok: '領域 %2% の所有者からプレイヤー %1% を除外しました'
+rg_remown_fail: '領域 %2% の所有者からプレイヤー %1% を除外できませんでした'
+only_owner: この操作は、領域の所有者のみが行えます
+rg_claim_inside_only: 所有者宣言は、指定した範囲内のみで行えます
+rg_claim_single_only: 複数の領域に対して所有者宣言することはできません
+rg_claim_already: この領域では既に所有者宣言しています
+rg_claim_exist_ok: '領域 %1% で所有者宣言しました'
+rg_claim_exist_fail: '領域 %1% で所有者宣言できませんでした'
+rg_claim_exist_unallowed: '領域 %1% では所有者宣言できません'
+rg_claim_exist_inside: 所有者宣言は、領域内で行えます。宣言する領域まで移動し、/claim を実行してください
+rg_claim_ok: '領域 %1% を作成し、所有者宣言しました'
+rg_claim_fail: '領域 %1% で所有者宣言できませんでした'
+rg_claim_max_count_reached: 'これ以上領域の所有者宣言をすることはできません。プレイヤー1人あたり%1%個までの領域を宣言できます'
+rg_claim_area_volume_reached: '指定した範囲は、所有者宣言するには大きすぎます。宣言は%1%ブロックまでの範囲で行えます。'
+rg_claim_area_intersected: 他の領域で既に使用されているIDのため、領域の作成と所有者宣言はできません
+rg_claim_need_id: '所有者宣言をするには、/claim <ID> のように領域のIDを入力してください'
+fmsg_interact: この対象に対して操作をすることはできません
+fmsg_break: この場所のブロックは破壊できません
+fmsg_build: この場所にはブロックを設置できません
+fmsg_entry: この領域に立ち入ることはできません
+fmsg_leave: この領域から出ることはできません
+rg_reload_ok: '設定が読み込まれました。%1%の領域が読み込まれています'
+sel_show_disabled: 選択範囲表示のパーティクルは設定で無効になっているため、コマンドが拒否されました
+sel_show_plr_enabled: 選択範囲表示モードが有効になりました
+sel_show_plr_disabled: 選択範囲表示モードが無効になりました
+up_height_fail: 高い場所までジャンプしてみてください
+up_empty_fail: 範囲の上には空きがありません
+build_finished: '%1%ブロックが処理されました（%2% ms / %3% ticks）'
+build_finished_log: '[%1%] %2%ブロックが処理されました（%3% ms / %4% ticks）'
+build_select: このコマンドを実行する前に、範囲を選択してください
+build_wrong_id: 'ブロックを解析できませんでした: %1%'
+undo_not_found: 取り消す操作がありません
+undo_fail: 操作の取り消しができませんでした
+undo_ok: Last edits repelead
+undo_clear_ok: Undo story cleared
+rg_sel: '/region select [ID] - 範囲内にいる領域を選択します。IDを指定することで、その領域を選択します'
+rg_sel_notfound: 付近に領域がありません
+rg_sel_foundmore: '領域の選択を取得できませんでしたが、付近に領域が見つかりました: %1%'
+cbd_copy_desk: '/copy - 選択した範囲のブロックをコピーします'
+cbd_copy_fail: ブロックをコピーできませんでした
+cbd_copy_ok: '%1%ブロックをコピーしました'
+cbd_paste_desk: '/paste - コピーされているブロックを設置します'
+cbd_paste_noclip: コピーされているブロックがありません
+cbd_pasting: ワールドに設置しています…
+sel_expand_dir_fail: '方向 %1% を選択できませんでした'
+regen_need_sel: 再生成する範囲を選択してください
+flag_debug_permission: 'フラグ %1% は「true」に設定されています'
+flag_debug_result: 'フラグ %1% は「%2%」に設定されています'
+sel_expand_delta: 領域を拡張するには、正の整数値を指定してください
+regen_ok: '%1%個のチャンクを再生成しました'
+cfg_updated: Config file updated. New variables added but we lost all comments...
+build_biomeok: Biome successfully changed!
+build_biomelist: 'Biomes: %1%'
+build_biomelistfail: Failed to retrieve list of biomes
+biome_desc: '/biome [list|<BiomeName>] - show current biome, show list, set biome'
+build_biomeshow: 'Biome in your location: %1%'
+build_biome_colorfail: 'Failed to parse RGB-color: %1%, %2%, %3%'
+build_biome_fail: Failed to parse biome or color. Please check command syntax and try again
+brush_desc: '/brush [<brushType> r <radius>] [params] - choose brush type'
+brush_item_fail: 'Failed to create item %1% (%2%). Is it valid item?'
+brush_item_give: Brush added to your inventory!
+brush_take_ok: 'Brush created: %1%'
+brush_take_fail: Failed to configure your brush
+brush_modify_nobrush: You must select your brush first!
+brush_nobrush: "You didn't define your brush yet!"
+brush_modify_ok: 'Brush configured: %1%'
+brush_info: 'Brush: %1%'
+build_biome_smooth: Biome color transitions smoothened

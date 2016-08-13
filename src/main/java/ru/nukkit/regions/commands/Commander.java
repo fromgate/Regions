@@ -106,7 +106,7 @@ public class Commander {
             helpList.add(TextFormat.GREEN + cmd.getHelpString());
         }
         int pageHeight = (sender instanceof Player) ? 9 : 1000;
-        Paginator.printPage(sender, helpList, Message.HLP_TITLE.getText('e', '6', (plugin.getName() + " " + plugin.getDescription().getVersion()))
+        Paginator.printPage(sender, helpList, Message.HLP_TITLE.getText('a', '6', plugin.getDescription().getVersion())
                 , "[%1% / %2%]", "No help", page, pageHeight, false);
     }
 

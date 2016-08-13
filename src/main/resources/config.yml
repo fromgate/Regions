@@ -10,6 +10,7 @@ general:
 # default - system language defined in nukkit.yml
 # eng - English
 # rus - Russian
+# jpn - Japan (88% translated)
 # You can translate plugin manually. If you can help me with translation
 # please send me translated file or made a pull request at github:
 # https://github.com/fromgate/Regions
