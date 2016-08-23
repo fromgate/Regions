@@ -14,7 +14,7 @@ public class CmdPaste extends Cmd {
     public boolean execute(CommandSender sender, Player player, String[] args) {
         if (!Regions.getClipboard().hasClipboard(player)) return Message.CBD_PASTE_NOCLIP.print(player);
         Message.CBD_PASTING.print(player);
-        Regions.getClipboard().paste(player);
+        Regions.getClipboard().paste(player, true);
         return true;
     }
 }

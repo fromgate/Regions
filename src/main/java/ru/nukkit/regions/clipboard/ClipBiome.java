@@ -36,6 +36,11 @@ public class ClipBiome extends Clipboard {
     }
 
     @Override
+    public void paste(boolean useUndo) {
+        paste();
+    }
+
+    @Override
     public void paste(Location loc, boolean asPlayer) {
         throw new IllegalStateException("ClipBiome does not support relative paste");
     }
@@ -53,6 +58,16 @@ public class ClipBiome extends Clipboard {
     @Override
     public int getVolume() {
         return biomes.size();
+    }
+
+    @Override
+    public void paste(Location location, boolean b, boolean useUndo) {
+        paste(location, b);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return biomes.isEmpty();
     }
 
     class BiomeColor {

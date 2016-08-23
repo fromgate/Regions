@@ -114,9 +114,19 @@ public class SimpleBuilder implements Builder {
 
     @Override
     public void setBlock(String playerName, Collection<Block> blocks) {
+        setBlock(playerName, blocks, false);
+    }
+
+    @Override
+    public void setBlock(String playerName, Collection<Block> blocks, boolean useUndo) {
         boolean direct = blocks.size() < 100;
         Message.debugMessage("Set Blocks:", blocks.size(), "direct:", direct);
-        blocks.forEach(block -> setBlock(playerName, block, direct));
+        Clipboard undo = useUndo ? Clipboard.createUndoClipBoard(playerName) : null;
+        blocks.forEach(block -> {
+            if (undo != null) undo.add(block.getLevelBlock());
+            setBlock(playerName, block, direct);
+        });
+        if (undo != null) getUndoManager().add(undo);
     }
 
     @Override

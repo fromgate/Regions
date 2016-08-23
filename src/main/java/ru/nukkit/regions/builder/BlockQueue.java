@@ -6,6 +6,7 @@ import cn.nukkit.block.Block;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.Location;
 import ru.nukkit.regions.RegionsPlugin;
+import ru.nukkit.regions.clipboard.Clipboard;
 import ru.nukkit.regions.util.Message;
 
 import java.util.*;
@@ -45,6 +46,11 @@ public class BlockQueue {
 
     private List<Block> queue;
 
+    public BlockQueue(String name, Collection<Block> blocks, Clipboard undo) {
+        this(name);
+        add(blocks, undo);
+    }
+
     private boolean add(Block block) {
         if (!block.isValid()) return false;
         queue.add(block);
@@ -55,6 +61,19 @@ public class BlockQueue {
         queue.addAll(blocks);
         return true;
     }
+
+    private boolean add(Collection<Block> blocks, Clipboard undo) {
+        if (undo == null){
+            add(blocks);
+        } else {
+            blocks.forEach(block -> {
+                undo.add(block.getLevelBlock());
+                queue.add(block);
+            });
+        }
+        return true;
+    }
+
 
     public boolean processQueue(long time) {
         if (queue.isEmpty()) return true;

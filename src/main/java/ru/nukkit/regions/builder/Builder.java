@@ -35,4 +35,6 @@ public interface Builder {
     void setBlockWall(Player player, Block block, Location location, Location location1);
 
     void setBlockWall(String playerName, Block block, Location location, Location location1);
+
+    void setBlock(String playerName, Collection<Block> blocks, boolean useUndo);
 }

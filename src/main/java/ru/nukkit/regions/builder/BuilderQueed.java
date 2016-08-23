@@ -20,7 +20,7 @@ import static ru.nukkit.regions.Regions.getUndoManager;
 
 public class BuilderQueed implements Builder {
     public BuilderQueed() {
-        this.queues = new LinkedList<BlockQueue>();
+        this.queues = new LinkedList<>();
         this.active = false;
     }
 
@@ -38,6 +38,17 @@ public class BuilderQueed implements Builder {
         String name = player == null || player.isEmpty() ? "CONSOLE" : player;
         this.queues.add(new BlockQueue(name, blocks));
         processQueue();
+    }
+
+    private void add(String playerName, Collection<Block> blocks, Clipboard undo) {
+        if (undo == null) {
+            add (playerName, blocks);
+        } else {
+            String name = playerName == null || playerName.isEmpty() ? "CONSOLE" : playerName;
+            this.queues.add(new BlockQueue(name, blocks, undo));
+            if (!undo.isEmpty()) getUndoManager().add(undo);
+            processQueue();
+        }
     }
 
     public void setBlock(Player player, Block block) {
@@ -127,6 +138,16 @@ public class BuilderQueed implements Builder {
     }
 
 
+    @Override
+    public void setBlock(String playerName, Collection<Block> blocks, boolean useUndo) {
+        Clipboard undo = useUndo ? Clipboard.createUndoClipBoard(playerName) : null;
+        if (undo == null) {
+            add(playerName, blocks);
+        } else {
+            add(playerName, blocks, undo);
+            getUndoManager().add(undo);
+        }
+    }
     public void processQueue() {
         if (active) return;
         if (queues.isEmpty()) return;
@@ -200,4 +221,5 @@ public class BuilderQueed implements Builder {
         }
         if (undo != null) Regions.getUndoManager().add(undo);
     }
+
 }

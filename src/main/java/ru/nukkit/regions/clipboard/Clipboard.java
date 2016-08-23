@@ -32,6 +32,8 @@ public abstract class Clipboard {
 
     public abstract void paste();
 
+    public abstract void paste(boolean useUndo);
+
     public static Clipboard createUndoClipBoard(String playerName) {
         if (!RegionsPlugin.getCfg().builderUseUndo) return null;
         if (playerName == null || playerName.isEmpty()) return null;
@@ -65,4 +67,8 @@ public abstract class Clipboard {
     }
 
     public abstract int getVolume();
+
+    public abstract void paste(Location location, boolean b, boolean useUndo);
+
+    public abstract boolean isEmpty();
 }

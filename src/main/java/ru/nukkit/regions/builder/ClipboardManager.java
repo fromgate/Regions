@@ -48,11 +48,16 @@ public class ClipboardManager {
         return true;
     }
 
-    public boolean paste(Player player) {
+
+    public boolean paste(Player player, boolean useUndo) {
         if (!hasClipboard(player)) return false;
         Clipboard clipboard = this.clipboards.get(player.getName());
-        clipboard.paste(player.getLocation(), true);
+        clipboard.paste(player.getLocation(), true, useUndo);
         return true;
+    }
+
+    public boolean paste(Player player) {
+        return paste(player, false);
     }
 
     public boolean hasClipboard(Player player) {
@@ -62,4 +67,5 @@ public class ClipboardManager {
     public int getVolume(Player player) {
         return clipboards.containsKey(player.getName()) ? clipboards.get(player.getName()).getVolume() : 0;
     }
+
 }

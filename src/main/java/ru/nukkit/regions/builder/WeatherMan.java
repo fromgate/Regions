@@ -6,6 +6,7 @@ import cn.nukkit.level.Level;
 import cn.nukkit.level.generator.biome.Biome;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.utils.BlockColor;
+import cn.nukkit.utils.DyeColor;
 import ru.nukkit.regions.Regions;
 import ru.nukkit.regions.areas.Area;
 import ru.nukkit.regions.clipboard.Clipboard;
@@ -18,8 +19,6 @@ import java.util.*;
  * Created by Igor on 31.05.2016.
  */
 public class WeatherMan {
-    private static final String[] colors = new String[]{"White", "Orange", "Magenta", "Light Blue", "Yellow", "Lime", "Pink", "Gray", "Light Gray", "Cyan", "Purple", "Blue", "Brown", "Green", "Red", "Black"};
-
     public static boolean setBiome(Area area, Biome biome) {
         if (area == null) return false;
         if (biome == null) return false;
@@ -66,13 +65,12 @@ public class WeatherMan {
             for (int i = 0; i < 3; i++) rgb[i] = Integer.parseInt(rgbS[i]);
             color = new BlockColor(rgb[0], rgb[1], rgb[2]);
         } else {
-            int colorNum = -1;
-            for (int i = 0; i < colors.length; i++)
-                if (colors[i].equalsIgnoreCase(name.replace("_", " "))) {
-                    colorNum = i;
+            for (DyeColor dye : DyeColor.values()){
+                if (dye.name().equalsIgnoreCase(name) || dye.getName().equalsIgnoreCase(name)){
+                    color = dye.getColor();
                     break;
                 }
-            if (colorNum >= 0) color = BlockColor.getDyeColor(colorNum);
+            }
         }
         return color;
     }

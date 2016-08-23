@@ -38,13 +38,13 @@ public class CmdRgInfo extends Cmd {
             StringBuilder sb = new StringBuilder();
             for (String id : regions.keySet()) {
                 Region r = regions.get(id);
-                String color = TextFormat.GREEN;
+                TextFormat color = TextFormat.GREEN;
                 if (player != null) {
                     if (r.isOwner(player.getName())) color = TextFormat.GOLD;
                     else if (r.isMember(player.getName())) color = TextFormat.YELLOW;
                 }
                 if (sb.length() > 0) {
-                    if (!color.equalsIgnoreCase(TextFormat.GREEN)) sb.append(TextFormat.GREEN);
+                    if (color != TextFormat.GREEN) sb.append(TextFormat.GREEN);
                     sb.append(", ");
                 }
                 sb.append(color).append(id);

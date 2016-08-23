@@ -76,17 +76,30 @@ public class ClipBlock extends Clipboard {
     }
 
     public void paste() {
-        Regions.getBuilder().setBlock(playerName, blocks);
+        paste(false);
+    }
+
+    @Override
+    public void paste(boolean useUndo) {
+        Regions.getBuilder().setBlock(playerName, blocks, useUndo);
     }
 
     public void paste(Location loc, boolean asPlayer) {
+        paste(loc, asPlayer, false);
+    }
+
+    public void paste(Location loc, boolean asPlayer, boolean useUndo) {
         Location start = asPlayer && this.playerLocation != null ? loc.add(this.minLocation.subtract(this.playerLocation)) : loc;
         List<Block> blocks = new LinkedList<Block>();
-
         for (Block block : this.blocks) {
             blocks.add(Block.get(block.getId(), block.getDamage(), start.add(block)));
         }
-        Regions.getBuilder().setBlock(playerName, blocks);
+        Regions.getBuilder().setBlock(playerName, blocks, useUndo);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return blocks.isEmpty();
     }
 
     public void remove(List<Block> blocks) {
@@ -103,4 +116,5 @@ public class ClipBlock extends Clipboard {
     public int getVolume() {
         return blocks.size();
     }
+
 }
