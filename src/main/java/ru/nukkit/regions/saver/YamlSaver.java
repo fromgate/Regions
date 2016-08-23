@@ -30,10 +30,10 @@ public class YamlSaver implements RegionSaver {
                 if (flag.getRelation() != null) s.set(flagKey + "relate", flag.getRelation().name());
                 s.set(flagKey + "value", flag.getParam());
             }
-            cfg.set(e.getKey(),s);
+            cfg.set(e.getKey(), s);
         });
         boolean saveResult = cfg.save();
-        Message.debugMessage("Regions saved:",regions.size(),"Save result (ok)",saveResult);
+        Message.debugMessage("Regions saved:", regions.size(), "Save result (ok)", saveResult);
         return saveResult;
     }
 

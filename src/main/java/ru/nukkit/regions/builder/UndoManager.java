@@ -22,7 +22,7 @@ public class UndoManager {
         String userName = clipboard.getPlayerName();
         if (!undos.containsKey(userName)) undos.put(userName, new ArrayList<>());
         undos.get(userName).add(clipboard);
-        if (undos.size()>RegionsPlugin.getCfg().undoLevels) undos.get(userName).remove(0);
+        if (undos.size() > RegionsPlugin.getCfg().undoLevels) undos.get(userName).remove(0);
     }
 
     public boolean playerUndoExist(String name) {
@@ -32,8 +32,8 @@ public class UndoManager {
     public boolean performUndo(String name) {
         if (!playerUndoExist(name)) return false;
         List<Clipboard> clipboards = undos.get(name);
-        Clipboard clipboard = clipboards.get(clipboards.size()-1);
-        clipboards.remove(clipboards.size()-1);
+        Clipboard clipboard = clipboards.get(clipboards.size() - 1);
+        clipboards.remove(clipboards.size() - 1);
         if (clipboards.isEmpty()) undos.remove(name);
         clipboard.paste();
         return true;

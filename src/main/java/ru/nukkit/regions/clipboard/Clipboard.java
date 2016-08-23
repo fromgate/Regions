@@ -28,7 +28,7 @@ public abstract class Clipboard {
 
     public abstract void add(Block block);
 
-    public abstract void  add(Block... block);
+    public abstract void add(Block... block);
 
     public abstract void paste();
 
@@ -43,7 +43,7 @@ public abstract class Clipboard {
         return clip;
     }
 
-    public static Clipboard createUndoClipBiome (String playerName) {
+    public static Clipboard createUndoClipBiome(String playerName) {
         if (!RegionsPlugin.getCfg().builderUseUndo) return null;
         if (playerName == null || playerName.isEmpty()) return null;
         Player player = Server.getInstance().getPlayerExact(playerName);

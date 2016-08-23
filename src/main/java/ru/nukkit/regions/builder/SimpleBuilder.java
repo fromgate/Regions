@@ -29,6 +29,7 @@ public class SimpleBuilder implements Builder {
         setBlock(playerName, block, true);
 
     }
+
     public void setBlock(String playerName, Block block, boolean direct) {
         block.getLevel().setBlock(block, block, direct);
     }
@@ -113,8 +114,8 @@ public class SimpleBuilder implements Builder {
 
     @Override
     public void setBlock(String playerName, Collection<Block> blocks) {
-        boolean direct = blocks.size()<100;
-        Message.debugMessage("Set Blocks:",blocks.size(),"direct:", direct);
+        boolean direct = blocks.size() < 100;
+        Message.debugMessage("Set Blocks:", blocks.size(), "direct:", direct);
         blocks.forEach(block -> setBlock(playerName, block, direct));
     }
 

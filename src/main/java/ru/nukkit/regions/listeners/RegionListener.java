@@ -38,10 +38,10 @@ public class RegionListener implements Listener {
     }
 
     @EventHandler
-    public void onBrush (PlayerInteractEvent event){
-        if (event.getAction() != PlayerInteractEvent.RIGHT_CLICK_BLOCK&&
+    public void onBrush(PlayerInteractEvent event) {
+        if (event.getAction() != PlayerInteractEvent.RIGHT_CLICK_BLOCK &&
                 event.getAction() != PlayerInteractEvent.RIGHT_CLICK_AIR) return;
-        if (!BrushManager.isBrush (event.getPlayer().getInventory().getItemInHand())) return;
+        if (!BrushManager.isBrush(event.getPlayer().getInventory().getItemInHand())) return;
         Block clickedBlock = event.getAction() == PlayerInteractEvent.RIGHT_CLICK_BLOCK ? event.getBlock() : null;
         BrushManager.paint(event.getPlayer(), clickedBlock);
     }

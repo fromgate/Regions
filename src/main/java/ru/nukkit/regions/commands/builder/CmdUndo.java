@@ -13,7 +13,7 @@ public class CmdUndo extends Cmd {
     public boolean execute(CommandSender sender, Player player, String[] args) {
         if (!Regions.getUndoManager().playerUndoExist(player.getName()))
             return Message.UNDO_NOT_FOUND.print(sender, sender.getName());
-        if (args.length==1 && args[0].equals("clear")){
+        if (args.length == 1 && args[0].equals("clear")) {
             Regions.getUndoManager().clear(player.getName());
             Message.UNDO_CLEAR_OK.print(sender);
         } else {

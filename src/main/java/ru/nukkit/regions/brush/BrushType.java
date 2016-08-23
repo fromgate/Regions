@@ -6,11 +6,11 @@ import ru.nukkit.regions.brush.brushes.*;
  * Created by Igor on 27.06.2016.
  */
 public enum BrushType {
-    BUILD (BuildBrush.class, "build"),
-    BREAK (BreakBrush.class, "destroy"),
-    BIOME (BiomeBrush.class, "biom"),
-    SMOOTH (SmoothBiome.class,"sbiome"),
-    FILL (FillBrush.class, "floodfill");
+    BUILD(BuildBrush.class, "build"),
+    BREAK(BreakBrush.class, "destroy"),
+    BIOME(BiomeBrush.class, "biom"),
+    SMOOTH(SmoothBiome.class, "sbiome"),
+    FILL(FillBrush.class, "floodfill");
 
     private Class<? extends Brush> brushClass;
     private String alias;
@@ -20,7 +20,7 @@ public enum BrushType {
         this.alias = alias;
     }
 
-    public Brush createBrush(String[] args){
+    public Brush createBrush(String[] args) {
         try {
             Brush brush = this.brushClass.newInstance(); //c.newInstance();
             if (brush.init(args)) return brush;
@@ -30,9 +30,9 @@ public enum BrushType {
         return null;
     }
 
-    public static BrushType getByName (String name){
-        for (BrushType bt : values()){
-            if (bt.name().equalsIgnoreCase(name)||name.matches("(?i)"+bt.alias)) return bt;
+    public static BrushType getByName(String name) {
+        for (BrushType bt : values()) {
+            if (bt.name().equalsIgnoreCase(name) || name.matches("(?i)" + bt.alias)) return bt;
         }
         return null;
     }

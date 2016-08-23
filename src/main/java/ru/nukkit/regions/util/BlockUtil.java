@@ -76,7 +76,7 @@ public class BlockUtil {
     public static Item createItem(String itemStr, String itemName) {
         int id = -1;
         Integer data = 0;
-        if (itemStr.contains(":")){
+        if (itemStr.contains(":")) {
             String[] ln = itemStr.split(":");
             itemStr = ln[0];
             data = Integer.parseInt(ln[1]);
@@ -92,7 +92,7 @@ public class BlockUtil {
         }
         if (id < 0) return null;
         Item item = Item.get(id, data);
-        if (itemName!=null&&!itemName.isEmpty()) item.setCustomName(TextFormat.colorize(itemName));
+        if (itemName != null && !itemName.isEmpty()) item.setCustomName(TextFormat.colorize(itemName));
         return item;
     }
 

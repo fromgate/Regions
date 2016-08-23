@@ -82,7 +82,7 @@ public class FlagListener implements Listener {
             } else if (ev.getDamager() instanceof Player) damager = (Player) ev.getDamager();
         }
         if (damager == null) return;
-        if (Regions.getManager().cancelEvent(player, player.getLocation(), PVP)||
+        if (Regions.getManager().cancelEvent(player, player.getLocation(), PVP) ||
                 Regions.getManager().cancelEvent(damager, damager.getLocation(), PVP)) event.setCancelled();
     }
 }

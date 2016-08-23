@@ -47,19 +47,19 @@ public class Param {
     /**
      * Creates param object, based on arguments array.
      * For example if input array represents string:
-     *    "key1 value1 key2 value2" it will converted into param map:
-     *    key1:value1
-     *    key2:value2
+     * "key1 value1 key2 value2" it will converted into param map:
+     * key1:value1
+     * key2:value2
      *
-     * @param args      Arguments array
-     * @param start     First array that will count as a first key (0 for first element)
-     * @return          Param object
+     * @param args  Arguments array
+     * @param start First array that will count as a first key (0 for first element)
+     * @return Param object
      */
-    public static Param fromArgs (String[] args, int start){
+    public static Param fromArgs(String[] args, int start) {
         Param param = new Param();
-        if (args.length<start+2) return param;
-        for (int i = start; i+1<args.length ;i+=2){
-            param.set(args[i],args[i+1]);
+        if (args.length < start + 2) return param;
+        for (int i = start; i + 1 < args.length; i += 2) {
+            param.set(args[i], args[i + 1]);
         }
         return param;
     }
@@ -94,8 +94,6 @@ public class Param {
 			param.set(keys[i], ln[i]);
 		return param;
 	} */
-
-
     public String getParam(String key, String defParam) {
         if (!params.containsKey(key)) return defParam;
         return params.get(key);
@@ -151,6 +149,7 @@ public class Param {
                 if (param.matches(key)) return true;
         return false;
     }
+
     public static Map<String, String> parseParams(String param, String defaultKey) {
         Map<String, String> params = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         Pattern pattern = Pattern.compile("\\S+:\\{[^\\{\\}]*\\}|\\S+");

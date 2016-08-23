@@ -13,7 +13,7 @@ public class ClipBiome extends Clipboard {
 
     private LinkedHashMap<Position, BiomeColor> biomes;
 
-    public ClipBiome (){
+    public ClipBiome() {
         this.biomes = new LinkedHashMap<>();
     }
 
@@ -25,29 +25,29 @@ public class ClipBiome extends Clipboard {
     @Override
     public void add(Block... blocks) {
         for (Block block : blocks)
-            add (block);
+            add(block);
     }
 
     @Override
     public void paste() {
-        biomes.entrySet().forEach(e->{
+        biomes.entrySet().forEach(e -> {
             e.getValue().set(e.getKey());
         });
     }
 
     @Override
     public void paste(Location loc, boolean asPlayer) {
-        throw new IllegalStateException ("ClipBiome does not support relative paste");
+        throw new IllegalStateException("ClipBiome does not support relative paste");
     }
 
     @Override
     public void remove(List<Block> blocks) {
-        throw new IllegalStateException ("ClipBiome does not support remove blocks");
+        throw new IllegalStateException("ClipBiome does not support remove blocks");
     }
 
     @Override
     public void remove(Clipboard removeClip) {
-        throw new IllegalStateException ("ClipBiome does not support remove blocks");
+        throw new IllegalStateException("ClipBiome does not support remove blocks");
     }
 
     @Override
@@ -55,28 +55,29 @@ public class ClipBiome extends Clipboard {
         return biomes.size();
     }
 
-    class BiomeColor{
+    class BiomeColor {
         private Biome biome;
         private BlockColor color;
 
-        public BiomeColor (Block block){
+        public BiomeColor(Block block) {
             this.biome = Biome.getBiome(block.getLevel().getBiomeId(block.getFloorX(), block.getFloorZ()));
-            int[] rgb = block.getLevel().getBiomeColor(block.getFloorX(),block.getFloorZ());
+            int[] rgb = block.getLevel().getBiomeColor(block.getFloorX(), block.getFloorZ());
             this.color = new BlockColor(rgb[0], rgb[1], rgb[2]);
         }
-        public Biome getBiome(){
+
+        public Biome getBiome() {
             return this.biome;
         }
 
-        public BlockColor getColor(){
+        public BlockColor getColor() {
             return this.color;
         }
 
-        public void set (Position loc){
-            if (biome!=null)
-                loc.getLevel().setBiomeId(loc.getFloorX(),loc.getFloorZ(),biome.getId());
-            if (color!=null)
-                loc.getLevel().setBiomeColor(loc.getFloorX(),loc.getFloorZ(),
+        public void set(Position loc) {
+            if (biome != null)
+                loc.getLevel().setBiomeId(loc.getFloorX(), loc.getFloorZ(), biome.getId());
+            if (color != null)
+                loc.getLevel().setBiomeColor(loc.getFloorX(), loc.getFloorZ(),
                         color.getRed(), color.getGreen(), color.getBlue());
         }
 

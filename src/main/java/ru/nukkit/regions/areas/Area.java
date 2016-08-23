@@ -42,13 +42,13 @@ public class Area {
             throw new IllegalArgumentException("Wrong area definition format: " + areaStr);
         String[] ln = areaStr.replaceAll("(?i)(^cuboid:\\{)|(\\}$)", "").trim().split("\\s+");
         for (String s : ln) {
-            if (s.regionMatches(true, 0, "level:",0,6)) this.world = s.replaceAll("(?i)^level:", "");
-            else if (s.regionMatches(true, 0, "x1:",0,3)) this.x1 = Integer.parseInt(s.replaceAll("(?i)^x1:", ""));
-            else if (s.regionMatches(true, 0, "y1:",0,3)) this.y1 = Integer.parseInt(s.replaceAll("(?i)^y1:", ""));
-            else if (s.regionMatches(true, 0, "z1:",0,3)) this.z1 = Integer.parseInt(s.replaceAll("(?i)^z1:", ""));
-            else if (s.regionMatches(true, 0, "x2:",0,3)) this.x2 = Integer.parseInt(s.replaceAll("(?i)^x2:", ""));
-            else if (s.regionMatches(true, 0, "y2:",0,3)) this.y2 = Integer.parseInt(s.replaceAll("(?i)^y2:", ""));
-            else if (s.regionMatches(true, 0, "z2:",0,3)) this.z2 = Integer.parseInt(s.replaceAll("(?i)^z2:", ""));
+            if (s.regionMatches(true, 0, "level:", 0, 6)) this.world = s.replaceAll("(?i)^level:", "");
+            else if (s.regionMatches(true, 0, "x1:", 0, 3)) this.x1 = Integer.parseInt(s.replaceAll("(?i)^x1:", ""));
+            else if (s.regionMatches(true, 0, "y1:", 0, 3)) this.y1 = Integer.parseInt(s.replaceAll("(?i)^y1:", ""));
+            else if (s.regionMatches(true, 0, "z1:", 0, 3)) this.z1 = Integer.parseInt(s.replaceAll("(?i)^z1:", ""));
+            else if (s.regionMatches(true, 0, "x2:", 0, 3)) this.x2 = Integer.parseInt(s.replaceAll("(?i)^x2:", ""));
+            else if (s.regionMatches(true, 0, "y2:", 0, 3)) this.y2 = Integer.parseInt(s.replaceAll("(?i)^y2:", ""));
+            else if (s.regionMatches(true, 0, "z2:", 0, 3)) this.z2 = Integer.parseInt(s.replaceAll("(?i)^z2:", ""));
         }
     }
 

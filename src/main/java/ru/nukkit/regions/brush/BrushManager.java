@@ -16,11 +16,11 @@ public class BrushManager {
 
 
     // Command brush <brushName> r <radius> <brushParams...>
-    public static boolean takeBrush (Player player, String[] args){
+    public static boolean takeBrush(Player player, String[] args) {
         if (player == null) return false;
         artists.remove(player.getName());
-        if (args==null||args.length==0) return false;
-        Brush brush = getBrush (args[0], removeArg(args));
+        if (args == null || args.length == 0) return false;
+        Brush brush = getBrush(args[0], removeArg(args));
         if (brush == null) return false;
         artists.put(player.getName(), brush);
         return true;
@@ -28,20 +28,20 @@ public class BrushManager {
 
     private static Brush getBrush(String arg, String[] strings) {
         BrushType bt = BrushType.getByName(arg);
-        if (bt==null) return null;
+        if (bt == null) return null;
         Brush brush = bt.createBrush(strings);
         return brush;
     }
 
-    private static String [] removeArg(String[] args){
+    private static String[] removeArg(String[] args) {
         if (args.length <= 1) return new String[]{};
-        String [] newArgs = new String[args.length-1];
+        String[] newArgs = new String[args.length - 1];
         for (int i = 1; i < args.length; i++)
-            newArgs [i-1] = args[i];
+            newArgs[i - 1] = args[i];
         return newArgs;
     }
 
-    public static Item createBrushItem(){
+    public static Item createBrushItem() {
         return BlockUtil.createItem(RegionsPlugin.getCfg().brushItem,
                 TextFormat.colorize(RegionsPlugin.getCfg().brushName));
     }
@@ -50,8 +50,8 @@ public class BrushManager {
         if (item == null) return false;
         Item brush = createBrushItem();
         if (brush == null) return false;
-        if (item.getId()!=brush.getId()) return false;
-        if (item.getDamage()!=brush.getDamage()) return false;
+        if (item.getId() != brush.getId()) return false;
+        if (item.getDamage() != brush.getDamage()) return false;
         if (RegionsPlugin.getCfg().brushName.isEmpty()) return true;
         return (item.getCustomName().equals(brush.getCustomName()));
     }
@@ -61,7 +61,7 @@ public class BrushManager {
         return (artists.get(player.getName()) != null);
     }
 
-    public static boolean paint (Player player, Block clickedBlock){
+    public static boolean paint(Player player, Block clickedBlock) {
         if (!artists.containsKey(player.getName())) return false;
         Brush brush = artists.get(player.getName());
         if (brush == null) {

@@ -15,10 +15,10 @@ public class SmoothBiome extends Brush {
 
     int size;
 
-    public boolean init(String[] args){
-        Param param = Param.fromArgs(args,0);
-        this.radius = param.getParam("radius",param.getParam("r",1));
-        this.size = param.getParam("size",param.getParam("s",this.radius));
+    public boolean init(String[] args) {
+        Param param = Param.fromArgs(args, 0);
+        this.radius = param.getParam("radius", param.getParam("r", 1));
+        this.size = param.getParam("size", param.getParam("s", this.radius));
         return true;
     }
 
@@ -28,10 +28,10 @@ public class SmoothBiome extends Brush {
         Location center = clickedBlock == null ? getTarget(player) : clickedBlock.getLocation();
         if (center == null) return false;
         List<Block> blocks = getDisk(center, this.radius);
-        return WeatherMan.smooth (player, blocks, size);
+        return WeatherMan.smooth(player, blocks, size);
     }
 
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder("SMOOTH (");
         sb.append("radius: ").append(radius);
         sb.append("size: ").append(size);

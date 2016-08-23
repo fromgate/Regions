@@ -19,25 +19,25 @@ public class BiomeBrush extends Brush {
     private Biome biome;
     private BlockColor color;
 
-    public BiomeBrush(){
+    public BiomeBrush() {
         this.radius = 5;
         this.biome = null;
         this.color = null;
     }
 
-    public boolean init (String[] args){
-        Param param = Param.fromArgs(args,0);
+    public boolean init(String[] args) {
+        Param param = Param.fromArgs(args, 0);
         if (param.matchAnyParam("(?i)radius|r"))
-            this.radius = param.getParam("radius",param.getParam("r",1));
-        if (param.matchAnyParam("(?i)b|biome|biom")){
-            String biomeStr = param.getParam("b",param.getParam("biome",param.getParam("biom", "")));
+            this.radius = param.getParam("radius", param.getParam("r", 1));
+        if (param.matchAnyParam("(?i)b|biome|biom")) {
+            String biomeStr = param.getParam("b", param.getParam("biome", param.getParam("biom", "")));
             biome = Biome.getBiome(biomeStr);
         }
-        if (param.matchAnyParam("(?i)color|c|colour")){
-            String colorName = param.getParam("color",param.getParam("c"));
+        if (param.matchAnyParam("(?i)color|c|colour")) {
+            String colorName = param.getParam("color", param.getParam("c"));
             color = WeatherMan.getColorByName(colorName);
         }
-        return biome!=null||color!=null;
+        return biome != null || color != null;
     }
 
     @Override
@@ -48,11 +48,11 @@ public class BiomeBrush extends Brush {
         return WeatherMan.setBiome(player, blocks, biome, color);
     }
 
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder("BIOME (");
         sb.append("radius: ").append(radius);
-        if (biome!=null) sb.append(", biome: ").append(biome.getName());
-        if (color!=null) sb.append(", color: ").append(color.toString());
+        if (biome != null) sb.append(", biome: ").append(biome.getName());
+        if (color != null) sb.append(", color: ").append(color.toString());
         sb.append(")");
         return sb.toString();
     }

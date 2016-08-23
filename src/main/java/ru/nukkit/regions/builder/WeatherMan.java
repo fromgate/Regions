@@ -162,27 +162,27 @@ public class WeatherMan {
 
     }
 
-    public static boolean smooth (Player player, List<Block> blocks, int radius){
+    public static boolean smooth(Player player, List<Block> blocks, int radius) {
         Map<Block, BlockColor> futureBlocks = new HashMap<>();
         blocks.forEach(block -> {
             List<BlockColor> matrix = new ArrayList<BlockColor>();
-            for (int x = block.getFloorX()-radius; x<=block.getFloorX()+radius; x++)
-                for (int z = block.getFloorZ()-radius; z<=block.getFloorZ()+radius; z++){
-                    int[] rgb = block.getLevel().getBiomeColor(x,z);
-                    matrix.add(new BlockColor(rgb[0],rgb[1],rgb[2]));
+            for (int x = block.getFloorX() - radius; x <= block.getFloorX() + radius; x++)
+                for (int z = block.getFloorZ() - radius; z <= block.getFloorZ() + radius; z++) {
+                    int[] rgb = block.getLevel().getBiomeColor(x, z);
+                    matrix.add(new BlockColor(rgb[0], rgb[1], rgb[2]));
                 }
             int r = 0;
             int g = 0;
             int b = 0;
-            for (BlockColor c : matrix){
+            for (BlockColor c : matrix) {
                 r += c.getRed();
                 g += c.getGreen();
                 b += c.getBlue();
             }
-            r = r/matrix.size();
-            g = g/matrix.size();
-            b = b/matrix.size();
-            futureBlocks.put(block, new BlockColor(r,g,b));
+            r = r / matrix.size();
+            g = g / matrix.size();
+            b = b / matrix.size();
+            futureBlocks.put(block, new BlockColor(r, g, b));
         });
         setBiomeColors(player, futureBlocks);
         return true;

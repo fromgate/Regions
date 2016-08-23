@@ -15,27 +15,28 @@ import ru.nukkit.regions.util.Message;
 public class CmdBrush extends Cmd {
     @Override
     public boolean execute(CommandSender sender, Player player, String[] args) {
-        if (args.length == 0){
+        if (args.length == 0) {
             // brush  - show info
             if (!BrushManager.hasBrush(player)) return Message.BRUSH_NOBRUSH.print(sender);
             Brush brush = BrushManager.getBrush(player);
             Message.BRUSH_INFO.print(sender, brush.toString());
         } else {
-            if (args[0].equalsIgnoreCase("give")){
+            if (args[0].equalsIgnoreCase("give")) {
                 // brush give
                 Item item = BrushManager.createBrushItem();
-                if (item == null) Message.BRUSH_ITEM_FAIL.print(sender,RegionsPlugin.getCfg().brushName,RegionsPlugin.getCfg().brushItem);
+                if (item == null)
+                    Message.BRUSH_ITEM_FAIL.print(sender, RegionsPlugin.getCfg().brushName, RegionsPlugin.getCfg().brushItem);
                 player.getInventory().addItem(item);
                 Message.BRUSH_ITEM_GIVE.print(sender);
-            } else if (args[0].equalsIgnoreCase("set")){
+            } else if (args[0].equalsIgnoreCase("set")) {
                 // /brush set <param> <value>
                 if (!BrushManager.hasBrush(player)) return Message.BRUSH_MODIFY_NOBRUSH.print(sender);
-                BrushManager.modifyBrush (player, args);
+                BrushManager.modifyBrush(player, args);
                 Brush brush = BrushManager.getBrush(player);
-                Message.BRUSH_MODIFY_OK.print(sender,brush.toString());
+                Message.BRUSH_MODIFY_OK.print(sender, brush.toString());
             } else {
                 //brush <brushType> r <radius> [parameters]
-                if (!BrushManager.takeBrush(player,args)) return Message.BRUSH_TAKE_FAIL.print(sender);
+                if (!BrushManager.takeBrush(player, args)) return Message.BRUSH_TAKE_FAIL.print(sender);
                 Brush brush = BrushManager.getBrush(player);
                 Message.BRUSH_TAKE_OK.print(sender, brush.toString());
             }

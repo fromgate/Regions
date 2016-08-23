@@ -16,7 +16,7 @@ public class BuildBrush extends Brush {
     boolean fill;
     boolean ball;
 
-    public BuildBrush(){
+    public BuildBrush() {
         this.block = null;
         this.radius = 3;
         this.ball = true;
@@ -24,15 +24,15 @@ public class BuildBrush extends Brush {
     }
 
 
-    public boolean init (String[] args) {
-        Param param = Param.fromArgs(args,0);
+    public boolean init(String[] args) {
+        Param param = Param.fromArgs(args, 0);
         if (param.matchAnyParam("(?i)radius|r"))
-            this.radius = param.getParam("radius",param.getParam("r",3));
+            this.radius = param.getParam("radius", param.getParam("r", 3));
         if (param.matchAnyParam("(?i)fill|f"))
-            this.fill = param.getParam("fill",param.getParam("f", true));
+            this.fill = param.getParam("fill", param.getParam("f", true));
         if (param.matchAnyParam("(?i)t|type"))
-            this.ball = !param.getParam("type",param.getParam("t", "disk")).matches("(?i)disk|disc|d");
-        if (param.matchAnyParam("(?i)block|b")){
+            this.ball = !param.getParam("type", param.getParam("t", "disk")).matches("(?i)disk|disc|d");
+        if (param.matchAnyParam("(?i)block|b")) {
             String blockStr = param.getParam("block", param.getParam("b"));
             block = BlockUtil.getNewBlock(blockStr);
         }
@@ -46,9 +46,9 @@ public class BuildBrush extends Brush {
         List<Block> blocks = ball ? getBall(center, this.radius) : getDisk(center, radius);
         Clipboard undo = Clipboard.createUndoClipBoard(player.getName());
         blocks.forEach(b -> {
-            if (fill||b.getId()==0){
-                if (undo!=null) undo.add(b);
-                b.getLevel().setBlock(b,block,true,true);
+            if (fill || b.getId() == 0) {
+                if (undo != null) undo.add(b);
+                b.getLevel().setBlock(b, block, true, true);
             }
         });
         getUndoManager().add(undo);
@@ -56,14 +56,14 @@ public class BuildBrush extends Brush {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder("BUILD (");
         sb.append("radius: ").append(radius);
         sb.append(", type: ").append(ball ? "ball" : "disk");
 
-        if (block!=null) {
+        if (block != null) {
             sb.append(", block: ").append(block.getName());
-            if (block.getDamage()!=0) sb.append(":").append(block.getDamage());
+            if (block.getDamage() != 0) sb.append(":").append(block.getDamage());
         }
         sb.append(", fill: ").append(fill ? "yes" : "no");
         sb.append(")");

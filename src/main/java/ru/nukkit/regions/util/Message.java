@@ -152,21 +152,21 @@ public enum Message {
     CFG_UPDATED("Config file updated. New variables added but we lost all comments..."),
     BUILD_BIOMEOK("Biome successfully changed!"),
     BUILD_BIOMELIST("Biomes: %1%"),
-    BUILD_BIOMELISTFAIL ("Failed to retrieve list of biomes",'c'),
+    BUILD_BIOMELISTFAIL("Failed to retrieve list of biomes", 'c'),
     BIOME_DESC("/biome [list|<BiomeName>] - show current biome, show list, set biome"),
     BUILD_BIOMESHOW("Biome in your location: %1%"),
-    BUILD_BIOME_COLORFAIL("Failed to parse RGB-color: %1%, %2%, %3%", 'c','4'),
-    BUILD_BIOME_FAIL("Failed to parse biome or color. Please check command syntax and try again", 'c','4'),
+    BUILD_BIOME_COLORFAIL("Failed to parse RGB-color: %1%, %2%, %3%", 'c', '4'),
+    BUILD_BIOME_FAIL("Failed to parse biome or color. Please check command syntax and try again", 'c', '4'),
     BRUSH_DESC("/brush [<brushType> r <radius>] [params] - choose brush type"),
-    BRUSH_ITEM_FAIL("Failed to create item %1% (%2%). Is it valid item?", 'c','4'),
+    BRUSH_ITEM_FAIL("Failed to create item %1% (%2%). Is it valid item?", 'c', '4'),
     BRUSH_ITEM_GIVE("Brush added to your inventory!"),
     BRUSH_TAKE_OK("Brush created: %1%"),
-    BRUSH_TAKE_FAIL("Failed to configure your brush", 'c','4'),
-    BRUSH_MODIFY_NOBRUSH("You must select your brush first!",'c','4'),
-    BRUSH_NOBRUSH("You didn't define your brush yet!",'c','4'),
+    BRUSH_TAKE_FAIL("Failed to configure your brush", 'c', '4'),
+    BRUSH_MODIFY_NOBRUSH("You must select your brush first!", 'c', '4'),
+    BRUSH_NOBRUSH("You didn't define your brush yet!", 'c', '4'),
     BRUSH_MODIFY_OK("Brush configured: %1%"),
-    BRUSH_INFO ("Brush: %1%"),
-    BUILD_BIOME_SMOOTH ("Biome color transitions smoothened");
+    BRUSH_INFO("Brush: %1%"),
+    BUILD_BIOME_SMOOTH("Biome color transitions smoothened");
 
     private static boolean debugMode = false;
     private static String language = "default";

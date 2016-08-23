@@ -82,6 +82,7 @@ public class ClipBlock extends Clipboard {
     public void paste(Location loc, boolean asPlayer) {
         Location start = asPlayer && this.playerLocation != null ? loc.add(this.minLocation.subtract(this.playerLocation)) : loc;
         List<Block> blocks = new LinkedList<Block>();
+
         for (Block block : this.blocks) {
             blocks.add(Block.get(block.getId(), block.getDamage(), start.add(block)));
         }
@@ -93,8 +94,8 @@ public class ClipBlock extends Clipboard {
     }
 
     public void remove(Clipboard removeClip) {
-        if (removeClip instanceof ClipBlock){
-            blocks.removeAll(((ClipBlock)removeClip).blocks);
+        if (removeClip instanceof ClipBlock) {
+            blocks.removeAll(((ClipBlock) removeClip).blocks);
         }
     }
 

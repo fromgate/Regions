@@ -20,8 +20,8 @@ public class CmdBiome extends Cmd {
     @Override
     public boolean execute(CommandSender sender, Player player, String[] args) {
 
-        if (args.length==0){
-            int biomeId = player.getLevel().getBiomeId(player.getFloorX(),player.getFloorZ());
+        if (args.length == 0) {
+            int biomeId = player.getLevel().getBiomeId(player.getFloorX(), player.getFloorZ());
             Biome biome = Biome.getBiome(biomeId);
             return Message.BUILD_BIOMESHOW.print(sender, biome.getName());
         }
@@ -33,7 +33,7 @@ public class CmdBiome extends Cmd {
             Message m = (biomeList.isEmpty()) ? Message.BUILD_BIOMELISTFAIL :
                     Message.BUILD_BIOMELIST;
             return m.print(sender, biomeList);
-        } else if (args[0].equalsIgnoreCase("smooth")){
+        } else if (args[0].equalsIgnoreCase("smooth")) {
             int radius = args.length >= 2 && args[1].matches("\\d+") ? Integer.parseInt(args[1]) : 3;
             WeatherMan.smooth(player, area, radius);
             return Message.BUILD_BIOME_SMOOTH.print(sender);
@@ -46,36 +46,36 @@ public class CmdBiome extends Cmd {
         BlockColor biomeColor = null;
 
         //biome <biome|color>
-        if (args.length==1) {
+        if (args.length == 1) {
             biome = Biome.getBiome(args[0]);
             if (biome == null) biomeColor = WeatherMan.getColorByName(args[0]);
-        // biome <biome> <color>
-        } else if (args.length == 2){
+            // biome <biome> <color>
+        } else if (args.length == 2) {
             biome = Biome.getBiome(args[0]);
             biomeColor = WeatherMan.getColorByName(args[1]);
-        // biome <r> <g> <b>
-        } else if (args.length == 3){
+            // biome <r> <g> <b>
+        } else if (args.length == 3) {
             int[] rgb = new int[3];
-            for (int i = 0; i<3; i++){
-                if (!args[i].matches("\\d+")) return Message.BUILD_BIOME_COLORFAIL.print(sender, args[0],args[1],args[2]);
+            for (int i = 0; i < 3; i++) {
+                if (!args[i].matches("\\d+"))
+                    return Message.BUILD_BIOME_COLORFAIL.print(sender, args[0], args[1], args[2]);
                 rgb[i] = Integer.parseInt(args[i]);
             }
-            biomeColor = new BlockColor(rgb[0],rgb[1],rgb[2]);
-        } else if (args.length == 4){
+            biomeColor = new BlockColor(rgb[0], rgb[1], rgb[2]);
+        } else if (args.length == 4) {
             biome = Biome.getBiome(args[0]);
             int[] rgb = new int[3];
-            for (int i = 0; i<3; i++){
-                if (!args[i].matches("\\d+")) return Message.BUILD_BIOME_COLORFAIL.print(sender, args[1],args[2],args[3]);
-                rgb[i] = Integer.parseInt(args[i+1]);
+            for (int i = 0; i < 3; i++) {
+                if (!args[i].matches("\\d+"))
+                    return Message.BUILD_BIOME_COLORFAIL.print(sender, args[1], args[2], args[3]);
+                rgb[i] = Integer.parseInt(args[i + 1]);
             }
-            biomeColor = new BlockColor(rgb[0],rgb[1],rgb[2]);
+            biomeColor = new BlockColor(rgb[0], rgb[1], rgb[2]);
         }
-        if (biome == null && biomeColor==null) return Message.BUILD_BIOME_FAIL.print(sender);
+        if (biome == null && biomeColor == null) return Message.BUILD_BIOME_FAIL.print(sender);
         WeatherMan.setBiome(player, area, biome, biomeColor);
         return Message.BUILD_BIOMEOK.print(sender);
     }
-
-
 
 
 }

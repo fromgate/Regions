@@ -18,7 +18,7 @@ public class BreakBrush extends Brush {
     Block block;
     boolean ball;
 
-    public BreakBrush(){
+    public BreakBrush() {
         this.block = null;
         this.radius = 3;
         this.ball = true;
@@ -26,12 +26,12 @@ public class BreakBrush extends Brush {
 
     @Override
     public boolean init(String[] args) {
-        Param param = Param.fromArgs(args,0);
+        Param param = Param.fromArgs(args, 0);
         if (param.matchAnyParam("(?i)radius|r"))
-            this.radius = param.getParam("radius",param.getParam("r",radius));
+            this.radius = param.getParam("radius", param.getParam("r", radius));
         if (param.matchAnyParam("(?i)t|type"))
-            this.ball = !param.getParam("type",param.getParam("t", "disk")).matches("(?i)disk|disc|d");
-        if (param.matchAnyParam("(?i)block|b")){
+            this.ball = !param.getParam("type", param.getParam("t", "disk")).matches("(?i)disk|disc|d");
+        if (param.matchAnyParam("(?i)block|b")) {
             String blockStr = param.getParam("block", param.getParam("b"));
             block = BlockUtil.getNewBlock(blockStr);
         }
@@ -46,9 +46,9 @@ public class BreakBrush extends Brush {
         Block air = Block.get(0);
         Clipboard undo = Clipboard.createUndoClipBoard(player.getName());
         blocks.forEach(b -> {
-            if (block == null|| block.getId()==b.getId()){
-                if (undo!=null) undo.add(b);
-                b.getLevel().setBlock(b,air,true,true);
+            if (block == null || block.getId() == b.getId()) {
+                if (undo != null) undo.add(b);
+                b.getLevel().setBlock(b, air, true, true);
             }
         });
 
@@ -58,13 +58,13 @@ public class BreakBrush extends Brush {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder("BREAK (");
         sb.append("radius: ").append(radius);
         sb.append(", type: ").append(ball ? "ball" : "disk");
-        if (block!=null) {
+        if (block != null) {
             sb.append(", block: ").append(block.getName());
-            if (block.getDamage()!=0) sb.append(":").append(block.getDamage());
+            if (block.getDamage() != 0) sb.append(":").append(block.getDamage());
         }
         sb.append(")");
         return sb.toString();

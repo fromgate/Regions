@@ -9,23 +9,23 @@ public class BuilderChunk {
     int x;
     int z;
 
-    public BuilderChunk (Location location){
+    public BuilderChunk(Location location) {
         level = location.getLevel();
         this.x = location.getFloorX() >> 4;
         this.z = location.getFloorZ() >> 4;
     }
 
-    public BuilderChunk (Level level, int chunkX, int chunkZ){
+    public BuilderChunk(Level level, int chunkX, int chunkZ) {
         this.level = level;
         this.x = chunkX;
         this.z = chunkZ;
     }
 
-    public void updateChunk(){
-        Server.getInstance().getOnlinePlayers().values().forEach(p->{
-            Location center = new Location((x<<4)+7,p.getY(),(z<<4)+7,0,0,level);
-            if (center.distance(p)<=(Server.getInstance().getViewDistance()>>4));
-                level.requestChunk(x,z,p);
+    public void updateChunk() {
+        Server.getInstance().getOnlinePlayers().values().forEach(p -> {
+            Location center = new Location((x << 4) + 7, p.getY(), (z << 4) + 7, 0, 0, level);
+            if (center.distance(p) <= (Server.getInstance().getViewDistance() >> 4)) ;
+            level.requestChunk(x, z, p);
         });
     }
 

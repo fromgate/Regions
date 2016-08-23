@@ -88,10 +88,10 @@ public class RegionsConfig extends SimpleConfig {
     @Path("builder.undo.levels")
     public int undoLevels = 10;
 
-    @Path ("builder.brush.item")
+    @Path("builder.brush.item")
     public String brushItem = "FEATHER";
 
-    @Path ("builder.brush.item-name")
+    @Path("builder.brush.item-name")
     public String brushName = "&6Brush";
 
 
@@ -104,7 +104,7 @@ public class RegionsConfig extends SimpleConfig {
         return new SimpleBuilder();
     }
 
-    public void update(){
+    public void update() {
         File file;
         try {
             Field field = SimpleConfig.class.getDeclaredField("configFile");
@@ -114,8 +114,8 @@ public class RegionsConfig extends SimpleConfig {
             e.printStackTrace();
             return;
         }
-        Config cfg = new Config(file,Config.YAML);
-        if (!cfg.exists("builder.undo.enable")){
+        Config cfg = new Config(file, Config.YAML);
+        if (!cfg.exists("builder.undo.enable")) {
             save();
             Message.CFG_UPDATED.log();
         }
