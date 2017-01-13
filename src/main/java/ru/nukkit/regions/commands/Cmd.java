@@ -35,9 +35,11 @@ public abstract class Cmd {
 
     public boolean isCommand(String cmdLabel) {
         if (this.command.equalsIgnoreCase(cmdLabel)) return true;
-        if (aliases != null)
-            for (String alias : aliases)
+        if (aliases != null){
+            for (String alias : aliases){
                 if (alias.equalsIgnoreCase(cmdLabel)) return true;
+            }
+        }
         return false;
     }
 

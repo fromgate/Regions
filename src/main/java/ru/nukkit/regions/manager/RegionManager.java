@@ -27,7 +27,7 @@ public class RegionManager {
 
     private final Pattern VALID_ID_PATTERN = Pattern.compile("^[A-Za-z0-9_,\'\\-\\+/]{1,}$");
 
-    private Map<String, Region> regions = new TreeMap<String, Region>(String.CASE_INSENSITIVE_ORDER);
+    private Map<String, Region> regions = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
     public RegionManager() {
         load();

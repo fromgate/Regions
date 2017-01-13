@@ -8,9 +8,9 @@ import java.util.*;
 
 public class Selector {
     public Selector() {
-        this.mode = new HashSet<String>();
-        this.p1 = new HashMap<String, Location>();
-        this.p2 = new HashMap<String, Location>();
+        this.mode = new HashSet<>();
+        this.p1 = new HashMap<>();
+        this.p2 = new HashMap<>();
     }
 
     private Set<String> mode;

@@ -9,7 +9,7 @@ import ru.nukkit.regions.commands.CmdDefine;
 import ru.nukkit.regions.util.Message;
 
 
-@CmdDefine(command = "select", alias = "sel", subCommands = {"(?i)pos1|p1|pos2|p2"}, permission = "regions.select", defaultPerm = Permission.DEFAULT_TRUE, description = Message.SEL_POS_DESC)
+@CmdDefine(command = "select", alias = "sel,rgsel,rgselect", subCommands = {"(?i)pos1|p1|pos2|p2"}, permission = "regions.select", defaultPerm = Permission.DEFAULT_TRUE, description = Message.SEL_POS_DESC)
 public class CmdSelectPos extends Cmd {
 
     @Override
