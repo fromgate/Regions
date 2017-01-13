@@ -3,6 +3,7 @@ package ru.nukkit.regions.areas;
 import cn.nukkit.Server;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.Location;
+import ru.nukkit.regions.util.LocUtil;
 
 import java.util.regex.Pattern;
 
@@ -149,8 +150,8 @@ public class Area {
         this.z2 = Math.max(z1, z2);
         if (y1 <= 0) this.y1 = 0;
         if (y2 <= 0) this.y2 = 0;
-        if (y1 > 127) this.y1 = 127;
-        if (y2 > 127) this.y2 = 127;
+        if (LocUtil.isHigherThanWorld(y1)) this.y1 = LocUtil.getWorldHeight()-1;
+        if (LocUtil.isHigherThanWorld(y2)) this.y2 = LocUtil.getWorldHeight() - 1;
     }
 
     public Location getLoc2() {

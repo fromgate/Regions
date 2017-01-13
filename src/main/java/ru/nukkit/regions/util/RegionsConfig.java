@@ -21,6 +21,9 @@ public class RegionsConfig extends SimpleConfig {
     @Path("general.debug-mode")
     public boolean debugMode = false;
 
+    @Path ("general.world-height")
+    public int worldHeight = 128;
+
     // Selection particles
     @Path("selection.particles.enable")
     public boolean selectionShow;
@@ -115,7 +118,7 @@ public class RegionsConfig extends SimpleConfig {
             return;
         }
         Config cfg = new Config(file, Config.YAML);
-        if (!cfg.exists("builder.undo.enable")) {
+        if (!cfg.exists("general.world-height")) {
             save();
             Message.CFG_UPDATED.log();
         }

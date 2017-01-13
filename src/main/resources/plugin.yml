@@ -1,6 +1,6 @@
 name: Regions
 main: ru.nukkit.regions.RegionsPlugin
-version: "0.0.5/1"
+version: "0.0.5/2"
 author: fromgate, nukkit.ru
 api: ["1.0.0"]
 description: Regions, regions, regions!

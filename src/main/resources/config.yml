@@ -21,6 +21,8 @@ general:
   language-save: false
 # Enable/disable debug mode. Don't touch this option :)
   debug-mode: false
+# Choose your world height (256 or 128
+  world-height: 128
 
 # Selection mode configuration
 selection:

@@ -7,6 +7,7 @@ import cn.nukkit.level.Position;
 import ru.nukkit.regions.Regions;
 import ru.nukkit.regions.clipboard.Clipboard;
 import ru.nukkit.regions.util.BlockUtil;
+import ru.nukkit.regions.util.LocUtil;
 import ru.nukkit.regions.util.Param;
 
 import java.util.LinkedList;
@@ -58,7 +59,7 @@ public class FillBrush extends Brush {
             Position p = blocks.removeLast();
             if (p.distance(new Position(start.getFloorX(), p.getY(), start.getFloorZ(), p.getLevel())) > radius)
                 continue;
-            if (p.getY() < 0 || p.getY() > 127) continue;
+            if (p.getY() < 0 || LocUtil.isHigherThanWorld(p.getY())) continue;
             Block b = p.getLevelBlock();
             if (b.getId() != 0) continue;
 
