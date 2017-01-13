@@ -3,6 +3,11 @@
 
 Regions is a plugin for Nukkit, that provides useful private system for nukkit server. You can define regions and control access rights to this regions: build or break blocks, accessing to chest, using levers, doors, etc.
 
+## Download
+[**Release**](http://nukkit.ru/resources/regions.53/)
+
+[**Latest dev build**  ![Snapshot](https://circleci.com/gh/fromgate/Regions.svg?style=shield&circle-token=2bb628276a494b5ac51ec0a0ae4deda896b6f3e3)](https://circleci.com/gh/fromgate/Regions)
+
 ## Features
 * Regions management (create, redefine, configure region flags)
 * World editing system (fill areas, replace blocks, copy areas, edit biomes)
