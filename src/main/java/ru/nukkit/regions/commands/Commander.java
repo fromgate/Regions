@@ -44,7 +44,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Commander {
-    protected static List<Cmd> commands = new ArrayList<Cmd>();
+    protected static List<Cmd> commands = new ArrayList<>();
     private static PluginBase plugin;
 
     public static void init(PluginBase plg) {
@@ -129,7 +129,7 @@ public class Commander {
     }
 
     public static void printHelp(CommandSender sender, int page) {
-        List<String> helpList = new ArrayList<String>();
+        List<String> helpList = new ArrayList<>();
         for (Cmd cmd : commands) {
             helpList.add(TextFormat.GREEN + cmd.getHelpString());
         }
@@ -160,9 +160,9 @@ public class Commander {
         for (Cmd cmd : commands) {
             if (!cmd.isCommand(cmdLabel)) continue;
             if (cmd.executeCommand(sender, args))
-                return Message.debugMessage("Executed command:", sender.getName(), cmdLabel, cmd.toString(), new ArrayList<String>(Arrays.asList(args)).toString());
+                return Message.debugMessage("Executed command:", sender.getName(), cmdLabel, cmd.toString(), new ArrayList<>(Arrays.asList(args)).toString());
         }
-        Message.debugMessage("Command not executed:", sender.getName(), cmdLabel, new ArrayList<String>(Arrays.asList(args)).toString());
+        Message.debugMessage("Command not executed:", sender.getName(), cmdLabel, new ArrayList<>(Arrays.asList(args)).toString());
         return Message.CMD_FAILED.print(sender, "/region help");
     }
 
@@ -173,7 +173,7 @@ public class Commander {
     }
 
     public static void registerPermissions() {
-        commands.forEach(cmd -> cmd.registerPermission());
+        commands.forEach(Cmd::registerPermission);
     }
 
     public static boolean isPluginCommand(String cmdLabel) {

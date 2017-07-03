@@ -30,9 +30,9 @@ public class WalkListener implements Listener {
 
     public WalkListener() {
         if (!RegionsPlugin.getCfg().enablePlayerMove) return;
-        this.currentRegions = new HashMap<String, Map<String, Region>>();
+        this.currentRegions = new HashMap<>();
         if (!RegionsPlugin.getCfg().usePlayerMoveEvent) {
-            this.prevLoc = new HashMap<String, Location>();
+            this.prevLoc = new HashMap<>();
             startRechek();
         } else Server.getInstance().getPluginManager().registerEvents(this, RegionsPlugin.getPlugin());
     }
@@ -41,7 +41,7 @@ public class WalkListener implements Listener {
         Server.getInstance().getScheduler().scheduleRepeatingTask(new Runnable() {
             public void run() {
                 for (Player player : Server.getInstance().getOnlinePlayers().values()) {
-                    Location from = prevLoc.containsKey(player.getName()) ? prevLoc.get(player.getName()) : null;
+                    Location from = prevLoc.getOrDefault(player.getName(), null);
                     Location to = player.getLocation();
                     if (from == null || (from.getFloorX() == to.getFloorX() &&
                             from.getFloorY() == to.getFloorY() &&
@@ -54,14 +54,14 @@ public class WalkListener implements Listener {
     }
 
     private boolean cancelPlayerMove(Player player, Location to) {
-        Map<String, Region> fromReg = new TreeMap<String, Region>(String.CASE_INSENSITIVE_ORDER);
+        Map<String, Region> fromReg = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
-        fromReg.putAll(this.currentRegions.containsKey(player.getName()) ? this.currentRegions.get(player.getName()) : new HashMap<String, Region>());
+        fromReg.putAll(this.currentRegions.containsKey(player.getName()) ? this.currentRegions.get(player.getName()) : new HashMap<>());
 
         Map<String, Region> toReg = Regions.getManager().getRegions(to);
 
-        Map<String, Region> toCheck = new TreeMap<String, Region>(String.CASE_INSENSITIVE_ORDER);
-        Map<String, Region> fromCheck = new TreeMap<String, Region>(String.CASE_INSENSITIVE_ORDER);
+        Map<String, Region> toCheck = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        Map<String, Region> fromCheck = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
         if (RegionsPlugin.getCfg().enableCustomEvents) {
             for (Map.Entry<String, Region> tor : toReg.entrySet()) {

@@ -2,14 +2,14 @@ package ru.nukkit.regions.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class StringUtil {
     public static List<String> stringToList(String str) {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         String[] ln = str.split(",\\s*");
-        for (String s : ln)
-            list.add(s);
+        Collections.addAll(list, ln);
         return list;
     }
 

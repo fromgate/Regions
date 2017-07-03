@@ -75,7 +75,7 @@ public class Selector {
     }
 
     public List<Location> getPoints(Player player) {
-        List<Location> locs = new ArrayList<Location>();
+        List<Location> locs = new ArrayList<>();
         String playerName = player.getName();
         if (p1.containsKey(playerName) && p1.get(playerName) != null) locs.add(p1.get(playerName));
         if (p2.containsKey(playerName) && p2.get(playerName) != null) locs.add(p2.get(playerName));

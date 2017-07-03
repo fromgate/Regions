@@ -25,7 +25,7 @@ public class BlockQueue {
     private Location minLoc; //add this to block coordinates if not null
 
     BlockQueue(String name) {
-        this.queue = new ArrayList<Block>();//LinkedList<Block>();
+        this.queue = new ArrayList<>();//LinkedList<Block>();
         this.starter = name;
         this.startTime = System.currentTimeMillis();
         this.ticks = 0;
@@ -112,14 +112,14 @@ public class BlockQueue {
     }
 
     private void sortQueue() {
-        Map<Integer, List<Block>> groupQueue = new TreeMap<Integer, List<Block>>();
+        Map<Integer, List<Block>> groupQueue = new TreeMap<>();
         for (Block b : queue) {
             int hash = (b.getFloorX() >> 4) ^ (b.getFloorZ() >> 4);
-            if (!groupQueue.containsKey(hash)) groupQueue.put(hash, new LinkedList<Block>());
+            if (!groupQueue.containsKey(hash)) groupQueue.put(hash, new LinkedList<>());
             List<Block> chunkBlock = groupQueue.get(hash);
             chunkBlock.add(b);
         }
-        queue = new LinkedList<Block>();
+        queue = new LinkedList<>();
         for (Map.Entry<Integer, List<Block>> entry : groupQueue.entrySet()) {
             queue.addAll(entry.getValue());
         }

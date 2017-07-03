@@ -3,6 +3,7 @@ package ru.nukkit.regions.flags;
 import ru.nukkit.regions.util.Relation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -12,14 +13,14 @@ public class ListFlag extends Flag {
 
     public ListFlag(FlagType flagType, Relation relation) {
         super(flagType, relation);
-        this.names = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
+        this.names = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
     }
 
     @Override
     public boolean parseParam(String parameter) {
         if (parameter == null || parameter.isEmpty()) return false;
         String[] ln = parameter.split(",\\s*");
-        for (String s : ln) names.add(s);
+        Collections.addAll(names, ln);
         return true;
     }
 
@@ -43,7 +44,7 @@ public class ListFlag extends Flag {
     }
 
     public void add(String playerName) {
-        if (this.names == null) this.names = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
+        if (this.names == null) this.names = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
         this.names.add(playerName);
     }
 
@@ -57,7 +58,7 @@ public class ListFlag extends Flag {
 
 
     public List<String> getList() {
-        return new ArrayList<String>(this.names);
+        return new ArrayList<>(this.names);
     }
 
     @Override

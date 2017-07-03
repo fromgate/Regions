@@ -17,7 +17,7 @@ public class ClipboardManager {
     private Map<String, ClipBlock> clipboards;
 
     public ClipboardManager() {
-        this.clipboards = new TreeMap<String, ClipBlock>(String.CASE_INSENSITIVE_ORDER);
+        this.clipboards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     }
 
     public void clear(Player player) {
@@ -26,7 +26,7 @@ public class ClipboardManager {
 
     public boolean copy(Player player, Location loc1, Location loc2) {
         Area area = new Area(loc1, loc2);
-        List<Block> blocks = new LinkedList<Block>();
+        List<Block> blocks = new LinkedList<>();
         int chX1 = area.getX1() >> 4;
         int chZ1 = area.getZ1() >> 4;
         int chX2 = area.getX2() >> 4;

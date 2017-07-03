@@ -444,7 +444,6 @@ public enum Message {
         } catch (Exception e) {
             LNG_SAVE_FAIL.log();
             if (debugMode) e.printStackTrace();
-            return;
         }
     }
 

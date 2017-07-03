@@ -22,10 +22,10 @@ public class Region {
     Set<String> members;
 
     public Region(Area area) {
-        this.flags = new ArrayList<Flag>();
+        this.flags = new ArrayList<>();
         this.area = area;
-        this.owners = new HashSet<String>();
-        this.members = new HashSet<String>();
+        this.owners = new HashSet<>();
+        this.members = new HashSet<>();
     }
 
     public Region(Location loc1, Location loc2) {
@@ -46,7 +46,7 @@ public class Region {
 
 
     public List<Location> getLocations() {
-        List<Location> locs = new ArrayList<Location>();
+        List<Location> locs = new ArrayList<>();
         locs.add(area.getLoc1());
         locs.add(area.getLoc2());
         return locs;
@@ -75,10 +75,7 @@ public class Region {
     }
 
     public void removeFlag(FlagType flagType) {
-        Iterator<Flag> it = this.flags.iterator();
-        while (it.hasNext()) {
-            if (it.next().getType() == flagType) it.remove();
-        }
+        this.flags.removeIf(flag -> flag.getType() == flagType);
     }
 
     public Flag getFlag(FlagType flagType) {
@@ -95,12 +92,12 @@ public class Region {
 
 
     public void setMember(String player) {
-        this.members = new HashSet<String>();
+        this.members = new HashSet<>();
         addMember(player);
     }
 
     public void setOwner(String players) {
-        this.owners = new HashSet<String>();
+        this.owners = new HashSet<>();
         addOwner(players);
     }
 

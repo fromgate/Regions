@@ -116,7 +116,7 @@ public enum FlagType {
             File f = new File(RegionsPlugin.getPlugin().getDataFolder(), "default-flags.yml");
             if (!f.exists()) try {
                 f.createNewFile();
-            } catch (IOException e) {
+            } catch (IOException ignored) {
             }
             cfg = new Config(f, Config.YAML);
         }
@@ -131,7 +131,7 @@ public enum FlagType {
             File f = new File(RegionsPlugin.getPlugin().getDataFolder(), "default-flags.yml");
             if (!f.exists()) try {
                 f.createNewFile();
-            } catch (IOException e) {
+            } catch (IOException ignored) {
             }
             cfg = new Config(f, Config.YAML);
         }

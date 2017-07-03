@@ -123,10 +123,8 @@ public class WeatherMan {
         if (blocks == null || blocks.isEmpty()) return false;
         Set<BuilderChunk> toUpdate = new HashSet<>();
         Clipboard undo = Clipboard.createUndoClipBiome(player.getName());
-        blocks.entrySet().forEach(e -> {
-            Block b = e.getKey();
+        blocks.forEach((b, color) -> {
             if (undo != null) undo.add(b);
-            BlockColor color = e.getValue();
             b.getLevel().setBiomeColor(b.getFloorX(), b.getFloorZ(), color.getRed(), color.getGreen(), color.getBlue());
             toUpdate.add(new BuilderChunk(b.level, b.getFloorX() >> 4, b.getFloorZ() >> 4));
         });
@@ -141,7 +139,7 @@ public class WeatherMan {
         for (int x = area.getX1(); x <= area.getX2(); x++) {
             for (int z = area.getZ1(); z <= area.getZ2(); z++) {
                 Block block = area.getLevel().getBlock(new Vector3(x, area.getY1(), z));
-                List<BlockColor> matrix = new ArrayList<BlockColor>();
+                List<BlockColor> matrix = new ArrayList<>();
                 for (int cX = block.getFloorX() - radius; cX <= block.getFloorX() + radius; cX++)
                     for (int cZ = block.getFloorZ() - radius; cZ <= block.getFloorZ() + radius; cZ++) {
                         int[] rgb = block.getLevel().getBiomeColor(cX, cZ);
@@ -169,7 +167,7 @@ public class WeatherMan {
     public static boolean smooth(Player player, List<Block> blocks, int radius) {
         Map<Block, BlockColor> futureBlocks = new HashMap<>();
         blocks.forEach(block -> {
-            List<BlockColor> matrix = new ArrayList<BlockColor>();
+            List<BlockColor> matrix = new ArrayList<>();
             for (int x = block.getFloorX() - radius; x <= block.getFloorX() + radius; x++)
                 for (int z = block.getFloorZ() - radius; z <= block.getFloorZ() + radius; z++) {
                     int[] rgb = block.getLevel().getBiomeColor(x, z);

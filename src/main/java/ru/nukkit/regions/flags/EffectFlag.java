@@ -17,7 +17,7 @@ public class EffectFlag extends Flag {
 
     @Override
     public boolean parseParam(String parameter) {
-        effects = new ArrayList<Effect>();
+        effects = new ArrayList<>();
         if (parameter == null || parameter.isEmpty()) return false;
         String[] ln = parameter.split("\\s+|,\\s*|;\\s*");
         for (String effStr : ln) {
@@ -31,7 +31,7 @@ public class EffectFlag extends Flag {
             }
             try {
                 effect = eStr.matches("\\d+") ? Effect.getEffect(Integer.parseInt(eStr)) : Effect.getEffectByName(eStr);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
             if (effect == null) continue;
             effect.setAmplifier(power);

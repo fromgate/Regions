@@ -22,7 +22,7 @@ public class BlockUtil {
     }
 
     private static void fillDoors() {
-        doors = new HashSet<Integer>();
+        doors = new HashSet<>();
         for (Field f : Block.class.getDeclaredFields()) {
             if (f.getName().contains("DOOR_BLOCK") ||
                     f.getName().contains("FENCE_GATE") ||
@@ -65,7 +65,7 @@ public class BlockUtil {
             try {
                 Field f = Block.class.getDeclaredField(typeStr.toUpperCase());
                 id = f.getInt(null);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         if (id < 0) return null;
@@ -87,7 +87,7 @@ public class BlockUtil {
             try {
                 Field f = Item.class.getDeclaredField(itemStr.toUpperCase());
                 id = f.getInt(null);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         if (id < 0) return null;

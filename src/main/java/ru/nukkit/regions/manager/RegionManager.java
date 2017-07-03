@@ -108,7 +108,7 @@ public class RegionManager {
     }
 
     public Map<String, Region> getRegions(Location loc) {
-        Map<String, Region> locReg = new TreeMap<String, Region>(String.CASE_INSENSITIVE_ORDER);
+        Map<String, Region> locReg = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         for (String id : regions.keySet()) {
             Region r = regions.get(id);
             if (r.isInRegion(loc)) locReg.put(id, r);
@@ -121,7 +121,7 @@ public class RegionManager {
     }
 
     public Map<String, Region> getRegions(Level level) {
-        Map<String, Region> locReg = new TreeMap<String, Region>(String.CASE_INSENSITIVE_ORDER);
+        Map<String, Region> locReg = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         for (String id : regions.keySet()) {
             Region r = regions.get(id);
             if (r.getLevel().equals(level)) locReg.put(id, r);
@@ -131,7 +131,7 @@ public class RegionManager {
 
 
     public List<Flag> getDefaultFlags() {
-        return new ArrayList<Flag>();
+        return new ArrayList<>();
     }
 
     public boolean addOwner(String id, String players) {
@@ -230,7 +230,7 @@ public class RegionManager {
     }
 
     public Map<String, Region> getIntersections(String id) {
-        Map<String, Region> intersections = new TreeMap<String, Region>(String.CASE_INSENSITIVE_ORDER);
+        Map<String, Region> intersections = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         Region r = this.getRegion(id);
         if (r == null) return intersections;
         for (String rid : this.regions.keySet()) {
@@ -242,7 +242,7 @@ public class RegionManager {
     }
 
     public Map<String, Region> getIntersections(Area area) {
-        Map<String, Region> intersections = new TreeMap<String, Region>(String.CASE_INSENSITIVE_ORDER);
+        Map<String, Region> intersections = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         for (Map.Entry<String, Region> entry : regions.entrySet()) {
             if (entry.getValue().intersect(area))
                 intersections.put(entry.getKey(), entry.getValue());

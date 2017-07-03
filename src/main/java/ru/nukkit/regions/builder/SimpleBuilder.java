@@ -42,7 +42,7 @@ public class SimpleBuilder implements Builder {
     @Override
     public void replaceBlock(String playerName, Block b1, Block b2, boolean compareData, Location loc1, Location loc2) {
         Area area = new Area(loc1, loc2);
-        List<Block> blocks = new LinkedList<Block>();
+        List<Block> blocks = new LinkedList<>();
         ChunkCoord ch1 = new ChunkCoord(area.getLoc1());
         ChunkCoord ch2 = new ChunkCoord(area.getLoc1());
         int chX1 = area.getX1() >> 4;
@@ -81,7 +81,7 @@ public class SimpleBuilder implements Builder {
     @Override
     public void setBlock(String playerName, Block block, Location loc1, Location loc2) {
         Area area = new Area(loc1, loc2);
-        List<Block> blocks = new LinkedList<Block>();
+        List<Block> blocks = new LinkedList<>();
         int chX1 = area.getX1() >> 4;
         int chZ1 = area.getZ1() >> 4;
         int chX2 = area.getX2() >> 4;
@@ -137,7 +137,7 @@ public class SimpleBuilder implements Builder {
     @Override
     public void setBlockBox(String playerName, Block block, Location l1, Location l2) {
         Area area = new Area(l1, l2);
-        List<Block> blocks = new LinkedList<Block>();
+        List<Block> blocks = new LinkedList<>();
         Clipboard undo = Clipboard.createUndoClipBoard(playerName);
         for (int x = area.getX1(); x <= area.getX2(); x++)
             for (int z = area.getZ1(); z <= area.getZ2(); z++)

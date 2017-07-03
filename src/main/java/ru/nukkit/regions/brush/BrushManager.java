@@ -29,15 +29,13 @@ public class BrushManager {
     private static Brush getBrush(String arg, String[] strings) {
         BrushType bt = BrushType.getByName(arg);
         if (bt == null) return null;
-        Brush brush = bt.createBrush(strings);
-        return brush;
+        return bt.createBrush(strings);
     }
 
     private static String[] removeArg(String[] args) {
         if (args.length <= 1) return new String[]{};
         String[] newArgs = new String[args.length - 1];
-        for (int i = 1; i < args.length; i++)
-            newArgs[i - 1] = args[i];
+        System.arraycopy(args, 1, newArgs, 0, args.length - 1);
         return newArgs;
     }
 
@@ -78,6 +76,6 @@ public class BrushManager {
     }
 
     public static Brush getBrush(Player player) {
-        return artists.containsKey(player.getName()) ? artists.get(player.getName()) : null;
+        return artists.getOrDefault(player.getName(), null);
     }
 }

@@ -10,7 +10,6 @@ import ru.nukkit.regions.manager.Region;
 import ru.nukkit.regions.util.Message;
 import ru.nukkit.regions.util.StringUtil;
 
-import java.util.Iterator;
 import java.util.Map;
 
 
@@ -26,10 +25,9 @@ public class CmdRgSelect extends Cmd {
         } else {
             Map<String, Region> regions = Regions.getManager().getRegions(player.getLocation());
             if (regions.isEmpty()) return Message.RG_SEL_NOTFOUND.print(player);
-            Iterator<Map.Entry<String, Region>> iterator = regions.entrySet().iterator();
-            while (iterator.hasNext()) {
-                if (!Regions.getManager().isOwner(player, iterator.next().getKey())) iterator.remove();
-            }
+
+            regions.entrySet().removeIf(stringRegionEntry -> !Regions.getManager().isOwner(player, stringRegionEntry.getKey()));
+
             if (regions.isEmpty()) return Message.RG_SEL_NOTFOUND.print(player);
             if (regions.size() > 0)
                 return Message.RG_SEL_FOUNDMORE.print(player, StringUtil.listToString(regions.keySet()));

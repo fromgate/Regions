@@ -20,9 +20,9 @@ public class VisualRegions {
 
     public static void updateVisuals() {
         if (!enable) return;
-        visualEffect = new HashMap<Area, Set<Player>>();
+        visualEffect = new HashMap<>();
         for (Region region : Regions.getManager().getRegions().values()) {
-            Set<Player> players = new HashSet<Player>();
+            Set<Player> players = new HashSet<>();
             for (Player player : Server.getInstance().getOnlinePlayers().values()) {
                 if (Regions.getManager().cancelEvent(player, region, FlagType.VISUAL)) continue;
                 players.add(player);
@@ -33,7 +33,7 @@ public class VisualRegions {
 
     public static void init() {
         enable = true; //TODO
-        visualEffect = new HashMap<Area, Set<Player>>();
+        visualEffect = new HashMap<>();
         Server.getInstance().getScheduler().scheduleDelayedRepeatingTask(new Runnable() {
             public void run() {
                 updateVisuals();

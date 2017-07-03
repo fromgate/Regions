@@ -34,7 +34,7 @@ public class ShowParticle {
     }
 
     public static void init() {
-        selShow = new HashSet<String>();
+        selShow = new HashSet<>();
         if (RegionsPlugin.getCfg().selectionShow)
             Server.getInstance().getScheduler().scheduleRepeatingTask(new Runnable() {
                 public void run() {
@@ -50,7 +50,7 @@ public class ShowParticle {
 
     private static void showIntersections(Player player, Area area) {
         if (!RegionsPlugin.getCfg().selectionShowIntersections) return;
-        List<Location> cubeLoc = new ArrayList<Location>();
+        List<Location> cubeLoc = new ArrayList<>();
         for (Region region : Regions.getManager().getIntersections(area).values())
             cubeLoc.addAll(getCubePoints(region.getMin(), region.getMax()));
         for (Location l : cubeLoc)
@@ -62,7 +62,7 @@ public class ShowParticle {
         if (!player.isOnline()) return;
         List<Location> sel = Regions.getSelector().getPoints(player);
         if (sel == null || sel.isEmpty()) return;
-        List<Location> cubeLoc = new ArrayList<Location>();
+        List<Location> cubeLoc = new ArrayList<>();
         if (sel.size() == 2) {
             Area area = new Area(sel.get(0), sel.get(1));
             cubeLoc = getCubePoints(area.getMin(), area.getMax());
@@ -78,11 +78,11 @@ public class ShowParticle {
     }
 
     private static List<Location> getCubePoints(Location loc1, Location loc2) {
-        List<Location> locs = new ArrayList<Location>();
+        List<Location> locs = new ArrayList<>();
         Level world = loc1.getLevel();
         int[] xx = {loc1.getFloorX(), loc2.getFloorX()};
         int[] zz = {loc1.getFloorZ(), loc2.getFloorZ()};
-        List<Integer> yy = new ArrayList<Integer>();
+        List<Integer> yy = new ArrayList<>();
         if (RegionsPlugin.getCfg().selectionDrawWall && (loc2.getFloorY() - loc1.getFloorY()) > 2) {
             boolean skip = false;
             for (int y = loc2.getFloorY(); y >= loc1.getFloorY(); y--) {

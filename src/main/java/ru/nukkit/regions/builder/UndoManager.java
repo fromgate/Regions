@@ -13,7 +13,7 @@ public class UndoManager {
     private Map<String, List<Clipboard>> undos;
 
     public UndoManager() {
-        this.undos = new TreeMap<String, List<Clipboard>>(String.CASE_INSENSITIVE_ORDER);
+        this.undos = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     }
 
     public void add(Clipboard clipboard) {

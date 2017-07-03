@@ -19,9 +19,8 @@ public class YamlSaver implements RegionSaver {
         File f = new File(RegionsPlugin.getPlugin().getDataFolder() + File.separator + "regions.yml");
         if (f.exists()) f.delete();
         Config cfg = new Config(f, Config.YAML);
-        regions.entrySet().forEach(e -> {
+        regions.forEach((key, region) -> {
             ConfigSection s = new ConfigSection();
-            Region region = e.getValue();
             s.set("area", region.getDimension());
             s.set("owners", StringUtil.listToString(region.getOwners()));
             s.set("members", StringUtil.listToString(region.getMembers()));
@@ -30,7 +29,7 @@ public class YamlSaver implements RegionSaver {
                 if (flag.getRelation() != null) s.set(flagKey + "relate", flag.getRelation().name());
                 s.set(flagKey + "value", flag.getParam());
             }
-            cfg.set(e.getKey(), s);
+            cfg.set(key, s);
         });
         boolean saveResult = cfg.save();
         Message.debugMessage("Regions saved:", regions.size(), "Save result (ok)", saveResult);
@@ -38,13 +37,13 @@ public class YamlSaver implements RegionSaver {
     }
 
     public Map<String, Region> load() {
-        Map<String, Region> regions = new HashMap<String, Region>();
+        Map<String, Region> regions = new HashMap<>();
         File f = new File(RegionsPlugin.getPlugin().getDataFolder() + File.separator + "regions.yml");
         if (!f.exists()) return regions;
         Config cfg = new Config(f, Config.YAML);
 
-        cfg.getSections(null).entrySet().forEach(e -> {
-            ConfigSection s = (ConfigSection) e.getValue();
+        cfg.getSections(null).forEach((key, section) -> {
+            ConfigSection s = (ConfigSection) section;
             Region region = new Region(new Area(s.getString("area")));
             region.setOwner(s.getString("owners"));
             region.setMember(s.getString("members"));
@@ -56,7 +55,7 @@ public class YamlSaver implements RegionSaver {
                 Flag flag = ft.createNewFlag(relStr, value);
                 region.addFlag(flag);
             }
-            regions.put(e.getKey(), region);
+            regions.put(key, region);
         });
         Message.debugMessage("Loaded", regions.size(), "regions");
 

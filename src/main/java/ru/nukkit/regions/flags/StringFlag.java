@@ -20,7 +20,7 @@ public class StringFlag extends Flag {
 
     @Override
     public boolean parseParam(String parameter) {
-        this.value = parameter == null ? "" : new String(parameter);
+        this.value = parameter == null ? "" : parameter;
         return true;
     }
 

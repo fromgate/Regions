@@ -6,6 +6,7 @@ import cn.nukkit.level.Location;
 import ru.nukkit.regions.Regions;
 import ru.nukkit.regions.areas.Area;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class ClipBlock extends Clipboard {
         this.playerName = "";
         this.playerLocation = null;
         this.minLocation = null;
-        this.blocks = new LinkedList<Block>();
+        this.blocks = new LinkedList<>();
     }
 
     public ClipBlock(Player player) {
@@ -37,12 +38,13 @@ public class ClipBlock extends Clipboard {
     public ClipBlock(List<Block> blocks, Location minLocation) {
         this();
         this.minLocation = minLocation;
-        this.blocks = new LinkedList<Block>();
+        this.blocks = new LinkedList<>();
         if (this.minLocation == null) {
-            blocks.addAll(blocks);
+            this.blocks.addAll(blocks);
         } else {
-            for (Block b : blocks)
+            for (Block b : blocks) {
                 this.blocks.add(Block.get(b.getId(), b.getDamage(), b.getLocation().subtract(this.minLocation)));
+            }
         }
     }
 
@@ -58,6 +60,7 @@ public class ClipBlock extends Clipboard {
                             int blockZ = z + (chZ << 4);
                             if (blockX < area.getX1() || blockX > area.getX2()) continue;
                             if (blockZ < area.getZ1() || blockZ > area.getZ2()) continue;
+                            this.add(new Location(blockX, y, blockZ, area.getLevel()));
                         }
                 }
     }
@@ -75,6 +78,15 @@ public class ClipBlock extends Clipboard {
         for (Block b : block) add(b);
     }
 
+    public void add(Location blockLocation) {
+        add(blockLocation.getLevelBlock());
+    }
+    public void add(Location... blockLocation) {
+        Arrays.stream(blockLocation).forEach(location -> {
+            add(location.getLevelBlock());
+        });
+    }
+
     public void paste() {
         paste(false);
     }
@@ -90,7 +102,7 @@ public class ClipBlock extends Clipboard {
 
     public void paste(Location loc, boolean asPlayer, boolean useUndo) {
         Location start = asPlayer && this.playerLocation != null ? loc.add(this.minLocation.subtract(this.playerLocation)) : loc;
-        List<Block> blocks = new LinkedList<Block>();
+        List<Block> blocks = new LinkedList<>();
         for (Block block : this.blocks) {
             blocks.add(Block.get(block.getId(), block.getDamage(), start.add(block)));
         }
@@ -103,12 +115,12 @@ public class ClipBlock extends Clipboard {
     }
 
     public void remove(List<Block> blocks) {
-        blocks.removeAll(blocks);
+        this.blocks.removeAll(blocks);
     }
 
     public void remove(Clipboard removeClip) {
         if (removeClip instanceof ClipBlock) {
-            blocks.removeAll(((ClipBlock) removeClip).blocks);
+            this.blocks.removeAll(((ClipBlock) removeClip).blocks);
         }
     }
 
