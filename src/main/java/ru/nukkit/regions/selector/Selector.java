@@ -25,7 +25,7 @@ public class Selector {
     public boolean isSelectionFinished(Player player) {
         String playerName = player.getName();
         if (!p1.containsKey(playerName)) return false;
-        if (!p1.containsKey(playerName)) return false;
+        if (!p2.containsKey(playerName)) return false;
         return p1.get(playerName).getLevel().equals(p2.get(playerName).getLevel());
     }
 

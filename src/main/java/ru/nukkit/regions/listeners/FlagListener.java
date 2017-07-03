@@ -41,9 +41,11 @@ public class FlagListener implements Listener {
     public void onDoor(DoorToggleEvent event) {
         if (!BlockUtil.isDoor(event.getBlock())) return;
         Player player = event.getPlayer();
-        if (Regions.getManager().cancelEvent(player, event.getBlock().getLocation(), FlagType.DOOR))
-            event.setCancelled();
-        if (event.isCancelled()) Message.FMSG_INTERACT.print(player);
+        if(player != null) {
+            if (Regions.getManager().cancelEvent(player, event.getBlock().getLocation(), FlagType.DOOR))
+                event.setCancelled();
+            if (event.isCancelled()) Message.FMSG_INTERACT.print(player);
+        }
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
