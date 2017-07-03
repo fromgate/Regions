@@ -6,6 +6,7 @@ import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.EventPriority;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.player.PlayerInteractEvent;
+import cn.nukkit.event.player.PlayerInteractEvent.Action;
 import cn.nukkit.event.player.PlayerJoinEvent;
 import cn.nukkit.level.Location;
 import ru.nukkit.regions.Regions;
@@ -20,9 +21,9 @@ public class RegionListener implements Listener {
         if (event.getItem().getId() != 0) return;
         Player player = event.getPlayer();
         if (!Regions.getSelector().selMode(player)) return;
-        if (event.getAction() != PlayerInteractEvent.LEFT_CLICK_BLOCK && event.getAction() != PlayerInteractEvent.RIGHT_CLICK_BLOCK)
+        if (event.getAction() != Action.LEFT_CLICK_BLOCK && event.getAction() != Action.RIGHT_CLICK_BLOCK)
             return;
-        boolean selP1 = event.getAction() == PlayerInteractEvent.LEFT_CLICK_BLOCK;
+        boolean selP1 = event.getAction() == Action.LEFT_CLICK_BLOCK;
         Location selPoint = new Location(event.getBlock().getX(), event.getBlock().getY(), event.getBlock().getZ(), 0, 0, event.getBlock().getLevel());
         if (!Regions.getSelector().isSelected(player, selPoint)) {
             if (Regions.getSelector().selectPoint(player, selPoint, selP1))
@@ -39,10 +40,10 @@ public class RegionListener implements Listener {
 
     @EventHandler
     public void onBrush(PlayerInteractEvent event) {
-        if (event.getAction() != PlayerInteractEvent.RIGHT_CLICK_BLOCK &&
-                event.getAction() != PlayerInteractEvent.RIGHT_CLICK_AIR) return;
+        if (event.getAction() != Action.RIGHT_CLICK_BLOCK &&
+                event.getAction() != Action.RIGHT_CLICK_AIR) return;
         if (!BrushManager.isBrush(event.getPlayer().getInventory().getItemInHand())) return;
-        Block clickedBlock = event.getAction() == PlayerInteractEvent.RIGHT_CLICK_BLOCK ? event.getBlock() : null;
+        Block clickedBlock = event.getAction() == Action.RIGHT_CLICK_BLOCK ? event.getBlock() : null;
         BrushManager.paint(event.getPlayer(), clickedBlock);
     }
 }
