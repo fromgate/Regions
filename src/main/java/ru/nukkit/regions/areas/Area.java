@@ -150,7 +150,7 @@ public class Area {
         this.z2 = Math.max(z1, z2);
         if (y1 <= 0) this.y1 = 0;
         if (y2 <= 0) this.y2 = 0;
-        if (LocUtil.isHigherThanWorld(y1)) this.y1 = LocUtil.getWorldHeight()-1;
+        if (LocUtil.isHigherThanWorld(y1)) this.y1 = LocUtil.getWorldHeight() - 1;
         if (LocUtil.isHigherThanWorld(y2)) this.y2 = LocUtil.getWorldHeight() - 1;
     }
 

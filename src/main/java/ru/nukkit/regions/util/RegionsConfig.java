@@ -21,7 +21,7 @@ public class RegionsConfig extends SimpleConfig {
     @Path("general.debug-mode")
     public boolean debugMode = false;
 
-    @Path ("general.world-height")
+    @Path("general.world-height")
     public int worldHeight = 128;
 
     // Selection particles

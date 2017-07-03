@@ -232,10 +232,8 @@ public enum Message {
         final String message = getText(s);
         if (player == null) sender.sendMessage(message);
         else for (int i = 0; i < seconds; i++)
-            Server.getInstance().getScheduler().scheduleDelayedTask(new Runnable() {
-                public void run() {
-                    if (player.isOnline()) player.sendTip(message);
-                }
+            Server.getInstance().getScheduler().scheduleDelayedTask(() -> {
+                if (player.isOnline()) player.sendTip(message);
             }, 20 * i);
         return true;
     }

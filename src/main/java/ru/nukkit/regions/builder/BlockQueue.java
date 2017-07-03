@@ -9,7 +9,12 @@ import ru.nukkit.regions.RegionsPlugin;
 import ru.nukkit.regions.clipboard.Clipboard;
 import ru.nukkit.regions.util.Message;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class BlockQueue {
 
@@ -63,7 +68,7 @@ public class BlockQueue {
     }
 
     private boolean add(Collection<Block> blocks, Clipboard undo) {
-        if (undo == null){
+        if (undo == null) {
             add(blocks);
         } else {
             blocks.forEach(block -> {

@@ -42,7 +42,7 @@ public class BuilderQueed implements Builder {
 
     private void add(String playerName, Collection<Block> blocks, Clipboard undo) {
         if (undo == null) {
-            add (playerName, blocks);
+            add(playerName, blocks);
         } else {
             String name = playerName == null || playerName.isEmpty() ? "CONSOLE" : playerName;
             this.queues.add(new BlockQueue(name, blocks, undo));
@@ -148,6 +148,7 @@ public class BuilderQueed implements Builder {
             getUndoManager().add(undo);
         }
     }
+
     public void processQueue() {
         if (active) return;
         if (queues.isEmpty()) return;

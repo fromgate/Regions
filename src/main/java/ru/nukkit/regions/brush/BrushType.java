@@ -1,6 +1,11 @@
 package ru.nukkit.regions.brush;
 
-import ru.nukkit.regions.brush.brushes.*;
+import ru.nukkit.regions.brush.brushes.BiomeBrush;
+import ru.nukkit.regions.brush.brushes.BreakBrush;
+import ru.nukkit.regions.brush.brushes.Brush;
+import ru.nukkit.regions.brush.brushes.BuildBrush;
+import ru.nukkit.regions.brush.brushes.FillBrush;
+import ru.nukkit.regions.brush.brushes.SmoothBiome;
 
 /**
  * Created by Igor on 27.06.2016.

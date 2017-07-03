@@ -53,7 +53,7 @@ public abstract class Brush {
             blocks.add(loc.getLevelBlock());
         } else for (int x = loc.getFloorX() - radius; x <= loc.getFloorX() + radius; x++) {
             for (int z = loc.getFloorZ() - radius; z <= loc.getFloorZ() + radius; z++) {
-                for (int y = Math.max(0, loc.getFloorY() - radius); y <= Math.min(loc.getFloorY() + radius, LocUtil.getWorldHeight()-1); y++) {
+                for (int y = Math.max(0, loc.getFloorY() - radius); y <= Math.min(loc.getFloorY() + radius, LocUtil.getWorldHeight() - 1); y++) {
                     Location l = new Location(x, y, z, 0, 0, loc.getLevel());
                     if (l.distance(loc) < radius) blocks.add(l.getLevelBlock());
                 }

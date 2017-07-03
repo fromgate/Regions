@@ -13,7 +13,13 @@ import ru.nukkit.regions.clipboard.Clipboard;
 import ru.nukkit.regions.util.Message;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Igor on 31.05.2016.
@@ -65,8 +71,8 @@ public class WeatherMan {
             for (int i = 0; i < 3; i++) rgb[i] = Integer.parseInt(rgbS[i]);
             color = new BlockColor(rgb[0], rgb[1], rgb[2]);
         } else {
-            for (DyeColor dye : DyeColor.values()){
-                if (dye.name().equalsIgnoreCase(name) || dye.getName().equalsIgnoreCase(name)){
+            for (DyeColor dye : DyeColor.values()) {
+                if (dye.name().equalsIgnoreCase(name) || dye.getName().equalsIgnoreCase(name)) {
                     color = dye.getColor();
                     break;
                 }

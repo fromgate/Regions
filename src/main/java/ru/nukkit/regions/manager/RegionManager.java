@@ -93,7 +93,7 @@ public class RegionManager {
     }
 
     public Region getRegion(String id) {
-        return (regions.containsKey(id)) ? regions.get(id) : null;
+        return regions.getOrDefault(id, null);
     }
 
     public boolean removeRegion(String id) {
@@ -222,11 +222,11 @@ public class RegionManager {
 
     public boolean canClaimMore(String playerName) {
         int count = countClaimRegions(playerName);
-        return count >= RegionsPlugin.getPlugin().getCfg().maxRegionPerPlayer;
+        return count >= RegionsPlugin.getCfg().maxRegionPerPlayer;
     }
 
     public boolean canClaimVolume(Area area) {
-        return RegionsPlugin.getPlugin().getCfg().maxClaimVolume < area.getVolume();
+        return RegionsPlugin.getCfg().maxClaimVolume < area.getVolume();
     }
 
     public Map<String, Region> getIntersections(String id) {
